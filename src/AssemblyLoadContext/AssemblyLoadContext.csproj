@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
+
+	<PropertyGroup>
+		<AssemblyName>AutoBrew.PowerShell.AssemblyLoadContext</AssemblyName>
+		<RootNamespace>AutoBrew.PowerShell.AssemblyLoadContext</RootNamespace>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
+
+	<PropertyGroup>
+		<AssemblyName>AutoBrew.PowerShell.Authentication</AssemblyName>
+		<RootNamespace>AutoBrew.PowerShell</RootNamespace>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.6.0" />
+		<PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
+		<PackageReference Include="System.Text.Json" Version="6.0.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Common.csproj" />
+	</ItemGroup>
+
+</Project>

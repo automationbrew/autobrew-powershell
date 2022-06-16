@@ -1,0 +1,23 @@
+<Project>
+	<!-- Custom -->
+	<PropertyGroup>
+		<RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+		<RepoSrc>$(RepoRoot)src/</RepoSrc>
+		<RepoArtifacts>$(RepoRoot)artifacts/</RepoArtifacts>
+		<RepoTools>$(RepoRoot)tools/</RepoTools>
+	</PropertyGroup>
+
+	<!-- Common -->
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<!-- Build -->
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<OutputPath>$(RepoArtifacts)$(Configuration)\</OutputPath>
+		<PublishDir>$(OutputPath)</PublishDir>
+	</PropertyGroup>
+</Project>
