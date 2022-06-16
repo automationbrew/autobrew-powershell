@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Updates the configurations for the AutoBrew PowerShell module.
+Updates the configurations for the AutomationBrew PowerShell module.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Update-AbConfiguration [-EnableTelemetry <Boolean>] -Scope <ConfigurationScope> 
 
 ## DESCRIPTION
 
-Updates the configurations for the AutoBrew PowerShell module.
+Updates the configurations for the AutomationBrew PowerShell module.
 
 ## EXAMPLES
 

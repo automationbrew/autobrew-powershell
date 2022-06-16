@@ -10,7 +10,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Gets the configurations for the AutoBrew PowerShell module.
+Gets the configurations for the AutomationBrew PowerShell module.
 
 ## SYNTAX
 
@@ -20,7 +20,7 @@ Get-AbConfiguration [<CommonParameters>]
 
 ## DESCRIPTION
 
-Gets the configurations for the AutoBrew PowerShell module.
+Gets the configurations for the AutomationBrew PowerShell module.
 
 ## EXAMPLES
 
@@ -30,7 +30,7 @@ Gets the configurations for the AutoBrew PowerShell module.
 PS C:\> Get-AbConfiguration
 ```
 
-Gets the configurations for the AutoBrew PowerShell module.
+Gets the configurations for the AutomationBrew PowerShell module.
 
 ## PARAMETERS
 

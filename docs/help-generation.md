@@ -32,7 +32,7 @@ $PathToModuleManifest = ".\artifacts\Debug\Ab.psd1"
 Import-Module -Name $PathToModuleManifest
 ```
 
-**Note**: if you do not see all of the changes you made to the cmdlets in your markdown files (_e.g.,_ a cmdlet you deleted is still appearing), you may need to delete any existing AutoBrew PowerShell modules that you have on your machine (installed either through the PowerShell Gallery or by Web Platform Installer) before you import your module.
+**Note**: if you do not see all of the changes you made to the cmdlets in your markdown files (_e.g.,_ a cmdlet you deleted is still appearing), you may need to delete any existing AutomationBrew PowerShell modules that you have on your machine (installed either through the PowerShell Gallery or by Web Platform Installer) before you import your module.
 
 ### Creating a help file for a new cmdlet
 
