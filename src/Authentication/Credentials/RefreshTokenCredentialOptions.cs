@@ -15,7 +15,7 @@
         /// <summary>
         /// Gets or sets the Azure Active Directory tenant identifier for the tenant.
         /// </summary>
-        public string Tenant { get; set; }
+        public string TenantId { get; set; }
 
         /// <summary>
         /// Gets or sets the persistence options for the token cache.

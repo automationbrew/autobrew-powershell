@@ -4,6 +4,7 @@
     using System.Net.Sockets;
     using Azure.Core;
     using Azure.Identity;
+    using Microsoft.Rest;
     using Models;
     using Models.Authentication;
     using Models.Parameters;
@@ -55,6 +56,8 @@
             Task<AuthenticationRecord> authRecordTask = browserCredential.AuthenticateAsync(
                 requestContext,
                 cancellationToken);
+
+            ServiceClientTracing.Information($"{DateTime.Now:T} - [InteractiveUserAuthenticator] Calling AcquireTokenAsync with TenantId:'{options.TenantId}', AuthorityHost:'{options.AuthorityHost}', Scopes:'{string.Join(",", parameters.Scopes)}', RedirectUri:'{options.RedirectUri}'");
 
             return await ModuleAuthenticationResult.AcquireTokenAsync(
                 authRecordTask,

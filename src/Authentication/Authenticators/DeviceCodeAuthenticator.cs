@@ -2,6 +2,7 @@
 {
     using Azure.Core;
     using Azure.Identity;
+    using Microsoft.Rest;
     using Models;
     using Models.Authentication;
     using Models.Parameters;
@@ -55,6 +56,8 @@
                 parameters.Account.Tenant);
 
             Task<AuthenticationRecord> authTask = deviceCodeCredential.AuthenticateAsync(requestContext, cancellationToken);
+
+            ServiceClientTracing.Information($"{DateTime.Now:T} - [DeviceCodeAuthenticator] Calling AcquireTokenAsync - TenantId:'{options.TenantId}', AuthorityHost:'{options.AuthorityHost}', Scopes:'{string.Join(",", parameters.Scopes)}'");
 
             return await ModuleAuthenticationResult.AcquireTokenAsync(
                 authTask,

@@ -48,7 +48,7 @@
             }
 
             using Stream stream = new MemoryStream(buffer);
-            JsonNode node = JsonNode.Parse(stream);
+            JsonNode node = JsonNode.Parse(stream, new JsonNodeOptions { PropertyNameCaseInsensitive = true });
 
             return node["RefreshToken"]?[$"{homeAccountId}-login.windows.net-refreshtoken-{clientId}--"]?["secret"]?.ToString().AsSecureString();
         }
