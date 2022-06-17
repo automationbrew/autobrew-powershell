@@ -2,6 +2,7 @@
 {
     using Azure.Core;
     using Azure.Identity;
+    using Microsoft.Rest;
     using Models;
     using Models.Authentication;
     using Models.Parameters;
@@ -55,6 +56,8 @@
             Task<AuthenticationRecord> authRecordTask = usernamePasswordCredential.AuthenticateAsync(
                 requestContext,
                 cancellationToken);
+
+            ServiceClientTracing.Information($"{DateTime.Now:T} - [UsernamePasswordAuthenticator] Calling AuthenticateAsync - TenantId:'{parameters.Account.Tenant}', Scopes:'{string.Join(",", parameters.Scopes)}', AuthorityHost:'{parameters.Environment.ActiveDirectoryAuthority}', Username:'{usernamePasswordParameters.Account.Username}'");
 
             return await ModuleAuthenticationResult.AcquireTokenAsync(
                 authRecordTask,

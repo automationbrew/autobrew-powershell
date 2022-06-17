@@ -3,6 +3,7 @@
     using Azure.Core;
     using Azure.Identity;
     using Credentials;
+    using Microsoft.Rest;
     using Models;
     using Models.Authentication;
     using Models.Parameters;
@@ -36,7 +37,7 @@
             {
                 AuthorityHost = new Uri(parameters.Environment.ActiveDirectoryAuthority),
                 ClientId = parameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
-                Tenant = parameters.Account.Tenant,
+                TenantId = parameters.Account.Tenant,
                 TokenCachePersistenceOptions = parameters.TokenCacheProvider.GetPersistenceOptions()
             };
 
@@ -53,6 +54,8 @@
             Task<AuthenticationRecord> authRecordTask = refreshTokenCredential.AuthenticateAsync(
                 requestContext,
                 cancellationToken);
+
+            ServiceClientTracing.Information($"{DateTime.Now:T} - [RefreshTokenAuthenticator] Calling AcquireTokenAsync - TenantId:'{options.TenantId}', AuthorityHost:'{options.AuthorityHost}', Scopes:'{string.Join(",", parameters.Scopes)}'");
 
             return await ModuleAuthenticationResult.AcquireTokenAsync(
                 authRecordTask,

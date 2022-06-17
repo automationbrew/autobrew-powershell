@@ -4,6 +4,7 @@
     using System.Text.Json.Nodes;
     using Azure.Core;
     using Azure.Identity;
+    using Microsoft.Rest;
     using Models;
     using Models.Authentication;
     using Models.Parameters;
@@ -55,6 +56,8 @@
             using MemoryStream stream = new(Encoding.UTF8.GetBytes(recordObject.ToJsonString()));
 
             Task<AuthenticationRecord> authRecordTask = AuthenticationRecord.DeserializeAsync(stream, cancellationToken);
+
+            ServiceClientTracing.Information($"{DateTime.Now:T} - [SilentAuthenticator] Calling AcquireTokenAsync - TenantId:'{options.TenantId}', AuthorityHost:'{options.AuthorityHost}', Scopes:'{string.Join(",", parameters.Scopes)}'");
 
             return await ModuleAuthenticationResult.AcquireTokenAsync(
                 authRecordTask,

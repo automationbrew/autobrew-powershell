@@ -49,7 +49,7 @@
 
             client = PublicClientApplicationBuilder
                 .Create(options.ClientId)
-                .WithAuthority(options.AuthorityHost.AbsoluteUri, options.Tenant)
+                .WithAuthority(options.AuthorityHost.AbsoluteUri, options.TenantId)
                 .WithHttpClientFactory(MsalHttpClientFactory.GetInstance(MsalHttpClientFactoryType.RefreshToken))
                 .WithLogging(LoggingCallback)
                 .Build();
