@@ -1,9 +1,9 @@
 ﻿namespace AutoBrew.PowerShell.Models.Authentication
 {
     using System.Security;
-    using AutoBrew.PowerShell.Cache;
     using Azure.Core;
     using Azure.Identity;
+    using Cache;
     using Microsoft.Identity.Client;
 
     /// <summary>

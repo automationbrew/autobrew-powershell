@@ -4,17 +4,17 @@
     using Cache;
 
     /// <summary>
-    /// Represents the data to be used when requesting an access token.
+    /// Represents the data to be used for authentication.
     /// </summary>
     public sealed class TokenRequestData
     {
         /// <summary>
-        /// Gets or sets account details to be used when requesting an access token.
+        /// Gets or sets account details to be used for authentication.
         /// </summary>
         public ModuleAccount Account { get; set; }
 
         /// <summary>
-        /// Gets or sets the environment to be used when requesting an access token.
+        /// Gets or sets the environment to be used for authentication.
         /// </summary>
         public ModuleEnvironment Environment { get; set; }
 
@@ -24,22 +24,22 @@
         public bool IncludeRefreshToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the password to be used when requesting an access token.
+        /// Gets or sets the password to be used for authentication.
         /// </summary>
         public SecureString Password { get; set; }
 
         /// <summary>
-        /// Gets or sets the refresh token to be used when requesting an access token.
+        /// Gets or sets the refresh token to be used for authentication.
         /// </summary>
         public SecureString RefreshToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the scopes to be used when requesting an access token.
+        /// Gets or sets the scopes to be used for authentication.
         /// </summary>
         public string[] Scopes { get; set; }
 
         /// <summary>
-        /// Gets the token cache provider to be used when requesting an access token.
+        /// Gets the token cache provider to be used for authentication.
         /// </summary>
         public TokenCacheProvider TokenCacheProvider
         {
@@ -55,27 +55,29 @@
         }
 
         /// <summary>
-        /// Initialize a new instance of the <see cref="TokenRequestData" /> class.
+        /// Initializes a new instance of the <see cref="TokenRequestData" /> class.
         /// </summary>
-        /// <param name="account">The account details to be used when requesting an access token.</param>
-        /// <param name="environment">The environment to be used when requesting an access token.</param>
-        /// <param name="scopes">The scopes to be used to when requesting an access token.</param>
+        /// <param name="account">The account details to be used for authentication.</param>
+        /// <param name="environment">The metadata of the environment to be used for authentication.</param>
+        /// <param name="scopes">The scopes to be used for authentication.</param>
         /// <exception cref="ArgumentNullException">
         /// The account parameter is null.
         /// or
         /// The environment parameter is null.
-        /// or 
-        /// The scopes parameter is null.
         /// </exception>
-        public TokenRequestData(ModuleAccount account, ModuleEnvironment environment, string[] scopes)
+        public TokenRequestData(ModuleAccount account, ModuleEnvironment environment, string[] scopes = null)
         {
             account.AssertNotNull(nameof(account));
             environment.AssertNotNull(nameof(environment));
-            scopes.AssertNotNull(nameof(scopes));
+
+            if (account.IsPropertySet(ExtendedPropertyType.ApplicationId) == false)
+            {
+                account.SetProperty(ExtendedPropertyType.ApplicationId, ModuleEnvironmentConstants.DefaultApplicationId);
+            }
 
             Account = account;
             Environment = environment;
-            Scopes = scopes;
+            Scopes = scopes ?? new[] { new Uri(new Uri(environment.MicrosoftGraphEndpoint), ModuleEnvironmentConstants.DefaultScope).ToString() };
         }
     }
 }

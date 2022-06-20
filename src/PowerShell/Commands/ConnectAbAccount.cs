@@ -1,18 +1,20 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
+    using System.Globalization;
     using System.Management.Automation;
     using System.Security;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Models;
     using Models.Authentication;
+    using Properties;
 
     /// <summary>
-    /// Cmdlet that requests a new access token from Azure Active Directory.
+    /// Cmdlet that establishes a connection with an authenticated account.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbAccessToken", DefaultParameterSetName = DefaultParameterSetName)]
-    [OutputType(typeof(ModuleAuthenticationResult))]
-    public class NewAbAccessToken : ModuleAsyncCmdlet
+    [Cmdlet(VerbsCommunications.Connect, "AbAccount", DefaultParameterSetName = DefaultParameterSetName, SupportsShouldProcess = true)]
+    [OutputType(typeof(ModuleContext))]
+    public class ConnectAbAccount : ModuleAsyncCmdlet
     {
         /// <summary>
         /// The name for the authorization code parameter set.
@@ -40,9 +42,9 @@
         private const string RefreshTokenParameterSetName = "RefreshTokenParameterSet";
 
         /// <summary>
-        /// Gets or sets the identifier for the application to be used for authentication.
+        /// Gets or sets the identifier of the application to be used for authentication.
         /// </summary>
-        [Parameter(HelpMessage = "The identifier for the application to be used for authentication.", Mandatory = true)]
+        [Parameter(HelpMessage = "The identifier of the application to be used for authentication.", Mandatory = false)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
 
@@ -61,9 +63,9 @@
         public SecureString RefreshToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the scopes to be used for authentication.
+        /// Gets or sets the scopes to be used for authenitcation.
         /// </summary>
-        [Parameter(HelpMessage = "The scopes to be used for authentication.", Mandatory = true)]
+        [Parameter(HelpMessage = "The scopes to be used for authentication.", Mandatory = false)]
         [ValidateNotNull]
         public string[] Scopes { get; set; }
 
@@ -100,12 +102,11 @@
 
             ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
 
-            account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
-
-            if (ParameterSetName.Equals(DefaultParameterSetName))
+            if (string.IsNullOrEmpty(ApplicationId) == false)
             {
-                account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
+                account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
             }
+
             if (UseAuthorizationCode.IsPresent)
             {
                 account.SetProperty(ExtendedPropertyType.UseAuthorizationCode, true.ToString());
@@ -115,14 +116,27 @@
                 account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
             }
 
-            WriteObject(await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
-                new TokenRequestData(account, environment, Scopes)
+            await ConfirmActionAsync(
+                string.Format(CultureInfo.InvariantCulture, Resources.AcquireTokenTarget, account.AccountType, Environment),
+                "acquire token",
+                async () =>
                 {
-                    IncludeRefreshToken = true,
-                    RefreshToken = RefreshToken
-                },
-                (string value) => WriteWarning(value),
-                CancellationToken).ConfigureAwait(false));
+                    await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
+                        new TokenRequestData(account, environment, Scopes)
+                        {
+                            RefreshToken = RefreshToken
+                        },
+                        (string value) => WriteWarning(value),
+                        CancellationToken).ConfigureAwait(false);
+
+                    ModuleSession.Instance.Context = new()
+                    {
+                        Account = account,
+                        Environment = environment
+                    };
+
+                    WriteObject(ModuleSession.Instance.Context);
+                }).ConfigureAwait(false);
         }
     }
 }

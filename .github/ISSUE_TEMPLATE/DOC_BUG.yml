@@ -1,0 +1,17 @@
+name: ✒️ Document issue or question
+description: Report document related issue
+title: '[Doc]: '
+labels: [needs-triage]
+
+body:
+- type: markdown
+  attributes:
+    value: >
+      Thanks for asking a question or reporting an issue with the documentation.
+- type: textarea
+  attributes:
+    label: Description
+    description: >
+      Please describe issue or question  about the documentation that you have. Including a link to the document would be helpful for the discussion.
+  validations:
+    required: true

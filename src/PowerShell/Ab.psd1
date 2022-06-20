@@ -79,11 +79,18 @@ FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @(
+    'Add-AbEnvironment',
+    'Connect-AbAccount',
+    'Disconnect-AbAccount',
+    'Get-AbAccessToken',
     'Get-AbConfiguration',
+    'Get-AbEnvironment',
     'Invoke-AbWebDriverAction',
     'New-AbAccessToken',
     'New-AbBulkRefreshToken',
+    'Remove-AbEnvironment',
     'Resolve-AbError',
+    'Set-AbEnvironment',
     'Update-AbConfiguration'
 )
 

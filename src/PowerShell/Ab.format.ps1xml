@@ -29,7 +29,7 @@
 							</TableColumnItem>
 							<TableColumnItem>
 								<Alignment>Left</Alignment>
-								<ScriptBlock>$_.Environment.EnvironmentName</ScriptBlock>
+								<ScriptBlock>$_.Environment.Name</ScriptBlock>
 							</TableColumnItem>
 							<TableColumnItem>
 								<Alignment>Left</Alignment>

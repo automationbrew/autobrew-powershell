@@ -1,82 +1,81 @@
 ---
 external help file: AutoBrew.PowerShell.dll-Help.xml
 Module Name: Ab
-online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/New-AbAccessToken.md
+online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Connect-AbAccount.md
 schema: 2.0.0
 ---
 
-# New-AbAccessToken
+# Connect-AbAccount
 
 ## SYNOPSIS
 
-Acquires an access token from Azure Active Directory.
+Connect to the cloud with an authenticated account.
 
 ## SYNTAX
 
 ### DefaultParameterSet (Default)
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
- [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### RefreshTokenParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -RefreshToken <SecureString>
- -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
+ [-Scopes <String[]>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### AuthorizationCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
- [-UseAuthorizationCode] [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-UseAuthorizationCode] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DeviceCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
- [-UseDeviceAuthentication] [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-UseDeviceAuthentication] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Acquires an access token from Azure Active Directory.
+Connect to the cloud with an authenticated account.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> $credential = Get-Credential
-PS C:\> New-AbAccessToken -ApplicationId 'xxxx-xxxx-xxxx-xxxx' -Scopes 'https://graph.microsoft.com/.default' -Tenant 'yyyy-yyyy-yyyy-yyyy' -UseAuthorizationCode
+PS C:\> Connect-AbAccount
 ```
 
-Requests a new access token from Azure Directory using the authorization code flow. By design the redirect URI will be generated automatically. This generation process will attempt to find a port between 8400 and 8999 that is not in use. Once an available port has been found, the redirect URL value will be constructed (e.g. <http://localhost:8400>). Which means, the redirect URI for the Azure Active Directory application must be configured accordingly.
+Establishes a connection to the cloud using an authenticated account.
 
 ### Example 2
 
 ```powershell
-$refreshToken = Get-AzKeyVaultSecret -SecretName 'secretName' -VaultName 'vaultName'
-New-AbAccessToken -ApplicationId 'xxxx-xxxx-xxxx-xxxx' -RefreshToken $refreshToken.SecretValue -Scopes 'https://graph.microsoft.com/.default' -Tenant 'yyyy-yyyy-yyyy-yyyy'
+PS C:\> $refreshToken = '<refreshToken>'
+PS C:\> Connect-AbAccount -ApplicationId 'xxxx-xxxx-xxxx-xxxx' -RefreshToken $refreshToken
 ```
 
-Obtains a refresh token from Azure KeyVault, and requests a new access from Azure Directory using that refresh token.
+Connects to the cloud using a refresh token that was generated using a [native application](https://docs.microsoft.com/azure/active-directory/develop/native-app).
 
 ## PARAMETERS
 
 ### -ApplicationId
 
-The identifier for the application to be used for authentication.
+The identifier of the application to be used for authentication.
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -85,7 +84,7 @@ Accept wildcard characters: False
 
 ### -Environment
 
-The environment to be used for authentication.
+The name of the environment to be used for authentication.
 
 ```yaml
 Type: System.String
@@ -124,7 +123,7 @@ Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -179,6 +178,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -189,7 +221,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### AutoBrew.PowerShell.Models.Authentication.ModuleAuthenticationResult
+### AutoBrew.PowerShell.Models.ModuleContext
 
 ## NOTES
 

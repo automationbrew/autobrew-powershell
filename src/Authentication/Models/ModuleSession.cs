@@ -2,6 +2,7 @@
 {
     using System.Collections.Concurrent;
     using Factories;
+    using Models.Authentication;
 
     /// <summary>
     /// Represents the current session for the module.
@@ -22,6 +23,11 @@
         /// Provides the components that have been registered.
         /// </summary>
         private readonly IDictionary<ComponentType, object> componentRegistry = new ConcurrentDictionary<ComponentType, object>();
+
+        /// <summary>
+        /// Provides the environments that have been registered.
+        /// </summary>
+        private readonly IDictionary<string, ModuleEnvironment> environmentRegistry = new ConcurrentDictionary<string, ModuleEnvironment>();
 
         /// <summary>
         /// Gets or sets the factory used to perform authentication requests.
@@ -54,6 +60,15 @@
         }
 
         /// <summary>
+        /// Gets a collection of environments that have been registered.
+        /// </summary>
+        /// <returns>A collection of environments that have been registered.</returns>
+        public IEnumerable<ModuleEnvironment> ListEnvironments()
+        {
+            return environmentRegistry.Values;
+        }
+
+        /// <summary>
         /// Gets the component associated with the specified key.
         /// </summary>
         /// <typeparam name="T">The type of component in the registry.</typeparam>
@@ -62,11 +77,48 @@
         /// <returns><c>true</c> if the component registry contains an element with the specified key; otherwise, <c>false</c>.</returns>
         public bool TryGetComponent<T>(ComponentType key, out T component) where T : class
         {
+            key.AssertNotNull(nameof(key));
+
             bool flag = componentRegistry.TryGetValue(key, out object value);
 
-            component = value == null ? null : value as T;
+            component = value as T ?? default;
 
             return flag;
+        }
+
+        /// <summary>
+        /// Gets the environment associated with the specified name.
+        /// </summary>
+        /// <param name="name">The name for the environment in the registry.</param>
+        /// <param name="environment">When this function returns, the instance of the <see cref="ModuleEnvironment" /> class associated with the specified name if found; otherwise, the default value.</param>
+        /// <returns><c>true</c> if the registry contains an environment with the specified name; otherwise, <c>false</c></returns>
+        public bool TryGetEnvironment(string name, out ModuleEnvironment environment)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = ModuleEnvironmentConstants.AzureCloud;
+            }
+
+            return environmentRegistry.TryGetValue(name, out environment);
+        }
+
+        /// <summary>
+        /// Initializes the session for use by the module.
+        /// </summary>
+        public void Initialize()
+        {
+            if (environmentRegistry.ContainsKey(ModuleEnvironmentConstants.AzureCloud) == false)
+            {
+                environmentRegistry.Add(
+                    ModuleEnvironmentConstants.AzureCloud,
+                    new ModuleEnvironment
+                    {
+                        ActiveDirectoryAuthority = ModuleEnvironmentConstants.ActiveDirectoryAuthority,
+                        MicrosoftGraphEndpoint = ModuleEnvironmentConstants.MicrosoftGraphEndpoint,
+                        Name = ModuleEnvironmentConstants.AzureCloud,
+                        Type = ModuleEnvironmentType.BuiltIn
+                    });
+            }
         }
 
         /// <summary>
@@ -87,6 +139,34 @@
         }
 
         /// <summary>
+        /// Registers an environment with the sepcified name.
+        /// </summary>
+        /// <param name="name">The name for the environment to register.</param>
+        /// <param name="environment">The instance of the <see cref="ModuleEnvironment" /> class to register.</param>
+        /// <param name="overwrite">The flag that indicates wheather to overwrite an existing environment with the same name.</param>
+        /// <exception cref="ArgumentException">
+        /// The name parameter is empty or null.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// The environment parameter is null.
+        /// </exception>
+        public void RegisterEnvironment(string name, ModuleEnvironment environment, bool overwrite = false)
+        {
+            name.AssertNotEmpty(nameof(name));
+            environment.AssertNotNull(nameof(environment));
+
+            if (environment.Type == ModuleEnvironmentType.BuiltIn)
+            {
+                throw new ModuleException($"The environment {name} with cannot be registered. Only user defined environments can be registered.");
+            }
+
+            if (environmentRegistry.ContainsKey(name) == false || overwrite)
+            {
+                environmentRegistry[name] = environment;
+            }
+        }
+
+        /// <summary>
         /// Unregisters the component with the specified key.
         /// </summary>
         /// <param name="key">The key for the component.</param>
@@ -96,6 +176,30 @@
             {
                 componentRegistry.Remove(key);
             }
+        }
+
+        /// <summary>
+        /// Unregisters the environment with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the environment to be unregistered.</param>
+        /// <exception cref="ArgumentException">
+        /// The name parameter is empty or null.
+        /// </exception>
+        public void UnregisterEnvironment(string name)
+        {
+            name.AssertNotEmpty(nameof(name));
+
+            if (environmentRegistry.ContainsKey(name) == false)
+            {
+                return;
+            }
+
+            if (environmentRegistry[name].Type == ModuleEnvironmentType.BuiltIn)
+            {
+                throw new ModuleException($"The environment {name} cannot be unregistered because it is a builtin environment.");
+            }
+
+            environmentRegistry.Remove(name);
         }
     }
 }
