@@ -14,8 +14,8 @@ Sets the properties for a given environment.
 ## SYNTAX
 
 ```powershell
-Set-AbEnvironment -ActiveDirectoryAuthority <String> [-MicrosoftGraphEndpoint <String>] -Name <String> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Set-AbEnvironment -ActiveDirectoryAuthority <String> [-MicrosoftGraphEndpoint <String>] -Name <String>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

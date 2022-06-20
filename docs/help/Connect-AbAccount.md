@@ -13,25 +13,32 @@ Connect to the cloud with an authenticated account.
 
 ## SYNTAX
 
+### DefaultParameterSet (Default)
+
+```powershell
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
 ### RefreshTokenParameterSet
 
 ```powershell
-Connect-AbAccount [-Environment <String>] -RefreshToken <SecureString> [-Tenant <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
+ [-Scopes <String[]>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### AuthorizationCodeParameterSet
 
 ```powershell
-Connect-AbAccount [-Environment <String>] [-Tenant <String>] [-UseAuthorizationCode] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-UseAuthorizationCode] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DeviceCodeParameterSet
 
 ```powershell
-Connect-AbAccount [-Environment <String>] [-Tenant <String>] [-UseDeviceAuthentication] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
+ [-UseDeviceAuthentication] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,6 +66,22 @@ Connects to the cloud using a refresh token that was generated using a [native a
 
 ## PARAMETERS
 
+### -ApplicationId
+
+The identifier of the application to be used for authentication.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Environment
 
 The name of the environment to be used for authentication.
@@ -77,7 +100,7 @@ Accept wildcard characters: False
 
 ### -RefreshToken
 
-The refresh token to use for authentication.
+The refresh token to be used for authentication.
 
 ```yaml
 Type: System.Security.SecureString
@@ -91,9 +114,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Scopes
+
+The scopes to be used for authentication.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Tenant
 
-The identifier for the tenant to use for authentication.
+The identifier for the tenant to be used for authentication.
 
 ```yaml
 Type: System.String

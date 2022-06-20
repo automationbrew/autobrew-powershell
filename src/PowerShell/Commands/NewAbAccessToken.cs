@@ -10,7 +10,7 @@
     /// <summary>
     /// Cmdlet that requests a new access token from Azure Active Directory.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbAccessToken")]
+    [Cmdlet(VerbsCommon.New, "AbAccessToken", DefaultParameterSetName = DefaultParameterSetName)]
     [OutputType(typeof(ModuleAuthenticationResult))]
     public class NewAbAccessToken : ModuleAsyncCmdlet
     {
@@ -23,6 +23,11 @@
         /// The value for the common tenant.
         /// </summary>
         private const string CommonTenant = "organizations";
+
+        /// <summary>
+        /// The name for the default parameter set.
+        /// </summary>
+        private const string DefaultParameterSetName = "DefaultParameterSet";
 
         /// <summary>
         /// The name for the device code parameter set.
@@ -97,6 +102,10 @@
 
             account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
 
+            if (ParameterSetName.Equals(DefaultParameterSetName))
+            {
+                account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
+            }
             if (UseAuthorizationCode.IsPresent)
             {
                 account.SetProperty(ExtendedPropertyType.UseAuthorizationCode, true.ToString());

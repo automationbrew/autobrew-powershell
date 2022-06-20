@@ -14,8 +14,8 @@ Adds metadata for connecting to a given cloud.
 ## SYNTAX
 
 ```powershell
-Add-AbEnvironment -ActiveDirectoryAuthority <String> -MicrosoftGraphEndpoint <String> -Name <String> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Add-AbEnvironment -ActiveDirectoryAuthority <String> -MicrosoftGraphEndpoint <String> -Name <String> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -13,6 +13,13 @@ Acquires an access token from Azure Active Directory.
 
 ## SYNTAX
 
+### DefaultParameterSet (Default)
+
+```powershell
+New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+ [<CommonParameters>]
+```
+
 ### RefreshTokenParameterSet
 
 ```powershell

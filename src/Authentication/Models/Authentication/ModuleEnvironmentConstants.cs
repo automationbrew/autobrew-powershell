@@ -26,6 +26,16 @@
         public const string BulkRefreshTokenPollUri = "webapp/bulkaadjtoken/poll";
 
         /// <summary>
+        /// The default application identifier to use when requesting an access token.
+        /// </summary>
+        public const string DefaultApplicationId = "04b07795-8ddb-461a-bbee-02f9e1bf7b46";
+
+        /// <summary>
+        /// The default scope to use when requesting an access token.
+        /// </summary>
+        public const string DefaultScope = ".default";
+
+        /// <summary>
         /// The endpoint of Microosft Graph for the Azure cloud environment.
         /// </summary>
         public const string MicrosoftGraphEndpoint = "https://graph.microsoft.com";

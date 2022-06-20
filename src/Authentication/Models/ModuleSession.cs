@@ -92,12 +92,12 @@
         /// <param name="name">The name for the environment in the registry.</param>
         /// <param name="environment">When this function returns, the instance of the <see cref="ModuleEnvironment" /> class associated with the specified name if found; otherwise, the default value.</param>
         /// <returns><c>true</c> if the registry contains an environment with the specified name; otherwise, <c>false</c></returns>
-        /// <exception cref="ArgumentException">
-        /// The name parameter is empty or null.
-        /// </exception>
         public bool TryGetEnvironment(string name, out ModuleEnvironment environment)
         {
-            name.AssertNotEmpty(nameof(name));
+            if (string.IsNullOrEmpty(name))
+            {
+                name = ModuleEnvironmentConstants.AzureCloud;
+            }
 
             return environmentRegistry.TryGetValue(name, out environment);
         }
