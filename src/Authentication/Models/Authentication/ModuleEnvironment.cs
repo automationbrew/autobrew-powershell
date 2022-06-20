@@ -11,16 +11,6 @@
         public string ActiveDirectoryAuthority { get; set; }
 
         /// <summary>
-        /// Gets or sets the bulk refresh token begin endpoint for the environment.
-        /// </summary>
-        public string BulkRefreshTokenBeginEndpoint { get; set; }
-
-        /// <summary>
-        /// Gets or sets the bulk refresh token poll endpoint for the environment.
-        /// </summary>
-        public string BulkRefreshTokenPollEndpoint { get; set; }
-
-        /// <summary>
         /// Gets or sets the Microsoft Graph endpoint for the environment.
         /// </summary>
         public string MicrosoftGraphEndpoint { get; set; }

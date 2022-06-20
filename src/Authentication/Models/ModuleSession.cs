@@ -113,9 +113,7 @@
                     ModuleEnvironmentConstants.AzureCloud,
                     new ModuleEnvironment
                     {
-                        ActiveDirectoryAuthority = ModuleEnvironmentConstants.AzureActiveDirectoryAuthority,
-                        BulkRefreshTokenBeginEndpoint = ModuleEnvironmentConstants.BulkRefreshTokenBeginEndpoint,
-                        BulkRefreshTokenPollEndpoint = ModuleEnvironmentConstants.BulkRefreshTokenPollEndpoint,
+                        ActiveDirectoryAuthority = ModuleEnvironmentConstants.ActiveDirectoryAuthority,
                         MicrosoftGraphEndpoint = ModuleEnvironmentConstants.MicrosoftGraphEndpoint,
                         Name = ModuleEnvironmentConstants.AzureCloud,
                         Type = ModuleEnvironmentType.BuiltIn

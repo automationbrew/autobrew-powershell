@@ -5,33 +5,57 @@ online version: https://github.com/automationbrew/autobrew-powershell/blob/main/
 schema: 2.0.0
 ---
 
-# Get-AbConfiguration
+# Get-AbEnvironment
 
 ## SYNOPSIS
 
-Gets the configurations for the AutomationBrew PowerShell module.
+Gets the metadata for an environment.
 
 ## SYNTAX
 
 ```powershell
-Get-AbConfiguration [<CommonParameters>]
+Get-AbEnvironment [-Name <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Gets the configurations for the AutomationBrew PowerShell module.
+Gets the metadata for an environment.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Get-AbConfiguration
+PS C:\> Get-AbEnvironment
 ```
 
-Gets the configurations for the AutomationBrew PowerShell module.
+Gets the metadata for all environments.
+
+### Example 2
+
+```powershell
+PS C:\> Get-AbEnvironment -Name AzureCloud
+```
+
+Gets the metadata for the environment with the name AzureCloud.
 
 ## PARAMETERS
+
+### -Name
+
+The name for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 
@@ -43,7 +67,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### AutoBrew.PowerShell.Models.Configuration.PSConfiguration
+### AutoBrew.PowerShell.Models.Authentication.ModuleEnvironment
 
 ## NOTES
 

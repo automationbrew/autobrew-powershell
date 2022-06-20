@@ -14,7 +14,7 @@ Acquires a bulk refresh token from Azure Active Directory that will be used to p
 ## SYNTAX
 
 ```powershell
-New-AbBulkRefreshToken [-Environment <ModuleEnvironmentName>] [<CommonParameters>]
+New-AbBulkRefreshToken [-Environment <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,10 +38,9 @@ Acquires a bulk refresh token from Azure Active Directory that will be used to p
 The enivornment that will provide metadata used to acquire the bulk refresh token.
 
 ```yaml
-Type: AutoBrew.PowerShell.Models.Authentication.ModuleEnvironmentName
+Type: System.String
 Parameter Sets: (All)
-Aliases: EnvironmentName
-Accepted values: Public
+Aliases:
 
 Required: False
 Position: Named

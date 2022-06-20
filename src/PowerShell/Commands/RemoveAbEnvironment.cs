@@ -14,7 +14,7 @@
         /// Gets or sets the name for the environment.
         /// </summary>
         [EnvironmentCompleter]
-        [Parameter(HelpMessage = "The name for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
+        [Parameter(HelpMessage = "The name for the environment.", Mandatory = true, ValueFromPipelineByPropertyName = true)]
         public string Name { get; set; }
 
         /// <summary>

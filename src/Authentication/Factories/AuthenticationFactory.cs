@@ -66,7 +66,7 @@
             string packageId = Guid.NewGuid().ToString();
 
             BulkRefreshTokenResponse response = await client.PostAsync<BulkRefreshTokenRequest, BulkRefreshTokenResponse>(
-                new Uri(environment.BulkRefreshTokenBeginEndpoint),
+                new Uri(new Uri(environment.ActiveDirectoryAuthority), ModuleEnvironmentConstants.BulkRefreshTokenBeginUri),
                 new BulkRefreshTokenRequest
                 {
                     DisplayName = $"package_{packageId}",
@@ -76,7 +76,7 @@
                 cancellationToken);
 
             response = await client.GetAsync<BulkRefreshTokenResponse>(
-                new Uri(environment.BulkRefreshTokenPollEndpoint),
+                new Uri(new Uri(environment.ActiveDirectoryAuthority), ModuleEnvironmentConstants.BulkRefreshTokenPollUri),
                 new Dictionary<string, string>() { { "flowToken", response.FlowToken } },
                 cancellationToken);
 

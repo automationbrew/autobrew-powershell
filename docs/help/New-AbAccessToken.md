@@ -16,22 +16,22 @@ Acquires an access token from Azure Active Directory.
 ### RefreshTokenParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <ModuleEnvironmentName>] -RefreshToken <SecureString>
+New-AbAccessToken -ApplicationId <String> [-Environment <String>] -RefreshToken <SecureString>
  -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
 ```
 
 ### AuthorizationCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <ModuleEnvironmentName>] -Scopes <String[]>
- [-Tenant <String>] [-UseAuthorizationCode] [<CommonParameters>]
+New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+ [-UseAuthorizationCode] [<CommonParameters>]
 ```
 
 ### DeviceCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <ModuleEnvironmentName>] -Scopes <String[]>
- [-Tenant <String>] [-UseDeviceAuthentication] [<CommonParameters>]
+New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+ [-UseDeviceAuthentication] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,10 +81,9 @@ Accept wildcard characters: False
 The environment to be used for authentication.
 
 ```yaml
-Type: AutoBrew.PowerShell.Models.Authentication.ModuleEnvironmentName
+Type: System.String
 Parameter Sets: (All)
 Aliases:
-Accepted values: Public
 
 Required: False
 Position: Named
