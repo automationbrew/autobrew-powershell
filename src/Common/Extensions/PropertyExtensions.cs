@@ -54,7 +54,7 @@
         /// <summary>
         /// Determines if the given property is set in the model.
         /// </summary>
-        /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel"/> interface.</param>
+        /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel" /> interface.</param>
         /// <param name="propertyType">The type of property to be checked.</param>
         /// <returns><c>true</c> if the property is set, otherwise <c>false</c>.</returns>
         public static bool IsPropertySet(this IExtensibleModel model, ExtendedPropertyType propertyType)
@@ -67,6 +67,17 @@
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Removes the property with the specified type.
+        /// </summary>
+        /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel" /> interface.</param>
+        /// <param name="propertyType">The type of property to be removed.</param>
+        /// <returns><c>true</c> if the property was successfully removed; otherwise, <c>false</c>. When the specified property does not exist <c>false</c> will be returned.</returns>
+        public static bool RemoveProperty(this IExtensibleModel model, ExtendedPropertyType propertyType)
+        {
+            return model.ExtendedProperties.Remove(propertyType);
         }
 
         /// <summary>

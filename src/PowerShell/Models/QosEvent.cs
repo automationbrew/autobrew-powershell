@@ -12,18 +12,6 @@
         /// Timer used to determine the duration of the event.
         /// </summary>
         private readonly Stopwatch timer;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QosEvent" /> class.
-        /// </summary>
-        public QosEvent()
-        {
-            StartTime = DateTimeOffset.Now;
-
-            timer = new Stopwatch();
-            timer.Start();
-        }
-
         /// <summary>
         /// Gets or sets the name of the command.
         /// </summary>
@@ -80,6 +68,17 @@
         public string UserId { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="QosEvent" /> class.
+        /// </summary>
+        public QosEvent()
+        {
+            StartTime = DateTimeOffset.Now;
+
+            timer = new Stopwatch();
+            timer.Start();
+        }
+
+        /// <summary>
         /// Finishes the quality of service event.
         /// </summary>
         public void FinishQosEvent()
@@ -87,6 +86,22 @@
             timer.Stop();
 
             Duration = timer.Elapsed;
+        }
+
+        /// <summary>
+        /// Pauses the quality of service timer.
+        /// </summary>
+        public void PauseQoSTimer()
+        {
+            timer.Stop();
+        }
+
+        /// <summary>
+        /// Resumes the quality of service timer.
+        /// </summary>
+        public void ResumeQoSTimer()
+        {
+            timer.Start();
         }
     }
 }

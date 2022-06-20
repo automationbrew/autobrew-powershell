@@ -13,12 +13,11 @@
     public class NewAbBulkRefreshToken : ModuleAsyncCmdlet
     {
         /// <summary>
-        /// Gets or sets the enivornment that will provide metadata used to acquire the bulk refresh token.
+        /// Gets or sets the name of the environment to be used for authentication.
         /// </summary>
-        [Alias("EnvironmentName")]
-        [Parameter(HelpMessage = "The enivornment that will provide metadata used to acquire the bulk refresh token.", Mandatory = false)]
-        [ValidateSet(nameof(ModuleEnvironmentName.Public))]
-        public ModuleEnvironmentName Environment { get; set; }
+        [EnvironmentCompleter]
+        [Parameter(HelpMessage = "The name of the environment to be used for authentication.", Mandatory = false)]
+        public string Environment { get; set; }
 
         /// <summary>
         /// Performs the actions associated with the command.
@@ -26,8 +25,10 @@
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected override async Task PerformCmdletAsync()
         {
+            ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
+
             WriteObject(await ModuleSession.Instance.AuthenticationFactory.AcquireBulkRefreshTokenAsync(
-                ModuleEnvironment.KnownEnvironments[Environment], (string value) => WriteWarning(value), CancellationToken));
+                environment, (string value) => WriteWarning(value), CancellationToken));
         }
     }
 }

@@ -1,21 +1,27 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
+    using System.Collections.ObjectModel;
     using System.Management.Automation;
     using Configuration;
     using Models;
     using Models.Configuration;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that provides the ability to list configurations.
     /// </summary>
-    [Cmdlet(VerbsData.Update, "AbConfiguration")]
-    public class UpdateAbConfiguration : ModuleCmdlet
+    [Cmdlet(VerbsData.Update, "AbConfiguration", SupportsShouldProcess = true)]
+    public class UpdateAbConfiguration : ModuleCmdlet, IDynamicParameters
     {
         /// <summary>
-        /// Gets or sets a flag that indicates whether telemetry for the module is enabled.
+        /// The provider for configurations that are used by the module.
         /// </summary>
-        [Parameter(HelpMessage = "A flag that indicates whether telemetry for the module is enabled", Mandatory = false)]
-        public bool? EnableTelemetry { get; set; }
+        private readonly IConfigurationProvider provider;
+
+        /// <summary>
+        /// The dictionary of runtime defined parameters used track the dynamic parameters for this command.
+        /// </summary>
+        private readonly RuntimeDefinedParameterDictionary parameters;
 
         /// <summary>
         /// Gets or sets the scope for the configuration.
@@ -25,19 +31,64 @@
         public ConfigurationScope Scope { get; set; }
 
         /// <summary>
-        /// Performs the actions associated with the command.
+        /// Initializes a new instance of the <see cref="UpdateAbConfiguration" /> class.
         /// </summary>
-        protected override void PerformCmdlet()
+        /// <exception cref="ModuleException">
+        /// Unable to locate the configuration provider.
+        /// </exception>
+        public UpdateAbConfiguration()
         {
-            if (ModuleSession.Instance.TryGetComponent(ComponentType.Configuration, out IConfigurationProvider provider) == false)
+            if (ModuleSession.Instance.TryGetComponent(ComponentType.Configuration, out provider) == false)
             {
                 throw new ModuleException("Unable to locate the configuration provider.", ModuleExceptionCategory.Configuration);
             }
 
-            if (EnableTelemetry.HasValue)
+            parameters = new();
+        }
+
+        /// <summary>
+        /// Gets the collection of runtime-based parameters for the command.
+        /// </summary>
+        /// <returns>A collection of runtime-defined parameters that are keyed based on the name of the parameter.</returns>
+        public object GetDynamicParameters()
+        {
+            parameters.Clear();
+
+            foreach (ConfigurationData item in provider.ListConfiguration())
             {
-                provider.UpdateConfiguration(ConfigurationKey.DataCollection, Scope, EnableTelemetry.Value);
+                parameters.Add(item.Definition.Key, new RuntimeDefinedParameter(
+                        item.Definition.Key,
+                        item.Definition.ValueType,
+                        new Collection<Attribute>
+                        {
+                            new ParameterAttribute
+                            {
+                                HelpMessage = item.Definition.Description,
+                                ValueFromPipelineByPropertyName = true
+                            }
+                        }));
             }
+
+            return parameters;
+        }
+
+        /// <summary>
+        /// Performs the actions associated with the command.
+        /// </summary>
+        protected override void PerformCmdlet()
+        {
+            var userDefinedParameters = parameters.Values.Where(p => p.IsSet);
+
+            ConfirmAction(
+                string.Format(Resources.UpdateConfigurationTarget, string.Join(", ", userDefinedParameters.Select(p => p.Name))),
+                Scope.ToString(),
+                () =>
+                {
+                    foreach (var parameter in parameters.Values.Where(p => p.IsSet))
+                    {
+                        provider.UpdateConfiguration(parameter.Name, Scope, parameter.Value);
+                    }
+                });
         }
     }
 }

@@ -18,6 +18,8 @@
         /// </summary>
         public void OnImport()
         {
+            ModuleSession.Instance.Initialize();
+
             if (ModuleSession.Instance.AuthenticationFactory == null)
             {
                 ModuleSession.Instance.AuthenticationFactory = new AuthenticationFactory();

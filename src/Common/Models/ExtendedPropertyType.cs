@@ -23,12 +23,12 @@
         /// <summary>
         /// Represents the type of extended property is a boolean that indicates the authorization code flow should be used.
         /// </summary>
-        UseAuthCode,
+        UseAuthorizationCode,
 
         /// <summary>
         /// Represents the type of extended property is a boolean that indicates the device code flow should be used.
         /// </summary>
-        UseDeviceAuth,
+        UseDeviceCode,
 
         /// <summary>
         /// Represent the type of extended property is a future or unknown value.

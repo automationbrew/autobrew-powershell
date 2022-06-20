@@ -4,9 +4,11 @@
     using System.Text.Json.Nodes;
     using Azure.Identity;
     using Microsoft.Identity.Client;
+    using Models;
+    using Models.Authentication;
 
     /// <summary>
-    /// Provides the ability to persist tokens.
+    /// Provides the ability to interact with the token cache.
     /// </summary>
     public abstract class TokenCacheProvider
     {
@@ -54,6 +56,34 @@
         }
 
         /// <summary>
+        /// Removes the specified account from the token cache.
+        /// </summary>
+        /// <param name="moduleAccount">The module account to be removed from the token cache.</param>
+        /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// The moduleAccount parameter is null.
+        /// </exception>
+        public async Task RemoveAccountAsync(ModuleAccount moduleAccount)
+        {
+            moduleAccount.AssertNotNull(nameof(moduleAccount));
+
+            if (moduleAccount.AccountType is not ModuleAccountType.User)
+            {
+                return;
+            }
+
+            IPublicClientApplication client = PublicClientApplicationBuilder.Create(moduleAccount.GetProperty(ExtendedPropertyType.ApplicationId)).Build();
+            await RegisterCacheAsync(client.UserTokenCache).ConfigureAwait(false);
+
+            IEnumerable<IAccount> accounts = await client.GetAccountsAsync().ConfigureAwait(false);
+
+            foreach (IAccount account in accounts.Where(a => IsAccountMatch(a, moduleAccount)))
+            {
+                await client.RemoveAsync(account).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
         /// Registers a token cache to synchronize with the approriate storage.
         /// </summary>
         /// <param name="tokenCache">The token cache to be registered.</param>
@@ -69,6 +99,29 @@
             await Task.CompletedTask.ConfigureAwait(false);
 
             return true;
+        }
+
+        /// <summary>
+        /// Determines if the identity and module accounts are a match.
+        /// </summary>
+        /// <param name="identityAccount">The identity account to be compared.</param>
+        /// <param name="moduleAccount">The module account to be compared.</param>
+        /// <returns><c>true</c> if the identity and module accounts are a match; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// The identityAccount parameter is null.
+        /// or
+        /// The moduleAccount parameter is null.
+        /// </exception>
+        private static bool IsAccountMatch(IAccount identityAccount, ModuleAccount moduleAccount)
+        {
+            identityAccount.AssertNotNull(nameof(identityAccount));
+            moduleAccount.AssertNotNull(nameof(moduleAccount));
+
+            return string.Equals(identityAccount.Username, moduleAccount.Username, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(
+                    identityAccount.HomeAccountId?.Identifier,
+                    moduleAccount.ExtendedProperties.GetProperty(ExtendedPropertyType.HomeAccountId),
+                    StringComparison.OrdinalIgnoreCase);
         }
     }
 }

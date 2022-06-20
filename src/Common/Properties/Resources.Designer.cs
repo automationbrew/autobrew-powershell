@@ -61,6 +61,24 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} acccount in environment &apos;{1}&apos;.
+        /// </summary>
+        public static string AcquireTokenTarget {
+            get {
+                return ResourceManager.GetString("AcquireTokenTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to add environment.
+        /// </summary>
+        public static string AddEnvironmentTarget {
+            get {
+                return ResourceManager.GetString("AddEnvironmentTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} must be greater than zero.
         /// </summary>
         public static string AssertNumberPositiveInvalidError {
@@ -102,6 +120,51 @@ namespace AutoBrew.PowerShell.Properties {
         public static string DataCollectionConfigurationDefinition {
             get {
                 return ResourceManager.GetString("DataCollectionConfigurationDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to remove account.
+        /// </summary>
+        public static string DisconnectAccountTarget {
+            get {
+                return ResourceManager.GetString("DisconnectAccountTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout account &apos;{0}&apos;.
+        /// </summary>
+        public static string LogoutTarget {
+            get {
+                return ResourceManager.GetString("LogoutTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to remove environment.
+        /// </summary>
+        public static string RemoveEnvironmentTarget {
+            get {
+                return ResourceManager.GetString("RemoveEnvironmentTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to update the following configurations &apos;{0}&apos;..
+        /// </summary>
+        public static string UpdateConfigurationTarget {
+            get {
+                return ResourceManager.GetString("UpdateConfigurationTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to update environment.
+        /// </summary>
+        public static string UpdateEnvironmentTarget {
+            get {
+                return ResourceManager.GetString("UpdateEnvironmentTarget", resourceCulture);
             }
         }
     }

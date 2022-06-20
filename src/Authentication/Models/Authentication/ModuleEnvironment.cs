@@ -1,59 +1,38 @@
 ﻿namespace AutoBrew.PowerShell.Models.Authentication
 {
-    using System.Collections.Concurrent;
-
     /// <summary>
-    /// Represents environment details use for authentication.
+    /// Represents the metadata for an environment for the module.
     /// </summary>
     public sealed class ModuleEnvironment
     {
         /// <summary>
-        /// Gets or sets the authentication endpoint.
+        /// Gets or sets the Active Directory authority for the environment.
         /// </summary>
         public string ActiveDirectoryAuthority { get; set; }
 
         /// <summary>
-        /// Gets or sets the bulk refresh token begin request endpoint.
+        /// Gets or sets the bulk refresh token begin endpoint for the environment.
         /// </summary>
         public string BulkRefreshTokenBeginEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or sets the bulk refresh token poll request endpoint.
+        /// Gets or sets the bulk refresh token poll endpoint for the environment.
         /// </summary>
         public string BulkRefreshTokenPollEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or sets the environment name.
-        /// </summary>
-        public ModuleEnvironmentName EnvironmentName { get; set; }
-
-        /// <summary>
-        /// Gets a collection of known environments for use by the module.
-        /// </summary>
-        public static IDictionary<ModuleEnvironmentName, ModuleEnvironment> KnownEnvironments { get; } = InitializeEnvironments();
-
-        /// <summary>
-        /// Gets or sets the endpoint for Microsoft Graph.
+        /// Gets or sets the Microsoft Graph endpoint for the environment.
         /// </summary>
         public string MicrosoftGraphEndpoint { get; set; }
 
         /// <summary>
-        /// Initializes the known environments for use by the module.
+        /// Gets or sets the name for the environment.
         /// </summary>
-        /// <returns>A collection of known environments for use by the module.</returns>
-        private static IDictionary<ModuleEnvironmentName, ModuleEnvironment> InitializeEnvironments()
-        {
-            return new ConcurrentDictionary<ModuleEnvironmentName, ModuleEnvironment>
-            {
-                [ModuleEnvironmentName.Public] = new ModuleEnvironment
-                {
-                    ActiveDirectoryAuthority = ModuleEnvironmentConstants.AzureActiveDirectoryAuthority,
-                    BulkRefreshTokenBeginEndpoint = ModuleEnvironmentConstants.BulkRefreshTokenBeginEndpoint,
-                    BulkRefreshTokenPollEndpoint = ModuleEnvironmentConstants.BulkRefreshTokenPollEndpoint,
-                    EnvironmentName = ModuleEnvironmentName.Public,
-                    MicrosoftGraphEndpoint = ModuleEnvironmentConstants.MicrosoftGraphEndpoint
-                }
-            };
-        }
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type for the enviornment.
+        /// </summary>
+        public ModuleEnvironmentType Type { get; set; }
     }
 }

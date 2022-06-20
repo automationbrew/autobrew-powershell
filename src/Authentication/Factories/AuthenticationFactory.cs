@@ -50,7 +50,7 @@
             };
 
             account.SetProperty(ExtendedPropertyType.ApplicationId, BulkRefreshTokenClientId);
-            account.SetProperty(ExtendedPropertyType.UseDeviceAuth, true.ToString());
+            account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
 
             ModuleAuthenticationResult authResult = await AcquireTokenAsync(
                 new TokenRequestData(
@@ -168,33 +168,28 @@
         {
             requestData.AssertNotNull(nameof(requestData));
 
-            if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseAuthCode))
+            if (requestData.Account.IsPropertySet(ExtendedPropertyType.HomeAccountId))
+            {
+                return new SilentParameters(requestData);
+            }
+            else if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseAuthorizationCode))
             {
                 return new InteractiveUserParameters(requestData);
             }
-            else if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseDeviceAuth))
+            else if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseDeviceCode))
             {
                 return new DeviceCodeParameters(requestData, outputAction);
             }
-            else if (requestData.Account.AccountType == ModuleAccountType.User)
+            else if (string.IsNullOrEmpty(requestData.Account.Username) == false && requestData.Password != null)
             {
-                if (string.IsNullOrEmpty(requestData.Account.Username) == false && requestData.Password != null)
-                {
-                    return new UsernamePasswordParameters(requestData);
-                }
-                else if (requestData.RefreshToken != null)
-                {
-                    return new RefreshTokenParameters(requestData);
-                }
-                if (requestData.Account.IsPropertySet(ExtendedPropertyType.HomeAccountId))
-                {
-                    return new SilentParameters(requestData);
-                }
-
-                return new InteractiveUserParameters(requestData);
+                return new UsernamePasswordParameters(requestData);
+            }
+            else if (requestData.RefreshToken != null)
+            {
+                return new RefreshTokenParameters(requestData);
             }
 
-            throw new ModuleException("Failed to resolve the authentication parameters.", ModuleExceptionCategory.Authentication);
+            return new InteractiveUserParameters(requestData);
         }
     }
 }
