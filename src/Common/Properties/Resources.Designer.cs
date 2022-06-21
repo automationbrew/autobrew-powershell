@@ -115,6 +115,205 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The parameter : &apos;{0}&apos; is changing..
+        /// </summary>
+        public static string BreakingChangeAttributeParameterChanging {
+            get {
+                return ResourceManager.GetString("BreakingChangeAttributeParameterChanging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The parameter : &apos;{0}&apos; is becoming mandatory..
+        /// </summary>
+        public static string BreakingChangeAttributeParameterMandatoryNow {
+            get {
+                return ResourceManager.GetString("BreakingChangeAttributeParameterMandatoryNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The parameter : &apos;{0}&apos; is being replaced by mandatory parameter : &apos;{1}&apos;..
+        /// </summary>
+        public static string BreakingChangeAttributeParameterReplaced {
+            get {
+                return ResourceManager.GetString("BreakingChangeAttributeParameterReplaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The parameter : &apos;{0}&apos; is being replaced by mandatory parameter : &apos;{1}&apos;..
+        /// </summary>
+        public static string BreakingChangeAttributeParameterReplacedMandatory {
+            get {
+                return ResourceManager.GetString("BreakingChangeAttributeParameterReplacedMandatory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///The type of the parameter is changing from &apos;{0}&apos; to &apos;{1}&apos;..
+        /// </summary>
+        public static string BreakingChangeAttributeParameterTypeChange {
+            get {
+                return ResourceManager.GetString("BreakingChangeAttributeParameterTypeChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- Change description : {0}.
+        /// </summary>
+        public static string BreakingChangesAttributesChangeDescriptionMessage {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesChangeDescriptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cmdlet is being deprecated. There will be no replacement for it..
+        /// </summary>
+        public static string BreakingChangesAttributesCommandDeprecationMessageNoReplacement {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesCommandDeprecationMessageNoReplacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cmdlet &apos;{0}&apos; is replacing this cmdlet..
+        /// </summary>
+        public static string BreakingChangesAttributesCommandDeprecationMessageWithReplacement {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesCommandDeprecationMessageWithReplacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}.
+        /// </summary>
+        public static string BreakingChangesAttributesDeclarationMessage {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesDeclarationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- Cmdlet : &apos;{0}&apos;
+        /// - {1}.
+        /// </summary>
+        public static string BreakingChangesAttributesDeclarationMessageWithCmdletName {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesDeclarationMessageWithCmdletName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Note : Go to {0} for steps to suppress this breaking change warning, and other information on breaking changes..
+        /// </summary>
+        public static string BreakingChangesAttributesFooterMessage {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesFooterMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upcoming breaking changes in the cmdlet &apos;{0}&apos; :.
+        /// </summary>
+        public static string BreakingChangesAttributesHeaderMessage {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesHeaderMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- This change will take effect on &apos;{0}&apos;.
+        /// </summary>
+        public static string BreakingChangesAttributesInEffectByDateMessage {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesInEffectByDateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The change is expected to take effect from the version : &apos;{0}&apos;.
+        /// </summary>
+        public static string BreakingChangesAttributesInEffectByVersion {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesInEffectByVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The output type is changing from the existing type :&apos;{0}&apos; to the new type :&apos;{1}&apos;.
+        /// </summary>
+        public static string BreakingChangesAttributesOutputChange1 {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesOutputChange1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The output type &apos;{0}&apos; is changing.
+        /// </summary>
+        public static string BreakingChangesAttributesOutputChange2 {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesOutputChange2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The following properties are being added to the output type :.
+        /// </summary>
+        public static string BreakingChangesAttributesOutputPropertiesAdded {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesOutputPropertiesAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///- The following properties in the output type are being deprecated :.
+        /// </summary>
+        public static string BreakingChangesAttributesOutputPropertiesRemoved {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesOutputPropertiesRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///The output type &apos;{0}&apos; is being deprecated without a replacement..
+        /// </summary>
+        public static string BreakingChangesAttributesOutputTypeDeprecated {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesOutputTypeDeprecated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Cmdlet invocation changes :
+        ///    Old Way : {0}
+        ///    New Way : {1}.
+        /// </summary>
+        public static string BreakingChangesAttributesUsageChangeMessageConsole {
+            get {
+                return ResourceManager.GetString("BreakingChangesAttributesUsageChangeMessageConsole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Controls if data collection, to help improve Automation Brew cmdlets, is enabled. When enabled, telemetry is shared with the developers to identify patterns of usage to identify common issues and help improve the experience with the module. Automation Brew does not collect any personal or private information. This configuration is enabled by default, and you must opt-out if you which to disable this functionality..
         /// </summary>
         public static string DataCollectionConfigurationDefinition {
@@ -129,6 +328,15 @@ namespace AutoBrew.PowerShell.Properties {
         public static string DisconnectAccountTarget {
             get {
                 return ResourceManager.GetString("DisconnectAccountTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controls if warning messages for breaking changes are displayed or suppressed. When enabled, a breaking change warning is displayed when executing cmdlets with breaking changes in a future release..
+        /// </summary>
+        public static string DisplayBreakingChangesConfigurationDefinition {
+            get {
+                return ResourceManager.GetString("DisplayBreakingChangesConfigurationDefinition", resourceCulture);
             }
         }
         

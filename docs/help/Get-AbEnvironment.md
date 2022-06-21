@@ -1,7 +1,7 @@
 ---
 external help file: AutoBrew.PowerShell.dll-Help.xml
 Module Name: Ab
-online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Get-AbConfiguration.md
+online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Get-AbEnvironment.md
 schema: 2.0.0
 ---
 

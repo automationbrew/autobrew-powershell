@@ -3,6 +3,7 @@
     using System.Globalization;
     using System.Management.Automation;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Security.Cryptography;
     using System.Text;
     using Configuration;
@@ -11,12 +12,19 @@
     using Microsoft.ApplicationInsights.Extensibility;
     using Microsoft.Rest;
     using Models;
+    using Models.Configuration;
+    using Properties;
 
     /// <summary>
-    /// Base type for cmdlets that should be performed synchronously.
+    /// Base for commands that should be performed synchronously.
     /// </summary>
     public abstract class ModuleCmdlet : PSCmdlet, IDisposable
     {
+        /// <summary>
+        /// The link that provides additional information about breaking changes for the module.
+        /// </summary>
+        private const string BREAKING_CHANGE_ATTRIBUTE_INFORMATION_LINK = "https://github.com/automationbrew/autobrew-powershell/blob/main/docs/breaking-defined.md";
+
         /// <summary>
         /// The name for the event that is captured by the telemetry if enabled.
         /// </summary>
@@ -34,6 +42,11 @@
         {
             InstrumentationKey = INSTRUMENTATION_KEY
         };
+
+        /// <summary>
+        /// The provider of configurations for the module.
+        /// </summary>
+        private readonly IConfigurationProvider configuration;
 
         /// <summary>
         /// The resource lock used to synchronize mutation of the telemetry.
@@ -109,6 +122,11 @@
         public ModuleCmdlet()
         {
             CancellationTokenSource = new();
+
+            if (ModuleSession.Instance.TryGetComponent(ComponentType.Configuration, out configuration) == false)
+            {
+                throw new ModuleException("Unable to locate the configuration provider.", ModuleExceptionCategory.Configuration);
+            }
         }
 
         /// <summary>
@@ -164,6 +182,8 @@
                 qosEvent.Parameters = string.Join(" ", MyInvocation.BoundParameters.Keys.Select(
                     s => string.Format(CultureInfo.InvariantCulture, "-{0} ***", s)));
             }
+
+            ProcessBreakingChangeAttributes(GetType(), MyInvocation);
         }
 
         /// <summary>
@@ -275,6 +295,36 @@
         }
 
         /// <summary>
+        /// Gets all the breaking change attributes for the specified type.
+        /// </summary>
+        /// <param name="type">The type to check for breaking change attributes.</param>
+        /// <param name="invocationInfo">The description for how and where the command was invoked.</param>
+        /// <returns>A collection of breaking change attributes for the specified type.</returns>
+        private static IEnumerable<BreakingChangeAttribute> GetAllBreakingChangeAttributes(Type type, InvocationInfo invocationInfo)
+        {
+            List<BreakingChangeAttribute> attributeList = new();
+
+            attributeList.AddRange(type.GetCustomAttributes(typeof(BreakingChangeAttribute), false).Cast<BreakingChangeAttribute>());
+
+            foreach (MethodInfo m in type.GetRuntimeMethods())
+            {
+                attributeList.AddRange((m.GetCustomAttributes(typeof(BreakingChangeAttribute), false).Cast<BreakingChangeAttribute>()));
+            }
+
+            foreach (FieldInfo f in type.GetRuntimeFields())
+            {
+                attributeList.AddRange(f.GetCustomAttributes(typeof(BreakingChangeAttribute), false).Cast<BreakingChangeAttribute>());
+            }
+
+            foreach (PropertyInfo p in type.GetRuntimeProperties())
+            {
+                attributeList.AddRange(p.GetCustomAttributes(typeof(BreakingChangeAttribute), false).Cast<BreakingChangeAttribute>());
+            }
+
+            return invocationInfo == null ? attributeList : attributeList.Where(e => e.IsApplicableToInvocation(invocationInfo));
+        }
+
+        /// <summary>
         /// Gets a flag that indicates if the exception is a terminating error.
         /// </summary>
         /// <param name="ex">An instance of the <see cref="Exception" /> class that represents the exception that was thrown.</param>
@@ -332,12 +382,7 @@
 
             qosEvent.FinishQosEvent();
 
-            if (ModuleSession.Instance.TryGetComponent(ComponentType.Configuration, out IConfigurationProvider provider) == false)
-            {
-                throw new ModuleException("Unable to locate the configuration provider.", ModuleExceptionCategory.Configuration);
-            }
-
-            (_, bool isTelemetryEnabled) = provider.GetConfigurationValue<bool>(Models.Configuration.ConfigurationKey.DataCollection);
+            (_, bool isTelemetryEnabled) = configuration.GetConfigurationValue<bool>(ConfigurationKey.DataCollection);
 
             if (isTelemetryEnabled == false)
             {
@@ -409,6 +454,39 @@
 
             eventProperties.Add("ReasonPhrase", response.ReasonPhrase);
             eventProperties.Add("StatusCode", response.StatusCode.ToString());
+        }
+
+        /// <summary>
+        /// Processes any breaking change attributes defined within the command.
+        /// </summary>
+        /// <param name="type">The type for the command that was invoked invoked.</param>
+        /// <param name="invocationInfo">The description for how and where the command was invoked.</param>
+        private void ProcessBreakingChangeAttributes(Type type, InvocationInfo invocationInfo)
+        {
+            List<BreakingChangeAttribute> attributes = new(GetAllBreakingChangeAttributes(type, invocationInfo));
+            StringBuilder output = new();
+
+            if (attributes.Count > 0)
+            {
+                output.AppendLine(
+                    string.Format(
+                        Resources.BreakingChangesAttributesHeaderMessage,
+                        BreakingChangeAttribute.GetNameFromCmdletType(type)));
+
+                foreach (BreakingChangeAttribute attribute in attributes)
+                {
+                    attribute.PrintCustomAttributeInfo(type, false, (string value) => output.Append(value));
+                }
+
+                string.Format(Resources.BreakingChangesAttributesFooterMessage, BREAKING_CHANGE_ATTRIBUTE_INFORMATION_LINK);
+
+                (_, bool isDisplayBreakingChangesEnabled) = configuration.GetConfigurationValue<bool>(ConfigurationKey.DisplayBreakingChanges);
+
+                if (isDisplayBreakingChangesEnabled)
+                {
+                    WriteWarning(output.ToString());
+                }
+            }
         }
     }
 }

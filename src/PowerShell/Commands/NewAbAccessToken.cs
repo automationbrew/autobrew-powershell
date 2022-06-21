@@ -42,7 +42,7 @@
         /// <summary>
         /// Gets or sets the identifier for the application to be used for authentication.
         /// </summary>
-        [Parameter(HelpMessage = "The identifier for the application to be used for authentication.", Mandatory = true)]
+        [Parameter(HelpMessage = "The identifier for the application to be used for authentication.", Mandatory = false)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
 
@@ -100,7 +100,10 @@
 
             ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
 
-            account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
+            if (string.IsNullOrEmpty(ApplicationId) == false)
+            {
+                account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
+            }
 
             if (ParameterSetName.Equals(DefaultParameterSetName))
             {

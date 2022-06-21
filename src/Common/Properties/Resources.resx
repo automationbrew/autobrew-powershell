@@ -135,11 +135,93 @@
   <data name="AssertStringNotEmptyInvalidPrefix" xml:space="preserve">
     <value>string</value>
   </data>
+  <data name="BreakingChangeAttributeParameterChanging" xml:space="preserve">
+    <value>
+- The parameter : '{0}' is changing.</value>
+  </data>
+  <data name="BreakingChangeAttributeParameterMandatoryNow" xml:space="preserve">
+    <value>
+- The parameter : '{0}' is becoming mandatory.</value>
+  </data>
+  <data name="BreakingChangeAttributeParameterReplaced" xml:space="preserve">
+    <value>
+- The parameter : '{0}' is being replaced by mandatory parameter : '{1}'.</value>
+  </data>
+  <data name="BreakingChangeAttributeParameterReplacedMandatory" xml:space="preserve">
+    <value>
+- The parameter : '{0}' is being replaced by mandatory parameter : '{1}'.</value>
+  </data>
+  <data name="BreakingChangeAttributeParameterTypeChange" xml:space="preserve">
+    <value>
+The type of the parameter is changing from '{0}' to '{1}'.</value>
+  </data>
+  <data name="BreakingChangesAttributesChangeDescriptionMessage" xml:space="preserve">
+    <value>
+- Change description : {0}</value>
+  </data>
+  <data name="BreakingChangesAttributesCommandDeprecationMessageNoReplacement" xml:space="preserve">
+    <value>The cmdlet is being deprecated. There will be no replacement for it.</value>
+  </data>
+  <data name="BreakingChangesAttributesCommandDeprecationMessageWithReplacement" xml:space="preserve">
+    <value>The cmdlet '{0}' is replacing this cmdlet.</value>
+  </data>
+  <data name="BreakingChangesAttributesDeclarationMessage" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="BreakingChangesAttributesDeclarationMessageWithCmdletName" xml:space="preserve">
+    <value>
+- Cmdlet : '{0}'
+ - {1}</value>
+  </data>
+  <data name="BreakingChangesAttributesFooterMessage" xml:space="preserve">
+    <value>
+Note : Go to {0} for steps to suppress this breaking change warning, and other information on breaking changes.</value>
+  </data>
+  <data name="BreakingChangesAttributesHeaderMessage" xml:space="preserve">
+    <value>Upcoming breaking changes in the cmdlet '{0}' :</value>
+  </data>
+  <data name="BreakingChangesAttributesInEffectByDateMessage" xml:space="preserve">
+    <value>
+- This change will take effect on '{0}'</value>
+  </data>
+  <data name="BreakingChangesAttributesInEffectByVersion" xml:space="preserve">
+    <value>
+- The change is expected to take effect from the version : '{0}'</value>
+  </data>
+  <data name="BreakingChangesAttributesOutputChange1" xml:space="preserve">
+    <value>
+- The output type is changing from the existing type :'{0}' to the new type :'{1}'</value>
+  </data>
+  <data name="BreakingChangesAttributesOutputChange2" xml:space="preserve">
+    <value>
+- The output type '{0}' is changing</value>
+  </data>
+  <data name="BreakingChangesAttributesOutputPropertiesAdded" xml:space="preserve">
+    <value>
+- The following properties are being added to the output type :</value>
+  </data>
+  <data name="BreakingChangesAttributesOutputPropertiesRemoved" xml:space="preserve">
+    <value>
+- The following properties in the output type are being deprecated :</value>
+  </data>
+  <data name="BreakingChangesAttributesOutputTypeDeprecated" xml:space="preserve">
+    <value>
+The output type '{0}' is being deprecated without a replacement.</value>
+  </data>
+  <data name="BreakingChangesAttributesUsageChangeMessageConsole" xml:space="preserve">
+    <value>
+Cmdlet invocation changes :
+    Old Way : {0}
+    New Way : {1}</value>
+  </data>
   <data name="DataCollectionConfigurationDefinition" xml:space="preserve">
     <value>Controls if data collection, to help improve Automation Brew cmdlets, is enabled. When enabled, telemetry is shared with the developers to identify patterns of usage to identify common issues and help improve the experience with the module. Automation Brew does not collect any personal or private information. This configuration is enabled by default, and you must opt-out if you which to disable this functionality.</value>
   </data>
   <data name="DisconnectAccountTarget" xml:space="preserve">
     <value>remove account</value>
+  </data>
+  <data name="DisplayBreakingChangesConfigurationDefinition" xml:space="preserve">
+    <value>Controls if warning messages for breaking changes are displayed or suppressed. When enabled, a breaking change warning is displayed when executing cmdlets with breaking changes in a future release.</value>
   </data>
   <data name="LogoutTarget" xml:space="preserve">
     <value>Logout account '{0}'</value>

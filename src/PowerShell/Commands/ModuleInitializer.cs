@@ -60,6 +60,12 @@
             IConfigurationProvider provider = ConfigurationProvider.Initialize();
 
             provider.RegisterDefinition(new TypedConfigurationDefinition<bool>(
+                ConfigurationCategory.Module,
+                true,
+                Resources.DisplayBreakingChangesConfigurationDefinition,
+                ConfigurationKey.DisplayBreakingChanges));
+
+            provider.RegisterDefinition(new TypedConfigurationDefinition<bool>(
                 ConfigurationCategory.Telemetry,
                 true,
                 Resources.DataCollectionConfigurationDefinition,
