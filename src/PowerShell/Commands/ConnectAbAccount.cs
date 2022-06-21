@@ -117,7 +117,7 @@
             }
 
             await ConfirmActionAsync(
-                string.Format(CultureInfo.InvariantCulture, Resources.AcquireTokenTarget, account.AccountType, Environment),
+                string.Format(CultureInfo.InvariantCulture, Resources.AcquireTokenTarget, account.AccountType, environment.Name),
                 "acquire token",
                 async () =>
                 {
