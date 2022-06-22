@@ -6,7 +6,7 @@
 
 ## Checklist
 
-- [ ] I have read the [submitting changes(../blob/main/CONTRIBUTING.md#submitting-changes) section from the [contributing](../blob/main/CONTRIBUTING.md) article.
+- [ ] I have read the [submitting changes](../blob/main/CONTRIBUTING.md#submitting-changes) section from the [contributing](../blob/main/CONTRIBUTING.md) article.
 - [ ] Updates have been made to the [change log](../blob/main/CHANGELOG.md) that reflect what is changing.
   - A snippet outlining the change(s) made in the PR should be written under the `## Upcoming release` header -- no new version header should be added.
 - [ ] When applicable, if the changes in this pull request are introducing breaking changes, as defined [here](../blob/main/docs/breaking-defined.md), the following has been completed:
