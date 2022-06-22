@@ -8,7 +8,7 @@ Automation Brew PowerShell provides the functionality to surpress the warning me
 
 ```powershell
 # Disables breaking change warnings the current and future PowerShell sessions.
-Update-AbConfiguration -DisplayBreakingChanges $false -Scope Process 
+Update-AbConfiguration -DisplayBreakingChanges $false -Scope CurrentUser 
 
 # Disables breaking change warnings for only the current PowerShell session.
 Update-AbConfiguration -DisplayBreakingChanges $false -Scope Process 
@@ -53,6 +53,34 @@ When this configuration is enabled no warning messages when be displayed when in
 
 This attribute should be used when making a breaking change that is not handled by one of the specialized attributes below.
 
+#### Behavioral change
+
+```csharp
+[BreakingChange("Adding the new mandatory parameter Category.", NewWay = "Get-AbSomeObjectA -Category Food", OldWay = "Get-AbSomeObjectA")]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetAbSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+##### Effect at runtime
+
+```output
+Get-AbSomeObjectA <parms here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - Adding the new mandatory parameter Category.
+Cmdlet invocation changes :
+    Old Way : Get-AbSomeObjectA
+    New Way : Get-AbSomeObjectA -Category Food
+```
+
 #### Simple message
 
 ```csharp
@@ -69,7 +97,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
@@ -94,7 +122,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
@@ -120,7 +148,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
@@ -151,7 +179,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
@@ -176,7 +204,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
@@ -203,7 +231,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA  <parms here>
@@ -234,13 +262,13 @@ public class GetSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
 Get-AbSomeObjectA <parms here>
 
 Breaking changes in the cmdlet : Get-AbSomeObjectA
-The cmdlet 'Get-AbSomeObjectC' is replacing this cmdlet
+The cmdlet 'Get-AbSomeObjectB' is replacing this cmdlet
 ```
 
 #### There is not a replacement
@@ -259,11 +287,145 @@ public class GetSomeObjectA : ModuleCmdlet
 }
 ```
 
-#### Effect at runtime
+##### Effect at runtime
 
 ```output
-Get-SomeObjectB <params here>
+Get-AbSomeObjectA <params here>
 
-Breaking changes in the cmdlet : Get-SomeObjectB
+Breaking changes in the cmdlet : Get-AbSomeObjectA
 The cmdlet is being deprecated. There will be no replacement for it.
+```
+
+### ParameterBreakingChangeAttribute
+
+This attribute should be used when the parameters for a command are changing.
+
+#### Being mandatory
+
+```csharp
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Gets or sets the name for the object.
+    /// </summary>
+    [Parameter(HelpMessage = "The name for the object.", Mandatory = false)]
+    [ParameterBreakingChange(nameof(Name), IsBecomingMandatory = true)]
+    [ValidateNotNullOrEmpty]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+##### Effect at runtime
+
+```output
+Get-AbSomeObjectA <params here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - The parameter 'Name' is becoming mandatory
+```
+
+#### Being replaced
+
+```csharp
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Gets or sets the name for the object.
+    /// </summary>
+    [Parameter(HelpMessage = "The name for the object.", Mandatory = false)]
+    [ParameterBreakingChange(nameof(Name), IsBecomingMandatory = true, ReplacementParameterName = "ObjectId")]
+    [ValidateNotNullOrEmpty]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+##### Effect at runtime
+
+```output
+Get-AbSomeObjectA <params here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - The parameter 'Name' is  being replaced by mandatory parameter 'ObjectId'
+```
+
+#### Changing type
+
+```csharp
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Gets or sets the name for the object.
+    /// </summary>
+    [Parameter(HelpMessage = "The name for the object.", Mandatory = false)]
+    [ParameterBreakingChange(nameof(Name), NewParameterTypeName = "MyName", OldParamaterType = typeof(string))]
+    [ValidateNotNullOrEmpty]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+##### Effect at runtime
+
+```output
+Get-AbSomeObjectA <params here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - The parameter 'Name' is changing
+    The type of the parameter is changing from 'string' to 'MyName'.
+```
+
+#### Simple message
+
+```csharp
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Gets or sets the name for the object.
+    /// </summary>
+    [Parameter(HelpMessage = "The name for the object.", Mandatory = false)]
+    [ParameterBreakingChange(nameof(Name), ChangeDescription = "This is a simple message.")]
+    [ValidateNotNullOrEmpty]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+##### Effect at runtime
+
+```output
+Get-AbSomeObjectA <params here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - The parameter 'Name' is changing
+    Change description : This is a simple message.
 ```
