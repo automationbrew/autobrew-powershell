@@ -44,7 +44,7 @@
         /// Initializes a new instance of the <see cref="BreakingChangeAttribute" /> class.
         /// </summary>
         /// <param name="message">The message that describes the breaking change.</param>
-        protected BreakingChangeAttribute(string message)
+        public BreakingChangeAttribute(string message)
         {
             message.AssertNotEmpty(nameof(message));
 
@@ -56,7 +56,7 @@
         /// </summary>
         /// <param name="message">The message that describes the breaking change.</param>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
-        protected BreakingChangeAttribute(string message, string deprecateByVersion)
+        public BreakingChangeAttribute(string message, string deprecateByVersion)
         {
             message.AssertNotEmpty(nameof(message));
             deprecateByVersion.AssertNotEmpty(nameof(deprecateByVersion));
@@ -71,7 +71,7 @@
         /// <param name="message">The message that describes the breaking change.</param>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
         /// <param name="changeInEfectByDate">The date when the change will be required.</param>
-        protected BreakingChangeAttribute(string message, string deprecateByVersion, string changeInEfectByDate)
+        public BreakingChangeAttribute(string message, string deprecateByVersion, string changeInEfectByDate)
         {
             deprecateByVersion.AssertNotEmpty(nameof(deprecateByVersion));
             changeInEfectByDate.AssertNotEmpty(nameof(changeInEfectByDate));

@@ -21,12 +21,115 @@ When this configuration is enabled no warning messages when be displayed when in
 ### Commands
 
 * Change in the `OutputType` or removal of the `OutputType` attribute
-  * Before making the change update the command with the [OutputBreakingChangeAttribute]()
+  * Update the command, to apply the [OutputBreakingChangeAttribute](breaking-defined.md#outputbreakingchangeattribute) attribute. 
 * Changing a command name without an alias to the original name
+  * Update the command, to apply the [CommandDeprecationAttribute](breaking-defined.md#commanddeprecationattribute) attribute.
 * Removing an attribute option such as `SupportsPaging` or `SupportShouldProcess`
+  * Update the command, to apply the [BreakingChangeAttribute](breaking-defined.md#breakingchangeattribute) attribute specifically mentioning the parameter that be removed.
 * Removing or changing a command alias
+  * Update the command, to apply the [BreakingChangeAttribute](breaking-defined.md#breakingchangeattribute) attribute specifically mentioning the alias that will be depcreated.
+
+### Parameters
+
+* Adding a required parameter to an existing parameter set
+* Changing parameter order for parameter sets with ordered parameters
+* Changing the name of a parameter without an alias to the original parameter name
+* Making parameter validation more exclusive (e.g., removing values from a `ValidateSet`)
+* Removing a parameter
+* Removing or changing a parameter alias
+* Removing or changing existing parameter attribute values
+
+### Types
+
+* Adding additional required properties
+* Adding required parameters, changing parameter names, or parameter types for methods or constructors
+* Changing property names without an accompanying alias to the original name
+* Changing return types of methods
+* Removing properties
 
 ## Examples
+
+### BreakingChangeAttribute
+
+This attribute should be used when making a breaking change that is not handled by one of the specialized attributes below.
+
+#### Simple message
+
+```csharp
+[BreakingChange("This is a simple message.")]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetAbSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+#### Effect at runtime
+
+```output
+Get-AbSomeObjectA <parms here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - This is a simple message
+```
+
+#### Simple message with version
+
+```csharp
+[BreakingChange("This is a simple message.", "2.0.0.0")]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetAbSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+#### Effect at runtime
+
+```output
+Get-AbSomeObjectA <parms here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - This is a simple message
+    The change is expected to take effect from the version : 2.0.0.0
+```
+
+#### Simple message with version and date
+
+```csharp
+[BreakingChange("This is a simple message.", "2.0.0.0", "07/01/2023")]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetAbSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+#### Effect at runtime
+
+```output
+Get-AbSomeObjectA <parms here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+ - This is a simple message
+    NOTE : This change will take effect on '07/01/2023'
+    The change is expected to take effect from the version : 2.0.0.0
+```
 
 ### OutputBreakingChangeAttribute
 
@@ -52,7 +155,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 
 ```output
 Get-AbSomeObjectA <parms here>
-...
+
 Breaking changes in the cmdlet : Get-AbSomeObjectA
  - The output type is changing from the existing type :'Foo' to the new type :'Dictionary<String, Foo>'
 ```
@@ -77,7 +180,7 @@ public class GetAbSomeObjectA : ModuleCmdlet
 
 ```output
 Get-AbSomeObjectA <parms here>
-...
+
 Breaking changes in the cmdlet : Get-AbSomeObjectA
  - The output type 'Foo' is changing
  - The following properties are being added to the output type :
@@ -104,9 +207,63 @@ public class GetAbSomeObjectA : ModuleCmdlet
 
 ```output
 Get-AbSomeObjectA  <parms here>
-...
+
 Breaking changes in the cmdlet : Get-AbSomeObjectA
  - The output type 'Foo' is changing
  - The following properties in the output type are being deprecated :
     'Prop3' 'Prop4'
+```
+
+### CommandDeprecationAttribute
+
+This attirbute should be used when deprecating an alias or command.
+
+#### There is a replacement
+
+```csharp
+[CmdletDeprecation(ReplacementCmdletName = "Get-AbSomeObjectB")]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+#### Effect at runtime
+
+```output
+Get-AbSomeObjectA <parms here>
+
+Breaking changes in the cmdlet : Get-AbSomeObjectA
+The cmdlet 'Get-AbSomeObjectC' is replacing this cmdlet
+```
+
+#### There is not a replacement
+
+```csharp
+[CmdletDeprecation]
+[Cmdlet(VerbsCommon.Get, "AbSomeObjectA"), OutputType(typeof(Foo))]
+public class GetSomeObjectA : ModuleCmdlet
+{
+    /// <summary>
+    /// Performs the actions associated with the command.
+    /// </summary>
+    protected override void PerformCmdlet()
+    {
+    }
+}
+```
+
+#### Effect at runtime
+
+```output
+Get-SomeObjectB <params here>
+
+Breaking changes in the cmdlet : Get-SomeObjectB
+The cmdlet is being deprecated. There will be no replacement for it.
 ```
