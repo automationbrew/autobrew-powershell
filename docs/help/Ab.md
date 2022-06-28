@@ -50,6 +50,14 @@ Acquires an access token from Azure Active Directory.
 
 Acquires a bulk refresh token from Azure Active Directory that will be used to perform the cloud domain join or workspace join operation.
 
+### [New-AbRandomPassword](New-AbRandomPassword.md)
+
+Generate a secure random password.
+
+### [New-AbRiskyUser](New-AbRiskyUser.md)
+
+Generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+
 ### [Remove-AbEnvironment](Remove-AbEnvironment.md)
 
 Removes the metadata for connecting to given cloud.

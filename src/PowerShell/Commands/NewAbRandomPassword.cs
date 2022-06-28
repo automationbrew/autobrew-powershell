@@ -26,7 +26,7 @@
         /// <summary>
         /// Gets or sets the minimum number of special characters in the password.
         /// </summary>
-        [Parameter(HelpMessage = "The minimum number of non-alphanumeric characters (such as @, #, !, %, &, and so on) in the generated password.", Mandatory = false)]
+        [Parameter(HelpMessage = "The minimum number of non-alphanumeric characters (such as @, #, !, %, &, and so on) in the generated password. The number must be 2 or more.", Mandatory = false)]
         [ValidateRange(2, 32)]
         public int? NumberOfNonAlphanumericCharacters { get; set; }
 
