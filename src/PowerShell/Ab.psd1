@@ -84,13 +84,22 @@ CmdletsToExport = @(
     'Disconnect-AbAccount',
     'Get-AbAccessToken',
     'Get-AbConfiguration',
+    'Get-AbDelegatedAdminAccessAssignment',
+    'Get-AbDelegatedAdminRelationship',
+    'Get-AbDelegatedAdminTenant',
     'Get-AbEnvironment',
     'Invoke-AbWebDriverAction',
     'New-AbAccessToken',
     'New-AbBulkRefreshToken',
+    'New-AbDelegatedAdminAccessAssignment',
+    'New-AbDelegatedAdminRelationship',
+    'New-AbDelegatedAdminRelationshipRequest'
+    'New-AbRandomPassword',
+    'New-AbRiskyUser',
     'Remove-AbEnvironment',
     'Resolve-AbError',
     'Set-AbEnvironment',
+    'Set-AbDelegatedAdminRelationshipRequest',
     'Update-AbConfiguration'
 )
 
@@ -118,10 +127,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/automationbrew/autobrew-powershell/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/automationbrew/autobrew-powershell'
 
         # A URL to an icon representing this module.
         # IconUri = ''

@@ -21,3 +21,14 @@
 # Change Log
 
 ## Upcoming release
+
+* Added the `Get-AbDelegatedAdminAccessAssignment` command to get delegated admin access assignments that exists for the given relationship.
+* Added the `Get-AbDelegatedAdminRelationship` command to get the delegated admin relationships associated with the authenticated tenant.
+* Added the `Get-AbDelegatedAdminTenant` command to get the delegated admin tenants associated with the authenticated tenant.
+* Added the `New-AbDelegatedAdminAccessAssignment` command to create a new access assignment for the specified delegated admin relationship.
+* Added the `New-AbDelegatedAdminRelationship` command to create a new delegated admin relationship.
+* Added the `New-AbDelegatedAdminRelationshipRequest` command to create a new delegated admin relationship request for approval by the tenant.
+* Added the `New-AbRandomPassword` command to create a random secure password.
+* Added the `New-AbRiskyUser` command to create an Azure Active Directory user risk event using a Tor proxy.
+* Added the `Set-AbDelegatedAdminRelationshipRequest` command to update the request for the specified delegated admin relationship.
+* Resolved the `Microsoft.Extensions.Primitives` assembly conflict (#5)[https://github.com/automationbrew/autobrew-powershell/issues/5]  

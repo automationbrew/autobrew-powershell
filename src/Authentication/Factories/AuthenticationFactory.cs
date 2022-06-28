@@ -70,6 +70,7 @@
                 new BulkRefreshTokenRequest
                 {
                     DisplayName = $"package_{packageId}",
+                    // TODO - This should be configurable
                     Expiration = DateTime.Now.AddDays(180).ToShortDateString(),
                     PackageId = packageId
                 },
