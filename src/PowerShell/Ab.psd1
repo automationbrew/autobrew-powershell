@@ -99,6 +99,7 @@ CmdletsToExport = @(
     'Remove-AbEnvironment',
     'Resolve-AbError',
     'Set-AbEnvironment',
+    'Set-AbDelegatedAdminRelationshipRequest',
     'Update-AbConfiguration'
 )
 

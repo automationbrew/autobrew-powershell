@@ -34,6 +34,18 @@ Gets an access token for the specified scopes.
 
 Gets the configurations for the AutomationBrew PowerShell module.
 
+### [Get-AbDelegatedAdminAccessAssignment](Get-AbDelegatedAdminAccessAssignment.md)
+
+Gets delegated admin access assignments that exists for the given relationship.
+
+### [Get-AbDelegatedAdminRelationship](Get-AbDelegatedAdminRelationship.md)
+
+Gets the delegated admin relationships associated with the authenticated tenant.
+
+### [Get-AbDelegatedAdminTenant](Get-AbDelegatedAdminTenant.md)
+
+Gets the delegated admin tenants associated with the authenticated tenant.
+
 ### [Get-AbEnvironment](Get-AbEnvironment.md)
 
 Gets the metadata for an environment.
@@ -50,6 +62,18 @@ Acquires an access token from Azure Active Directory.
 
 Acquires a bulk refresh token from Azure Active Directory that will be used to perform the cloud domain join or workspace join operation.
 
+### [New-AbDelegatedAdminAccessAssignment](New-AbDelegatedAdminAccessAssignment.md)
+
+Creates a new access assignment for the specified delegated admin relationship.
+
+### [New-AbDelegatedAdminRelationship](New-AbDelegatedAdminRelationship.md)
+
+Creates a new delegated admin relationship.
+
+### [New-AbDelegatedAdminRelationshipRequest](New-AbDelegatedAdminRelationshipRequest.md)
+
+Create a new delegated admin relationship request for approval by the tenant.
+
 ### [New-AbRandomPassword](New-AbRandomPassword.md)
 
 Generate a secure random password.
@@ -65,6 +89,10 @@ Removes the metadata for connecting to given cloud.
 ### [Resolve-AbError](Resolve-AbError.md)
 
 Displays detailed information about PowerShell errors, with extended details for cmdlet errors.
+
+### [Set-AbDelegatedAdminRelationshipRequest](Set-AbDelegatedAdminRelationshipRequest.md)
+
+Updates the request for the specified delegated admin relationship.
 
 ### [Set-AbEnvironment](Set-AbEnvironment.md)
 
