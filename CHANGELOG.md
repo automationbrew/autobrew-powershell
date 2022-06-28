@@ -21,3 +21,7 @@
 # Change Log
 
 ## Upcoming release
+
+* Added the `New-AbRandomPassword` command that can be used to generate random passwords
+* Added the `New-AbRiskyUser` command that can be used to generate Azure Active Directory user risk events using a Tor proxy
+* Resolved the `Microsoft.Extensions.Primitives` assembly conflict (#5)[https://github.com/automationbrew/autobrew-powershell/issues/5]  

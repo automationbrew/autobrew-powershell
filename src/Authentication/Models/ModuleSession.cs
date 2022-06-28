@@ -35,6 +35,11 @@
         public IAuthenticationFactory AuthenticationFactory { get; set; }
 
         /// <summary>
+        /// Gets or sets the factory to used to create clients that can interact with online services.
+        /// </summary>
+        public IClientFactory ClientFactory { get; set; }
+
+        /// <summary>
         /// Gets or sets the module context.
         /// </summary>
         public ModuleContext Context { get; set; }

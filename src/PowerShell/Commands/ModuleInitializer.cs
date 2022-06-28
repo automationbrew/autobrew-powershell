@@ -25,6 +25,11 @@
                 ModuleSession.Instance.AuthenticationFactory = new AuthenticationFactory();
             }
 
+            if (ModuleSession.Instance.ClientFactory == null)
+            {
+                ModuleSession.Instance.ClientFactory = new ClientFactory();
+            }
+
             MsalHttpClientFactory.Initialize();
 
             InitalizeConfiguration();
@@ -60,16 +65,16 @@
             IConfigurationProvider provider = ConfigurationProvider.Initialize();
 
             provider.RegisterDefinition(new TypedConfigurationDefinition<bool>(
-                ConfigurationCategory.Module,
-                true,
-                Resources.DisplayBreakingChangesConfigurationDefinition,
-                ConfigurationKey.DisplayBreakingChanges));
-
-            provider.RegisterDefinition(new TypedConfigurationDefinition<bool>(
                 ConfigurationCategory.Telemetry,
                 true,
                 Resources.DataCollectionConfigurationDefinition,
                 ConfigurationKey.DataCollection));
+
+            provider.RegisterDefinition(new TypedConfigurationDefinition<bool>(
+                ConfigurationCategory.Module,
+                true,
+                Resources.DisplayBreakingChangesConfigurationDefinition,
+                ConfigurationKey.DisplayBreakingChanges));
 
             ModuleSession.Instance.RegisterComponent(ComponentType.Configuration, () => provider, true);
         }

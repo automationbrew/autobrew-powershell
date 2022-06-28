@@ -1,7 +1,7 @@
 ﻿namespace AutoBrew.PowerShell
 {
-    using System.Management.Automation;
     using System.Globalization;
+    using System.Management.Automation;
     using Properties;
 
     /// <summary>

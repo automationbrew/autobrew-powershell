@@ -15,7 +15,7 @@
         /// <summary>
         /// Gets the extended properties for the account.
         /// </summary>
-        public IDictionary<ExtendedPropertyType, string> ExtendedProperties { get; } = new ConcurrentDictionary<ExtendedPropertyType, string>();
+        public IDictionary<ExtendedPropertyType, string> ExtendedProperties { get; private set; } = new ConcurrentDictionary<ExtendedPropertyType, string>();
 
         /// <summary>
         /// Gets or sets the Azure Active Directory tenant identifier for the tenant.
@@ -26,5 +26,20 @@
         /// Gets or sets the username for the account.
         /// </summary>
         public string Username { get; set; }
+
+        /// <summary>
+        /// Creates a clone of this instance of the <see cref="ModuleAccount" /> class.
+        /// </summary>
+        /// <returns>A clone of this instance of the <see cref="ModuleAccount" /> class.</returns>
+        public ModuleAccount Clone()
+        {
+            return new ModuleAccount()
+            {
+                AccountType = AccountType,
+                ExtendedProperties = ExtendedProperties,
+                Tenant = Tenant,
+                Username = Username
+            };
+        }
     }
 }

@@ -88,6 +88,8 @@ CmdletsToExport = @(
     'Invoke-AbWebDriverAction',
     'New-AbAccessToken',
     'New-AbBulkRefreshToken',
+    'New-AbRandomPassword',
+    'New-AbRiskyUser',
     'Remove-AbEnvironment',
     'Resolve-AbError',
     'Set-AbEnvironment',
@@ -118,10 +120,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/automationbrew/autobrew-powershell/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/automationbrew/autobrew-powershell'
 
         # A URL to an icon representing this module.
         # IconUri = ''

@@ -26,6 +26,7 @@
                 { "Azure.Core", new Version("1.24.0.0") },
                 { "Microsoft.ApplicationInsights", new Version("2.20.0.103") },
                 { "Azure.Identity", new Version("1.6.0.0") },
+                { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
                 { "Microsoft.Identity.Client", new Version("4.41.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.19.3.0") },
                 { "Microsoft.Rest.ClientRuntime", new Version("2.3.23.0") },
