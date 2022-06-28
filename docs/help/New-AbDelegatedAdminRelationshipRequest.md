@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Create a new delegated admin relationship request for approval by the tenant.
+Creates a new delegated admin relationship request for approval by the tenant.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ New-AbDelegatedAdminRelationshipRequest -RelationshipId <String> [<CommonParamet
 
 ## DESCRIPTION
 
-Create a new delegated admin relationship request for approval by the tenant.
+Creates a new delegated admin relationship request for approval by the tenant.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Create a new delegated admin relationship request for approval by the tenant.
 PS C:\> New-AbDelegatedAdminRelationshipRequest -RelationshipId '804ae4a3-eb6a-42af-9c18-270663291a86-55dd7c23-5287-41e4-b760-6024da674dba'
 ```
 
-Create a new delegated admin relationship request for approval by the tenant.
+Creates a new delegated admin relationship request for approval by the tenant.
 
 ## PARAMETERS
 
