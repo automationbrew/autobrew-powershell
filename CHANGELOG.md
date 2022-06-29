@@ -20,7 +20,7 @@
 
 # Change Log
 
-## Upcoming release
+## 1.0.1 - June 2022
 
 * Added the `Get-AbDelegatedAdminAccessAssignment` command to get delegated admin access assignments that exists for the given relationship.
 * Added the `Get-AbDelegatedAdminRelationship` command to get the delegated admin relationships associated with the authenticated tenant.
