@@ -20,6 +20,10 @@
 
 # Change Log
 
+## Upcoming Release
+
+* Resolved configuration issue when using the module with an Azure Function app [#9](https://github.com/automationbrew/autobrew-powershell/issues/9)
+
 ## 1.0.1 - June 2022
 
 * Added the `Get-AbDelegatedAdminAccessAssignment` command to get delegated admin access assignments that exists for the given relationship.
@@ -31,4 +35,4 @@
 * Added the `New-AbRandomPassword` command to create a random secure password.
 * Added the `New-AbRiskyUser` command to create an Azure Active Directory user risk event using a Tor proxy.
 * Added the `Set-AbDelegatedAdminRelationshipRequest` command to update the request for the specified delegated admin relationship.
-* Resolved the `Microsoft.Extensions.Primitives` assembly conflict (#5)[https://github.com/automationbrew/autobrew-powershell/issues/5]  
+* Resolved the `Microsoft.Extensions.Primitives` assembly conflict [#5](https://github.com/automationbrew/autobrew-powershell/issues/5)
