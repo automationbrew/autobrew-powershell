@@ -14,22 +14,12 @@
         /// <summary>
         /// The name for the directory that will be used to persist the configuration.
         /// </summary>
-        private const string configDirectoryName = ".AutomationBrew";
+        private const string directoryname = ".AutomationBrew";
 
         /// <summary>
         /// The name for the file that will be used to persist the configuration.
         /// </summary>
-        private const string configFileName = "PSConfig.json";
-
-        /// <summary>
-        /// The path for the directory that will be used to persist the configuration.
-        /// </summary>
-        private static readonly string configDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), configDirectoryName);
-
-        /// <summary>
-        /// The path for the file that will be used to persist the configuration.
-        /// </summary>
-        private static readonly string configFilePath = Path.Combine(configDirectoryPath, configFileName);
+        private const string filename = "PSConfig.json";
 
         /// <summary>
         /// The collection of configuration definitions used by the module.
@@ -47,9 +37,30 @@
         private readonly ReaderWriterLockSlim resourceLock = new(LockRecursionPolicy.SupportsRecursion);
 
         /// <summary>
+        /// The path for the configuration file.
+        /// </summary>
+        private readonly string configFilePath;
+
+        /// <summary>
         /// The root resource that makes it possible to interact with the configuration sources.
         /// </summary>
         private IConfigurationRoot configurationRoot;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationProvider" /> class.
+        /// </summary>
+        /// <param name="filepath">The path for the configuration file.</param>
+        /// <exception cref="ArgumentException">
+        /// The filepath parameter is empty or null.
+        /// </exception>
+        private ConfigurationProvider(string filepath)
+        {
+            filepath.AssertNotEmpty(nameof(filepath)); 
+
+            ValidateConfigurationContent(filepath);
+
+            configFilePath = filepath;
+        }
 
         /// <summary>
         /// Gets the value for the configuration with the specified key.
@@ -92,15 +103,7 @@
         /// <returns>An instance of the <see cref="ConfigurationProvider" /> class that is ready for use.</returns>
         public static IConfigurationProvider Initialize()
         {
-            IConfigurationProvider provider = new ConfigurationProvider();
-
-            if (Directory.Exists(configDirectoryPath) == false)
-            {
-                Directory.CreateDirectory(configDirectoryPath);
-                ResetConfigurationContent();
-            }
-
-            ValidateConfigurationContent();
+            IConfigurationProvider provider = new ConfigurationProvider(GetConfigurationFilePath());
 
             provider.Build();
 
@@ -236,6 +239,45 @@
         }
 
         /// <summary>
+        /// Gets the path for the configuration file.
+        /// </summary>
+        /// <returns>The path for the configuration file.</returns>
+        /// <exception cref="ModuleException">TODO</exception>
+        private static string GetConfigurationFilePath()
+        {
+            List<string> paths = new()
+            {
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), directoryname, filename),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), directoryname, filename)
+            };
+
+            foreach (string path in paths)
+            {
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            foreach (string path in paths)
+            {
+                try
+                {
+                    Directory.CreateDirectory(new FileInfo(path).Directory.FullName);
+                    ResetConfigurationContent(path);
+
+                    return path;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+
+            throw new ModuleException("Unable to store the configuration file.", ModuleExceptionCategory.Configuration);
+        }
+
+        /// <summary>
         /// Gets the scope for the configuration based on the specified provider type.
         /// </summary>
         /// <param name="providerType">The type of provider for the configuration.</param>
@@ -257,18 +299,20 @@
         /// <summary>
         /// Resets the content of the configuration file.
         /// </summary>
-        private static void ResetConfigurationContent()
+        /// <param name="filepath">The path for the configuration file to be reset.</param>
+        private static void ResetConfigurationContent(string filepath)
         {
-            File.WriteAllText(configFilePath, "{}");
+            File.WriteAllText(filepath, "{}");
         }
 
         /// <summary>
         /// Validates the content of the configuration file.
         /// </summary>
-        private static void ValidateConfigurationContent()
+        /// <param name="filepath">The path for the configuration file to be validated.</param>
+        private static void ValidateConfigurationContent(string filepath)
         {
             bool isValidJson = true;
-            string value = File.Exists(configFilePath) ? File.ReadAllText(configFilePath) : String.Empty;
+            string value = File.Exists(filepath) ? File.ReadAllText(filepath) : string.Empty;
 
             try
             {
@@ -281,7 +325,7 @@
 
             if (string.IsNullOrEmpty(value) || isValidJson == false)
             {
-                ResetConfigurationContent();
+                ResetConfigurationContent(filepath);
             }
         }
     }
