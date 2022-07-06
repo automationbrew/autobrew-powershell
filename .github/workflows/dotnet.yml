@@ -23,3 +23,11 @@ jobs:
       run: dotnet restore autobrew-powershell.sln
     - name: Build
       run: msbuild build.proj -t:Build -p:Configuration=Debug
+    - name: Install platyPS
+      shell: pwsh
+      run: |
+        Install-Module platyPS -Force -Confirm:$false -Scope CurrentUser
+    - name: Generate help
+      run: msbuild build.proj -t:GenerateHelp -p:Configuration=Debug
+    - name: Validate module manifest
+      run: msbuild build.proj -t:ValidateModule -p:Configuration=Debug
