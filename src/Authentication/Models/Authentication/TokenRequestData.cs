@@ -72,7 +72,7 @@
 
             if (account.IsPropertySet(ExtendedPropertyType.ApplicationId) == false)
             {
-                account.SetProperty(ExtendedPropertyType.ApplicationId, ModuleEnvironmentConstants.DefaultApplicationId);
+                account.SetProperty(ExtendedPropertyType.ApplicationId, ModuleEnvironmentConstants.ApplicationId);
             }
 
             Account = account;

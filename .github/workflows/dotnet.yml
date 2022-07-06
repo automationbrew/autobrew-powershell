@@ -1,0 +1,33 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+    - name: Restore dependencies
+      run: dotnet restore autobrew-powershell.sln
+    - name: Build
+      run: msbuild build.proj -t:Build -p:Configuration=Debug
+    - name: Install platyPS
+      shell: pwsh
+      run: |
+        Install-Module platyPS -Force -Confirm:$false -Scope CurrentUser
+    - name: Generate help
+      run: msbuild build.proj -t:GenerateHelp -p:Configuration=Debug
+    - name: Validate module manifest
+      run: msbuild build.proj -t:ValidateModule -p:Configuration=Debug
