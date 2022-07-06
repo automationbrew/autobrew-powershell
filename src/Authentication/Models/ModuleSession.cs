@@ -119,8 +119,10 @@
                     new ModuleEnvironment
                     {
                         ActiveDirectoryAuthority = ModuleEnvironmentConstants.ActiveDirectoryAuthority,
+                        ApplicationId = ModuleEnvironmentConstants.ApplicationId,
                         MicrosoftGraphEndpoint = ModuleEnvironmentConstants.MicrosoftGraphEndpoint,
                         Name = ModuleEnvironmentConstants.AzureCloud,
+                        Tenant = ModuleEnvironmentConstants.Tenant,
                         Type = ModuleEnvironmentType.BuiltIn
                     });
             }
@@ -154,6 +156,9 @@
         /// </exception>
         /// <exception cref="ArgumentNullException">
         /// The environment parameter is null.
+        /// </exception>
+        /// <exception cref="ModuleException">
+        /// The environment {name} with cannot be registered. Only user defined environments can be registered.
         /// </exception>
         public void RegisterEnvironment(string name, ModuleEnvironment environment, bool overwrite = false)
         {

@@ -11,6 +11,11 @@
         public string ActiveDirectoryAuthority { get; set; }
 
         /// <summary>
+        /// Gets or sets the identifier of the application for the environment.
+        /// </summary>
+        public string ApplicationId { get; set; }
+
+        /// <summary>
         /// Gets or sets the Microsoft Graph endpoint for the environment.
         /// </summary>
         public string MicrosoftGraphEndpoint { get; set; }
@@ -19,6 +24,11 @@
         /// Gets or sets the name for the environment.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the tenant for the environment.
+        /// </summary>
+        public string Tenant { get; set; }
 
         /// <summary>
         /// Gets or sets the type for the enviornment.
