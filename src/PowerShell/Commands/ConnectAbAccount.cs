@@ -102,6 +102,11 @@
 
             ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
 
+            if (string.IsNullOrEmpty(environment.ApplicationId) == false)
+            {
+                account.SetProperty(KnownExtendedPropertyKeys.ApplicationId, environment.ApplicationId);
+            }
+
             if (string.IsNullOrEmpty(ApplicationId) == false)
             {
                 account.SetProperty(KnownExtendedPropertyKeys.ApplicationId, ApplicationId);

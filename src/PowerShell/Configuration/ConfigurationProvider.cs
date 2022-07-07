@@ -55,7 +55,7 @@
         /// </exception>
         private ConfigurationProvider(string filepath)
         {
-            filepath.AssertNotEmpty(nameof(filepath)); 
+            filepath.AssertNotEmpty(nameof(filepath));
 
             ValidateConfigurationContent(filepath);
 

@@ -3,7 +3,6 @@
     using System.Management.Automation;
     using System.Reflection;
     using System.Text.RegularExpressions;
-    using Microsoft.Graph;
     using Models;
     using Models.Authentication;
     using Properties;
@@ -26,13 +25,6 @@
         [Parameter(HelpMessage = "The identifier of the application for the environment.", Mandatory = false)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the identifier of the Azure subscription for the environment.
-        /// </summary>
-        [Parameter(HelpMessage = "The identifier of the Azure subscription for the environment.", Mandatory = false)]
-        [ValidateNotNullOrEmpty]
-        public string AzureSubscription { get; set; }
 
         /// <summary>
         /// Gets or sets the name of DevTest Lab for the environment.
@@ -63,6 +55,13 @@
         public string ResourceGroupName { get; set; }
 
         /// <summary>
+        /// Gets or sets the identifier of the Azure subscription for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The identifier of the Azure subscription for the environment.", Mandatory = false)]
+        [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
+        public string SubscriptionId { get; set; }
+
+        /// <summary>
         /// Gets or sets the tenant for the environment.
         /// </summary>
         [Parameter(HelpMessage = "The tenant for the environment.", Mandatory = false)]
@@ -88,6 +87,8 @@
                     Tenant = Tenant,
                     Type = ModuleEnvironmentType.UserDefined
                 };
+
+                SetExtendedProperties(environment);
             }
             else if (environment.Type == ModuleEnvironmentType.BuiltIn)
             {
@@ -99,21 +100,30 @@
                 {
                     SetValue(environment, property.Name, GetType().GetProperty(property.Name).GetValue(this)?.ToString());
                 }
+
+                SetExtendedProperties(environment);
             }
 
             ConfirmAction(Resources.UpdateEnvironmentTarget, Name, () => ModuleSession.Instance.RegisterEnvironment(Name, environment, true));
         }
 
+        /// <summary>
+        /// Sets the extended properties for the environment.
+        /// </summary>
+        /// <param name="environment">The instance of the <see cref="ModuleEnvironment" /> class where the extended properties should be updated.</param>
+        /// <exception cref="ArgumentNullException">
+        /// The environment parameter is null.
+        /// </exception>
         private void SetExtendedProperties(ModuleEnvironment environment)
         {
             environment.AssertNotNull(nameof(environment));
 
-            string[] extendedProperties = { "AzureSubscription", "DevTestLabName", "ResourceGroupName" };
-            string propertyValue; 
+            string[] extendedProperties = { "DevTestLabName", "ResourceGroupName", "SubscriptionId" };
+            string propertyValue;
 
-            foreach (PropertyInfo property in GetType().GetProperties(BindingFlags.Public).Where(p => extendedProperties.Contains(p.Name)))
+            foreach (PropertyInfo property in GetType().GetProperties().Where(p => extendedProperties.Contains(p.Name)))
             {
-                propertyValue = property.GetValue(this, null)?.ToString(); 
+                propertyValue = property.GetValue(this, null)?.ToString();
 
                 if (string.IsNullOrEmpty(propertyValue) == false)
                 {
