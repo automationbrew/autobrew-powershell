@@ -2,9 +2,9 @@
 
 The introduction of breaking changes will impact how users can interact with the module, and often it will require the user invest additional effort. Through use of the [breaking change attribute](https://github.com/automationbrew/autobrew-powershell/blob/main/src/PowerShell/Attributes/BreakingChangeAttribute.cs) we can help minimize the disruption by providing advanced warning of any upcoming breaking change.
 
-## Surpressing the warning
+## Suppressing the warning
 
-Automation Brew PowerShell provides the functionality to surpress the warning message for any breaking change. If you would like to disable this functionality, then utilize one of the following commands.
+Automation Brew PowerShell provides the functionality to suppress the warning message for any breaking change. If you would like to disable this functionality, then utilize one of the following commands.
 
 ```powershell
 # Disables breaking change warnings the current and future PowerShell sessions.
@@ -21,13 +21,13 @@ When this configuration is enabled no warning messages when be displayed when in
 ### Commands
 
 * Change in the `OutputType` or removal of the `OutputType` attribute
-  * Update the command, to apply the [OutputBreakingChangeAttribute](breaking-defined.md#outputbreakingchangeattribute) attribute. 
+  * Update the command, to apply the [OutputBreakingChangeAttribute](breaking-defined.md#outputbreakingchangeattribute) attribute.
 * Changing a command name without an alias to the original name
   * Update the command, to apply the [CommandDeprecationAttribute](breaking-defined.md#commanddeprecationattribute) attribute.
 * Removing an attribute option such as `SupportsPaging` or `SupportShouldProcess`
   * Update the command, to apply the [BreakingChangeAttribute](breaking-defined.md#breakingchangeattribute) attribute specifically mentioning the parameter that be removed.
 * Removing or changing a command alias
-  * Update the command, to apply the [BreakingChangeAttribute](breaking-defined.md#breakingchangeattribute) attribute specifically mentioning the alias that will be depcreated.
+  * Update the command, to apply the [BreakingChangeAttribute](breaking-defined.md#breakingchangeattribute) attribute specifically mentioning the alias that will be deprecated.
 
 ### Parameters
 
@@ -161,7 +161,7 @@ Breaking changes in the cmdlet : Get-AbSomeObjectA
 
 ### OutputBreakingChangeAttribute
 
-This attirbute should be used when the output type for a command will be changing. 
+This attributes should be used when the output type for a command will be changing. 
 
 #### Output type is changing
 
@@ -244,7 +244,7 @@ Breaking changes in the cmdlet : Get-AbSomeObjectA
 
 ### CommandDeprecationAttribute
 
-This attirbute should be used when deprecating an alias or command.
+This attributes should be used when deprecating an alias or command.
 
 #### There is a replacement
 

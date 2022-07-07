@@ -72,7 +72,7 @@ Creates a new delegated admin relationship.
 
 ### [New-AbDelegatedAdminRelationshipRequest](New-AbDelegatedAdminRelationshipRequest.md)
 
-Create a new delegated admin relationship request for approval by the tenant.
+Creates a new delegated admin relationship request for approval by the tenant.
 
 ### [New-AbRandomPassword](New-AbRandomPassword.md)
 
@@ -80,7 +80,7 @@ Generate a secure random password.
 
 ### [New-AbRiskyUser](New-AbRiskyUser.md)
 
-Generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
 
 ### [Remove-AbEnvironment](Remove-AbEnvironment.md)
 

@@ -10,7 +10,7 @@
     using Models.Authentication;
 
     /// <summary>
-    /// Cmdlet that generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+    /// Cmdlet that generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "AbRiskyUser", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     public class NewAbRiskyUser : ModuleAsyncCmdlet

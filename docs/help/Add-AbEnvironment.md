@@ -14,8 +14,8 @@ Adds metadata for connecting to a given cloud.
 ## SYNTAX
 
 ```powershell
-Add-AbEnvironment -ActiveDirectoryAuthority <String> -MicrosoftGraphEndpoint <String> -Name <String> [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Add-AbEnvironment -ActiveDirectoryAuthority <String> [-ApplicationId <String>] -MicrosoftGraphEndpoint <String>
+ -Name <String> [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +50,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ApplicationId
+
+The identifier of the application for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MicrosoftGraphEndpoint
 
 The Microsoft Graph endpoint for the environment.
@@ -76,6 +92,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Tenant
+
+The tenant for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
