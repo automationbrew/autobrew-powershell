@@ -37,7 +37,7 @@
         /// <summary>
         /// Acquires a bulk refresh token from the authority.
         /// </summary>
-        /// <param name="environment">The enivornment that will provide metadata used to acquire the bulk refresh token.</param>
+        /// <param name="environment">The environment that will provide metadata used to acquire the bulk refresh token.</param>
         /// <param name="outputAction">The action that encapsulates the method used to write output.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>An instance of the <see cref="BulkRefreshToken" /> class that represents the acquired bulk refresh.</returns>

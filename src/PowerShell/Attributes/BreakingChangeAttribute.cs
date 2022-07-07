@@ -26,7 +26,7 @@
         public DateTime? ChangeInEfectByDate { get; } = null;
 
         /// <summary>
-        /// Gets the version when this change will be depcreated.
+        /// Gets the version when this change will be deprecated.
         /// </summary>
         public string DeprecateByVersion { get; }
 

@@ -16,28 +16,28 @@ Acquires an access token from Azure Active Directory.
 ### DefaultParameterSet (Default)
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
  [<CommonParameters>]
 ```
 
 ### RefreshTokenParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -RefreshToken <SecureString>
+New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
  -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
 ```
 
 ### AuthorizationCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
  [-UseAuthorizationCode] [<CommonParameters>]
 ```
 
 ### DeviceCodeParameterSet
 
 ```powershell
-New-AbAccessToken -ApplicationId <String> [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
+New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
  [-UseDeviceAuthentication] [<CommonParameters>]
 ```
 
@@ -76,7 +76,7 @@ Type: System.String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

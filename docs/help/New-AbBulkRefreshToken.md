@@ -35,7 +35,7 @@ Acquires a bulk refresh token from Azure Active Directory that will be used to p
 
 ### -Environment
 
-The enivornment that will provide metadata used to acquire the bulk refresh token.
+The environment that will provide metadata used to acquire the bulk refresh token.
 
 ```yaml
 Type: System.String

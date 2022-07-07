@@ -14,8 +14,8 @@ Updates the configurations for the AutomationBrew PowerShell module.
 ## SYNTAX
 
 ```powershell
-Update-AbConfiguration -Scope <ConfigurationScope> [-WhatIf] [-Confirm] [-DataCollection <Boolean>]
- [<CommonParameters>]
+Update-AbConfiguration -Scope <ConfigurationScope> [-WhatIf] [-Confirm] [-DisplayBreakingChanges <Boolean>]
+ [-DataCollection <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,22 @@ Sets the DataCollection configuration to false for the module. This will disable
 ### -DataCollection
 
 Controls if data collection, to help improve Automation Brew cmdlets, is enabled. When enabled, telemetry is shared with the developers to identify patterns of usage to identify common issues and help improve the experience with the module. Automation Brew does not collect any personal or private information. This configuration is enabled by default, and you must opt-out if you which to disable this functionality.
+
+```yaml
+Type: System.Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -DisplayBreakingChanges
+
+Controls if warning messages for breaking changes are displayed or suppressed. When enabled, a breaking change warning is displayed when executing cmdlets with breaking changes in a future release.
 
 ```yaml
 Type: System.Boolean

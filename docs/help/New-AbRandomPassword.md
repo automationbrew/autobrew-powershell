@@ -38,7 +38,7 @@ Generate a secure random password.
 The number of characters in the generated password. The length must be between 8 and 128 characters.
 
 ```yaml
-Type: System.Int32
+Type: System.Nullable`1[System.Int32]
 Parameter Sets: (All)
 Aliases:
 
@@ -54,7 +54,7 @@ Accept wildcard characters: False
 The minimum number of non-alphanumeric characters (such as @, #, !, %, &, and so on) in the generated password. The number must be 2 or more.
 
 ```yaml
-Type: System.Int32
+Type: System.Nullable`1[System.Int32]
 Parameter Sets: (All)
 Aliases:
 

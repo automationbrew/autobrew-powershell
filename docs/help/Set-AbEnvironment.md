@@ -14,8 +14,8 @@ Sets the properties for a given environment.
 ## SYNTAX
 
 ```powershell
-Set-AbEnvironment -ActiveDirectoryAuthority <String> [-MicrosoftGraphEndpoint <String>] -Name <String>
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-AbEnvironment -ActiveDirectoryAuthority <String> [-ApplicationId <String>]
+ [-MicrosoftGraphEndpoint <String>] -Name <String> [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +50,22 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -ApplicationId
+
+The identifier of the application for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MicrosoftGraphEndpoint
 
 The Microsoft Graph endpoint for the environment.
@@ -79,6 +95,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Tenant
+
+The tenant for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

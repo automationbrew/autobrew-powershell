@@ -10,12 +10,12 @@
     internal sealed class OutputBreakingChangeAttribute : BreakingChangeAttribute
     {
         /// <summary>
-        /// Gets or sets the output properties that will be depcreated.
+        /// Gets or sets the output properties that will be deprecated.
         /// </summary>
         public string[] DeprecatedOutputProperties { get; set; }
 
         /// <summary>
-        /// Gets the output type that will be depcreated.
+        /// Gets the output type that will be deprecated.
         /// </summary>
         public Type DeprecatedOutputType { get; }
 

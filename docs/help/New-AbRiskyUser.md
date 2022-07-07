@@ -9,26 +9,27 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
 
 ## SYNTAX
 
 ### CredentialParameterSet
 
 ```powershell
-New-AbRiskyUser -ApplicationId <String> -Credential <PSCredential> -Tenant <String> [<CommonParameters>]
+New-AbRiskyUser -ApplicationId <String> -Credential <PSCredential> -Tenant <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### UsernamePasswordParameterSet
 
 ```powershell
 New-AbRiskyUser -ApplicationId <String> -Password <SecureString> -Tenant <String> -UserPrincipalName <String>
- [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
 
 ## EXAMPLES
 
@@ -41,10 +42,10 @@ PS C:\>
 PS C:\> Set-AzureADUserPassword -ObjectId $user.ObjectId -Password $password -ForceChangePasswordNextLogin $false
 PS C:\>
 PS C:\> $credential = New-Object System.Management.Automation.PSCredential ($user.UserPrincipalName, $password)
-PS C:\> New-AbRiskyUser -ApplicationId 'yyyy-yyyy-yyyy-yyyy' -Credential $credential -Tenant 'zzzz-zzzz-zzzz-zzzz' 
+PS C:\> New-AbRiskyUser -ApplicationId 'yyyy-yyyy-yyyy-yyyy' -Credential $credential -Tenant 'zzzz-zzzz-zzzz-zzzz'
 ```
 
-Utilizes the Azure Active Directory PowerShell module to reset the password for a specific user. Then generates a risky user event in Azure Active Directory, by proxing an authentication request through the Tor service.
+Utilizes the Azure Active Directory PowerShell module to reset the password for a specific user. Then Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
 
 ## PARAMETERS
 
@@ -122,6 +123,38 @@ Parameter Sets: UsernamePasswordParameterSet
 Aliases: UPN
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
