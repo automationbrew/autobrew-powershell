@@ -49,8 +49,8 @@
                 Tenant = CommonTenant
             };
 
-            account.SetProperty(ExtendedPropertyType.ApplicationId, BulkRefreshTokenClientId);
-            account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
+            account.SetProperty(KnownExtendedPropertyKeys.ApplicationId, BulkRefreshTokenClientId);
+            account.SetProperty(KnownExtendedPropertyKeys.UseDeviceCode, true.ToString());
 
             ModuleAuthenticationResult authResult = await AcquireTokenAsync(
                 new TokenRequestData(
@@ -105,7 +105,7 @@
             {
                 if (string.IsNullOrEmpty(result.HomeAccountId) == false)
                 {
-                    requestData.Account.SetProperty(ExtendedPropertyType.HomeAccountId, result.HomeAccountId);
+                    requestData.Account.SetProperty(KnownExtendedPropertyKeys.HomeAccountId, result.HomeAccountId);
                 }
 
                 if (string.IsNullOrEmpty(requestData.Account.Username) && string.IsNullOrEmpty(result.Username) == false)
@@ -169,15 +169,15 @@
         {
             requestData.AssertNotNull(nameof(requestData));
 
-            if (requestData.Account.IsPropertySet(ExtendedPropertyType.HomeAccountId))
+            if (requestData.Account.IsPropertySet(KnownExtendedPropertyKeys.HomeAccountId))
             {
                 return new SilentParameters(requestData);
             }
-            else if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseAuthorizationCode))
+            else if (requestData.Account.IsPropertySet(KnownExtendedPropertyKeys.UseAuthorizationCode))
             {
                 return new InteractiveUserParameters(requestData);
             }
-            else if (requestData.Account.IsPropertySet(ExtendedPropertyType.UseDeviceCode))
+            else if (requestData.Account.IsPropertySet(KnownExtendedPropertyKeys.UseDeviceCode))
             {
                 return new DeviceCodeParameters(requestData, outputAction);
             }

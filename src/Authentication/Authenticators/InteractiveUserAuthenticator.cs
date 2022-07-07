@@ -39,7 +39,7 @@
             InteractiveBrowserCredentialOptions options = new()
             {
                 AuthorityHost = new Uri(interactiveParameters.Environment.ActiveDirectoryAuthority),
-                ClientId = interactiveParameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
+                ClientId = interactiveParameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
                 RedirectUri = new Uri($"http://localhost:{GetReplyUrlPort()}"),
                 TenantId = interactiveParameters.Account.Tenant,
                 TokenCachePersistenceOptions = parameters.TokenCacheProvider.GetPersistenceOptions()

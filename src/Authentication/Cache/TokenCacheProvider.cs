@@ -77,7 +77,7 @@
                 return;
             }
 
-            IPublicClientApplication client = PublicClientApplicationBuilder.Create(moduleAccount.GetProperty(ExtendedPropertyType.ApplicationId)).Build();
+            IPublicClientApplication client = PublicClientApplicationBuilder.Create(moduleAccount.GetProperty(KnownExtendedPropertyKeys.ApplicationId)).Build();
             await RegisterCacheAsync(client.UserTokenCache).ConfigureAwait(false);
 
             IEnumerable<IAccount> accounts = await client.GetAccountsAsync().ConfigureAwait(false);
@@ -125,7 +125,7 @@
             return string.Equals(identityAccount.Username, moduleAccount.Username, StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(
                     identityAccount.HomeAccountId?.Identifier,
-                    moduleAccount.ExtendedProperties.GetProperty(ExtendedPropertyType.HomeAccountId),
+                    moduleAccount.ExtendedProperties.GetProperty(KnownExtendedPropertyKeys.HomeAccountId),
                     StringComparison.OrdinalIgnoreCase);
         }
     }

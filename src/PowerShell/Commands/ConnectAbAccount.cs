@@ -104,16 +104,16 @@
 
             if (string.IsNullOrEmpty(ApplicationId) == false)
             {
-                account.SetProperty(ExtendedPropertyType.ApplicationId, ApplicationId);
+                account.SetProperty(KnownExtendedPropertyKeys.ApplicationId, ApplicationId);
             }
 
             if (UseAuthorizationCode.IsPresent)
             {
-                account.SetProperty(ExtendedPropertyType.UseAuthorizationCode, true.ToString());
+                account.SetProperty(KnownExtendedPropertyKeys.UseAuthorizationCode, true.ToString());
             }
             else if (UseDeviceAuthentication.IsPresent)
             {
-                account.SetProperty(ExtendedPropertyType.UseDeviceCode, true.ToString());
+                account.SetProperty(KnownExtendedPropertyKeys.UseDeviceCode, true.ToString());
             }
 
             await ConfirmActionAsync(

@@ -15,7 +15,7 @@
         /// <summary>
         /// Gets the extended properties for the account.
         /// </summary>
-        public IDictionary<ExtendedPropertyType, string> ExtendedProperties { get; private set; } = new ConcurrentDictionary<ExtendedPropertyType, string>();
+        public IDictionary<string, string> ExtendedProperties { get; private set; } = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// Gets or sets the Azure Active Directory tenant identifier for the tenant.

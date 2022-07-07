@@ -3,6 +3,7 @@
     using System.Management.Automation;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using Microsoft.Graph;
     using Models;
     using Models.Authentication;
     using Properties;
@@ -27,9 +28,24 @@
         public string ApplicationId { get; set; }
 
         /// <summary>
+        /// Gets or sets the identifier of the Azure subscription for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The identifier of the Azure subscription for the environment.", Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string AzureSubscription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of DevTest Lab for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The name of DevTest Lab for the environment.", Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string DevTestLabName { get; set; }
+
+        /// <summary>
         /// Gets or sets the endpoint of Microsoft Graph for the environment.
         /// </summary>
         [Parameter(HelpMessage = "The endpoint of Microsoft Graph for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
         public string MicrosoftGraphEndpoint { get; set; }
 
         /// <summary>
@@ -38,6 +54,13 @@
         [Parameter(HelpMessage = "The name for the environment.", Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the resource group for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The name of the resource group for the environment.", Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string ResourceGroupName { get; set; }
 
         /// <summary>
         /// Gets or sets the tenant for the environment.
@@ -52,7 +75,7 @@
         protected override void PerformCmdlet()
         {
             ModuleSession.Instance.TryGetEnvironment(Name, out ModuleEnvironment environment);
-            string[] excludeProperties = { "Name", "Type" };
+            string[] excludeProperties = { "ExtendedProperties", "Name", "Type" };
 
             if (environment == null)
             {
@@ -79,6 +102,24 @@
             }
 
             ConfirmAction(Resources.UpdateEnvironmentTarget, Name, () => ModuleSession.Instance.RegisterEnvironment(Name, environment, true));
+        }
+
+        private void SetExtendedProperties(ModuleEnvironment environment)
+        {
+            environment.AssertNotNull(nameof(environment));
+
+            string[] extendedProperties = { "AzureSubscription", "DevTestLabName", "ResourceGroupName" };
+            string propertyValue; 
+
+            foreach (PropertyInfo property in GetType().GetProperties(BindingFlags.Public).Where(p => extendedProperties.Contains(p.Name)))
+            {
+                propertyValue = property.GetValue(this, null)?.ToString(); 
+
+                if (string.IsNullOrEmpty(propertyValue) == false)
+                {
+                    environment.SetProperty(property.Name, propertyValue);
+                }
+            }
         }
 
         /// <summary>

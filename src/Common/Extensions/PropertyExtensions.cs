@@ -25,15 +25,15 @@
         /// Safely get the given property for the model.
         /// </summary>
         /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel"/> interface.</param>
-        /// <param name="propertyType">The type of property to be obtained.</param>
+        /// <param name="propertyKey">The type of property to be obtained.</param>
         /// <returns>The value of the property in the given model, or null if the property is not set</returns>
-        public static string GetProperty(this IExtensibleModel model, ExtendedPropertyType propertyType)
+        public static string GetProperty(this IExtensibleModel model, string propertyKey)
         {
             string result = null;
 
-            if (model.IsPropertySet(propertyType))
+            if (model.IsPropertySet(propertyKey))
             {
-                result = model.ExtendedProperties.GetProperty(propertyType);
+                result = model.ExtendedProperties.GetProperty(propertyKey);
             }
 
             return result;
@@ -55,29 +55,22 @@
         /// Determines if the given property is set in the model.
         /// </summary>
         /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel" /> interface.</param>
-        /// <param name="propertyType">The type of property to be checked.</param>
+        /// <param name="propertyKey">The type of property to be checked.</param>
         /// <returns><c>true</c> if the property is set, otherwise <c>false</c>.</returns>
-        public static bool IsPropertySet(this IExtensibleModel model, ExtendedPropertyType propertyType)
+        public static bool IsPropertySet(this IExtensibleModel model, string propertyKey)
         {
-            bool result = false;
-
-            if (propertyType != ExtendedPropertyType.UnknownFutureValue)
-            {
-                result = model.ExtendedProperties.IsPropertySet(propertyType);
-            }
-
-            return result;
+            return model.ExtendedProperties.IsPropertySet(propertyKey);
         }
 
         /// <summary>
         /// Removes the property with the specified type.
         /// </summary>
         /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel" /> interface.</param>
-        /// <param name="propertyType">The type of property to be removed.</param>
+        /// <param name="propertyKey">The type of property to be removed.</param>
         /// <returns><c>true</c> if the property was successfully removed; otherwise, <c>false</c>. When the specified property does not exist <c>false</c> will be returned.</returns>
-        public static bool RemoveProperty(this IExtensibleModel model, ExtendedPropertyType propertyType)
+        public static bool RemoveProperty(this IExtensibleModel model, string propertyKey)
         {
-            return model.ExtendedProperties.Remove(propertyType);
+            return model.ExtendedProperties.Remove(propertyKey);
         }
 
         /// <summary>
@@ -107,14 +100,11 @@
         /// represented as a comma-separated list.
         /// </summary>
         /// <param name="model">An instance of a class that implements the <see cref="IExtensibleModel"/> interface.</param>
-        /// <param name="propertyType">The type of property to be updated.</param>
+        /// <param name="propertyKey">The type of property to be updated.</param>
         /// <param name="values">The value to set for the property.</param>
-        public static void SetProperty(this IExtensibleModel model, ExtendedPropertyType propertyType, params string[] values)
+        public static void SetProperty(this IExtensibleModel model, string propertyKey, params string[] values)
         {
-            if (propertyType != ExtendedPropertyType.UnknownFutureValue)
-            {
-                model.ExtendedProperties.SetProperty(propertyType, values);
-            }
+            model.ExtendedProperties.SetProperty(propertyKey, values);
         }
     }
 }

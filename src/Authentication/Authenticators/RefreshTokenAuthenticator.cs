@@ -36,7 +36,7 @@
             RefreshTokenCredentialOptions options = new()
             {
                 AuthorityHost = new Uri(parameters.Environment.ActiveDirectoryAuthority),
-                ClientId = parameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
+                ClientId = parameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
                 TenantId = parameters.Account.Tenant,
                 TokenCachePersistenceOptions = parameters.TokenCacheProvider.GetPersistenceOptions()
             };
