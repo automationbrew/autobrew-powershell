@@ -14,8 +14,9 @@ Sets the properties for a given environment.
 ## SYNTAX
 
 ```powershell
-Set-AbEnvironment -ActiveDirectoryAuthority <String> [-ApplicationId <String>]
- [-MicrosoftGraphEndpoint <String>] -Name <String> [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-AbEnvironment -ActiveDirectoryAuthority <String> [-ApplicationId <String>] [-DevTestLabName <String>]
+ [-KeyVaultName <String>] [-MicrosoftGraphEndpoint <String>] -Name <String> [-ResourceGroupName <String>]
+ [-SubscriptionId <String>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,6 +67,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DevTestLabName
+
+The name of the DevTest Lab instance for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -KeyVaultName
+
+The name of the Key Vault instance for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MicrosoftGraphEndpoint
 
 The Microsoft Graph endpoint for the environment.
@@ -95,6 +128,38 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ResourceGroupName
+
+The name of the resource group for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SubscriptionId
+
+The identifier of the Azure subscription for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

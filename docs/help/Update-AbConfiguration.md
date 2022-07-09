@@ -14,8 +14,8 @@ Updates the configurations for the AutomationBrew PowerShell module.
 ## SYNTAX
 
 ```powershell
-Update-AbConfiguration -Scope <ConfigurationScope> [-WhatIf] [-Confirm] [-DisplayBreakingChanges <Boolean>]
- [-DataCollection <Boolean>] [<CommonParameters>]
+Update-AbConfiguration -Scope <ConfigurationScope> [-WhatIf] [-Confirm] [-DataCollection <Boolean>]
+ [-DisplayBreakingChanges <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

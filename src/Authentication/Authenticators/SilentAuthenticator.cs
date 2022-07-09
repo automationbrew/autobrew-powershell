@@ -37,7 +37,7 @@
             SharedTokenCacheCredentialOptions options = new(parameters.TokenCacheProvider.GetPersistenceOptions())
             {
                 AuthorityHost = new Uri(parameters.Environment.ActiveDirectoryAuthority),
-                ClientId = parameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
+                ClientId = parameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
                 EnableGuestTenantAuthentication = true,
                 TenantId = parameters.Account.Tenant,
                 Username = parameters.Account.Username
@@ -47,8 +47,8 @@
 
             JsonObject recordObject = new()
             {
-                ["clientId"] = parameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
-                ["homeAccountId"] = parameters.Account.GetProperty(ExtendedPropertyType.HomeAccountId),
+                ["clientId"] = parameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
+                ["homeAccountId"] = parameters.Account.GetProperty(KnownExtendedPropertyKeys.HomeAccountId),
                 ["tenantId"] = parameters.Account.Tenant,
                 ["username"] = parameters.Account.Username
             };

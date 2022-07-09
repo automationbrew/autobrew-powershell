@@ -10,6 +10,6 @@
         /// <summary>
         /// Gets the extended properties.
         /// </summary>
-        IDictionary<ExtendedPropertyType, string> ExtendedProperties { get; }
+        IDictionary<string, string> ExtendedProperties { get; }
     }
 }

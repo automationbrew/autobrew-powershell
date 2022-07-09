@@ -70,9 +70,9 @@
             account.AssertNotNull(nameof(account));
             environment.AssertNotNull(nameof(environment));
 
-            if (account.IsPropertySet(ExtendedPropertyType.ApplicationId) == false)
+            if (account.IsPropertySet(KnownExtendedPropertyKeys.ApplicationId) == false)
             {
-                account.SetProperty(ExtendedPropertyType.ApplicationId, ModuleEnvironmentConstants.ApplicationId);
+                account.SetProperty(KnownExtendedPropertyKeys.ApplicationId, ModuleEnvironmentConstants.ApplicationId);
             }
 
             Account = account;

@@ -42,7 +42,7 @@
             DeviceCodeCredentialOptions options = new()
             {
                 AuthorityHost = new Uri(parameters.Environment.ActiveDirectoryAuthority),
-                ClientId = parameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
+                ClientId = parameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
                 DeviceCodeCallback = DeviceCodeCallback,
                 TenantId = parameters.Account.Tenant,
                 TokenCachePersistenceOptions = parameters.TokenCacheProvider.GetPersistenceOptions()

@@ -21,6 +21,6 @@
         /// <summary>
         /// Gets the extended properties for the context.
         /// </summary>
-        public IDictionary<ExtendedPropertyType, string> ExtendedProperties { get; } = new ConcurrentDictionary<ExtendedPropertyType, string>();
+        public IDictionary<string, string> ExtendedProperties { get; } = new ConcurrentDictionary<string, string>();
     }
 }

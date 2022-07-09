@@ -44,7 +44,7 @@
                 usernamePasswordParameters.Account.Username,
                 usernamePasswordParameters.Password.AsString(),
                 usernamePasswordParameters.Account.Tenant,
-                usernamePasswordParameters.Account.GetProperty(ExtendedPropertyType.ApplicationId),
+                usernamePasswordParameters.Account.GetProperty(KnownExtendedPropertyKeys.ApplicationId),
                 options);
 
             TokenRequestContext requestContext = new(
