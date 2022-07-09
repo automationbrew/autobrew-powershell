@@ -28,11 +28,18 @@
         public string ApplicationId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of DevTest Lab for the environment.
+        /// Gets or sets the name of the DevTest Lab instance for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The name of DevTest Lab for the environment.", Mandatory = false)]
+        [Parameter(HelpMessage = "The name of the DevTest Lab instance for the environment.", Mandatory = false)]
         [ValidateNotNullOrEmpty]
         public string DevTestLabName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the Key Vault instance for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The name of the Key Vault instance for the environment.", Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string KeyVaultName { get; set; }
 
         /// <summary>
         /// Gets or sets the endpoint of Microsoft Graph for the environment.
@@ -99,7 +106,7 @@
         {
             environment.AssertNotNull(nameof(environment));
 
-            string[] extendedProperties = { "DevTestLabName", "ResourceGroupName", "SubscriptionId" };
+            string[] extendedProperties = { nameof(DevTestLabName), nameof(KeyVaultName), nameof(ResourceGroupName), nameof(SubscriptionId) };
             string propertyValue;
 
             foreach (PropertyInfo property in GetType().GetProperties().Where(p => extendedProperties.Contains(p.Name)))

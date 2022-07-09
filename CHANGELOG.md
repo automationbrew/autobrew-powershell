@@ -22,8 +22,8 @@
 
 ## Upcoming Release
 
-* Added optional parameters `DevTestLabName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
-* Added optional parameters `DevTestLabName`, `ResourceGroupName`, and `SubscriptionId` to [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md)
+* Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
+* Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md)
 * Prevent builtin environments from being updated using the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command [#12](https://github.com/automationbrew/autobrew-powershell/issues/12)
 * Resolved configuration issue when using the module with an Azure Function app [#9](https://github.com/automationbrew/autobrew-powershell/issues/9)
 * Resolved null reference exception when using the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command [#13](https://github.com/automationbrew/autobrew-powershell/issues/13)
