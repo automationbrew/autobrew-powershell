@@ -23,9 +23,9 @@
         {
             Dictionary<string, Version> sharedAssemblies = new()
             {
-                { "Azure.Core", new Version("1.24.0.0") },
-                { "Microsoft.ApplicationInsights", new Version("2.20.0.103") },
-                { "Azure.Identity", new Version("1.6.0.0") },
+                { "Azure.Core", new Version("1.2500.22.33004") },
+                { "Azure.Identity", new Version("1.600.122.40803") },
+                { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
                 { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
                 { "Microsoft.Identity.Client", new Version("4.41.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.19.3.0") },
