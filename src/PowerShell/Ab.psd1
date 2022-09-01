@@ -136,16 +136,17 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '* Added the Get-AbDelegatedAdminAccessAssignment command to get delegated admin access assignments that exists for the given relationship.
-* Added the Get-AbDelegatedAdminRelationship command to get the delegated admin relationships associated with the authenticated tenant.
-* Added the Get-AbDelegatedAdminTenant command to get the delegated admin tenants associated with the authenticated tenant.
-* Added the New-AbDelegatedAdminAccessAssignment command to create a new access assignment for the specified delegated admin relationship.
-* Added the New-AbDelegatedAdminRelationship command to create a new delegated admin relationship.
-* Added the New-AbDelegatedAdminRelationshipRequest command to create a new delegated admin relationship request for approval by the tenant.
-* Added the New-AbRandomPassword command to create a random secure password.
-* Added the New-AbRiskyUser command to create an Azure Active Directory user risk event using a Tor proxy.
-* Added the Set-AbDelegatedAdminRelationshipRequest command to update the request for the specified delegated admin relationship.
-* Resolved the Microsoft.Extensions.Primitives assembly conflict.'
+        ReleaseNotes = '* Added optional parameters DevTestLabName, KeyVaultName, ResourceGroupName, and SubscriptionId to the Add-AbEnvironment command
+        * Added optional parameters DevTestLabName, KeyVaultName, ResourceGroupName, and SubscriptionId to the Set-AbEnvironment command
+        * Prevent builtin environments from being updated using the Set-AbEnvironment command
+        * Resolved could not load the System.Runtime.CompilerServices.Unsafe assembly when using the New-AbAccessToken command and PowerShell 5.1
+        * Resolved configuration issue when using the module with an Azure Function app
+        * Resolved the obsolete initialization of the telemetry client 
+        * Resolved null reference exception when using the Set-AbEnvironment command
+        * Updated the Azure.Identity dependency to version 1.6.1
+        * Updated the Microsoft.ApplicationInsights dependency to version 2.21.0
+        * Updated the Selenium.WebDriver dependency to version 4.4.0
+        * Updated the Selenium.WebDriver.MSEdgeDriver dependency to version 104.0.1293.80'
 
         # Prerelease string of this module
         # Prerelease = ''
