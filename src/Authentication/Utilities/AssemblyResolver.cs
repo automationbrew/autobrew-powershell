@@ -21,9 +21,9 @@
         private static readonly Dictionary<string, Version> NetFxPreloadAssemblies = new(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Azure.Core", new Version("1.2500.22.33004") },
-            { "Azure.Identity", new Version("1.600.122.40803") },
+            { "Azure.Identity", new Version("1.700.22.46903") },
             { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
-            { "Microsoft.Bcl.AsyncInterfaces", new Version("1.1.1.0") },
+            { "Microsoft.Bcl.AsyncInterfaces", new Version("6.0.21.52210") },
             { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
             { "Microsoft.Identity.Client", new Version("4.41.0.0") },
             { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.19.3.0") },
@@ -36,8 +36,8 @@
             { "System.Numerics.Vectors", new Version("4.1.4.0") },
             { "System.Runtime.CompilerServices.Unsafe", new Version("6.0.21.52210") },
             { "System.Security.Cryptography.ProtectedData", new Version("4.0.3.0") },
-            { "System.Text.Encodings.Web", new Version("4.0.5.1") },
-            { "System.Text.Json", new Version("6.0.2.0") },
+            { "System.Text.Encodings.Web", new Version("6.0.21.52210") },
+            { "System.Text.Json", new Version("6.0.922.41905") },
             { "System.Threading.Tasks.Extensions", new Version("4.2.0.1") },
         };
 

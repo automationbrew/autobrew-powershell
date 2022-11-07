@@ -24,13 +24,13 @@
             Dictionary<string, Version> sharedAssemblies = new()
             {
                 { "Azure.Core", new Version("1.2500.22.33004") },
-                { "Azure.Identity", new Version("1.600.122.40803") },
+                { "Azure.Identity", new Version("1.700.22.46903") },
                 { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
                 { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
                 { "Microsoft.Identity.Client", new Version("4.41.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.19.3.0") },
                 { "Microsoft.Rest.ClientRuntime", new Version("2.3.23.0") },
-                { "System.Text.Json", new Version("6.0.2.0") },
+                { "System.Text.Json", new Version("6.0.922.41905") },
             };
 
             SharedAssemblyMap = new ConcurrentDictionary<string, Version>(sharedAssemblies, StringComparer.OrdinalIgnoreCase);

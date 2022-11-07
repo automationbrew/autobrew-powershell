@@ -20,7 +20,7 @@
 
 # Change Log
 
-## 1.0.2 - August 2022
+## 1.0.2 - November 2022
 
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md)
@@ -28,10 +28,12 @@
 * Resolved could not load the `System.Runtime.CompilerServices.Unsafe` assembly when using the `New-AbAccessToken` command and PowerShell 5.1 [#17](https://github.com/automationbrew/autobrew-powershell/issues/17)
 * Resolved configuration issue when using the module with an Azure Function app [#9](https://github.com/automationbrew/autobrew-powershell/issues/9)
 * Resolved null reference exception when using the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command [#13](https://github.com/automationbrew/autobrew-powershell/issues/13)
-* Updated the `Azure.Identity` dependency to version `1.6.1`
+* Resolved obsolete initialization of the telemetry client [#19](https://github.com/automationbrew/autobrew-powershell/issues/19)
+* Updated the `Azure.Identity` dependency to version `1.7.0`
 * Updated the `Microsoft.ApplicationInsights` dependency to version `2.21.0`
-* Updated the `Selenium.WebDriver` dependency to version `4.4.0`
-* Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `104.0.1293.54`
+* Updated the `Selenium.WebDriver` dependency to version `4.6.0`
+* Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `106.0.1370.34`
+* Updated the `System.Text.Json` dependency to version `6.0.6`
 
 ## 1.0.1 - June 2022
 
