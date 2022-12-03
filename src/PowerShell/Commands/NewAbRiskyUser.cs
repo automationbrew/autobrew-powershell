@@ -97,7 +97,7 @@
                 AuthenticationResult authResult = await app.AcquireTokenByUsernamePassword(
                     new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftGraphEndpoint}/.default" },
                     username,
-                    password).ExecuteAsync(CancellationToken).ConfigureAwait(false);
+                    password.AsString()).ExecuteAsync(CancellationToken).ConfigureAwait(false);
 
                 WriteObject(authResult.Account);
 
