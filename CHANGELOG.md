@@ -20,7 +20,7 @@
 
 # Change Log
 
-## 1.0.2 - November 2022
+## 1.0.2 - December 2022
 
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md)
@@ -32,8 +32,8 @@
 * Updated the `Azure.Identity` dependency to version `1.7.0`
 * Updated the `Microsoft.ApplicationInsights` dependency to version `2.21.0`
 * Updated the `Selenium.WebDriver` dependency to version `4.6.0`
-* Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `106.0.1370.34`
-* Updated the `System.Text.Json` dependency to version `6.0.6`
+* Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `107.0.1418.42`
+* Updated the `System.Text.Json` dependency to version `7.0.0`
 
 ## 1.0.1 - June 2022
 

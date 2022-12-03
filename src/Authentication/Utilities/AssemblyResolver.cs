@@ -21,23 +21,24 @@
         private static readonly Dictionary<string, Version> NetFxPreloadAssemblies = new(StringComparer.InvariantCultureIgnoreCase)
         {
             { "Azure.Core", new Version("1.2500.22.33004") },
-            { "Azure.Identity", new Version("1.700.22.46903") },
+            { "Azure.Identity", new Version("1.800.22.55901") },
             { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
             { "Microsoft.Bcl.AsyncInterfaces", new Version("6.0.21.52210") },
             { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
-            { "Microsoft.Identity.Client", new Version("4.41.0.0") },
-            { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.19.3.0") },
+            { "Microsoft.Identity.Client", new Version("4.46.0.0") },
+            { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.25.0.0") },
+            { "Microsoft.IdentityModel.Abstractions", new Version("6.25.1.31130") },
             { "Microsoft.Rest.ClientRuntime", new Version("2.3.23.0") },
             { "Newtonsoft.Json", new Version("13.0.1.25517") },
             { "System.Buffers", new Version("4.0.3.0") },
             { "System.Diagnostics.DiagnosticSource", new Version("4.0.4.0") },
-            { "System.Memory", new Version("4.0.1.1") },
+            { "System.Memory", new Version("4.6.31308.1") },
             { "System.Memory.Data", new Version("1.0.2.0") },
             { "System.Numerics.Vectors", new Version("4.1.4.0") },
             { "System.Runtime.CompilerServices.Unsafe", new Version("6.0.21.52210") },
             { "System.Security.Cryptography.ProtectedData", new Version("4.0.3.0") },
-            { "System.Text.Encodings.Web", new Version("6.0.21.52210") },
-            { "System.Text.Json", new Version("6.0.922.41905") },
+            { "System.Text.Encodings.Web", new Version("7.0.22.51805") },
+            { "System.Text.Json", new Version("7.0.22.51805") },
             { "System.Threading.Tasks.Extensions", new Version("4.2.0.1") },
         };
 
@@ -96,7 +97,7 @@
         /// <returns><c>true</c> if the major version matches or the assembly is part of the allowed list; otherwise, <c>false</c>.</returns>
         private static bool IsVersionMatching(AssemblyName assemblyName, Version version)
         {
-            string[] versionMismatchAllowed = { "Newtonsoft.Json", "System.Runtime.CompilerServices.Unsafe", "System.Text.Json" };
+            string[] versionMismatchAllowed = { "Microsoft.IdentityModel.Abstractions", "Newtonsoft.Json", "System.Runtime.CompilerServices.Unsafe", "System.Text.Json" };
 
             assemblyName.AssertNotNull(nameof(assemblyName));
             version.AssertNotNull(nameof(version));
