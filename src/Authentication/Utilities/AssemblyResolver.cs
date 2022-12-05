@@ -23,8 +23,8 @@
             { "Azure.Core", new Version("1.2500.22.33004") },
             { "Azure.Identity", new Version("1.800.22.55901") },
             { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
-            { "Microsoft.Bcl.AsyncInterfaces", new Version("6.0.21.52210") },
-            { "Microsoft.Extensions.Primitives", new Version("6.0.21.52210") },
+            { "Microsoft.Bcl.AsyncInterfaces", new Version("7.0.22.51805") },
+            { "Microsoft.Extensions.Primitives", new Version("7.0.22.51805") },
             { "Microsoft.Identity.Client", new Version("4.46.0.0") },
             { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.25.0.0") },
             { "Microsoft.IdentityModel.Abstractions", new Version("6.25.1.31130") },
@@ -97,7 +97,7 @@
         /// <returns><c>true</c> if the major version matches or the assembly is part of the allowed list; otherwise, <c>false</c>.</returns>
         private static bool IsVersionMatching(AssemblyName assemblyName, Version version)
         {
-            string[] versionMismatchAllowed = { "Microsoft.IdentityModel.Abstractions", "Newtonsoft.Json", "System.Runtime.CompilerServices.Unsafe", "System.Text.Json" };
+            string[] versionMismatchAllowed = { "Microsoft.Identity.Client", "Microsoft.IdentityModel.Abstractions", "Newtonsoft.Json", "System.Runtime.CompilerServices.Unsafe", "System.Text.Json" };
 
             assemblyName.AssertNotNull(nameof(assemblyName));
             version.AssertNotNull(nameof(version));
