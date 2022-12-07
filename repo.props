@@ -6,18 +6,25 @@
 		<RepoArtifacts>$(RepoRoot)artifacts/</RepoArtifacts>
 		<RepoTools>$(RepoRoot)tools/</RepoTools>
 	</PropertyGroup>
-
-	<!-- Common -->
-	<PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
+	
 	<!-- Build -->
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<OutputPath>$(RepoArtifacts)$(Configuration)\</OutputPath>
 		<PublishDir>$(OutputPath)</PublishDir>
+	</PropertyGroup>
+
+	<!-- Common -->
+	<PropertyGroup>
+		<AssemblyVersion>1.0.2</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/automationbrew/autobrew-powershell</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/automationbrew/autobrew-powershell.git</RepositoryUrl>
+		<Version>$(AssemblyVersion)</Version>
 	</PropertyGroup>
 </Project>

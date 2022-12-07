@@ -1,50 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
 
-	<PropertyGroup>
-		<AssemblyName>AutoBrew.PowerShell</AssemblyName>
-		<RootNamespace>AutoBrew.PowerShell</RootNamespace>
-		<TargetFramework>netstandard2.0</TargetFramework>
-	</PropertyGroup>
+  <PropertyGroup>
+    <AssemblyName>AutoBrew.PowerShell</AssemblyName>
+    <RootNamespace>AutoBrew.PowerShell</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
-		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.21.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-		<PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
-		<PackageReference Include="Selenium.WebDriver" Version="4.7.0" />
-		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="107.0.1418.42" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.21.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.7.0" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="107.0.1418.42" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Authentication\Authentication.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Authentication\Authentication.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <None Update="Ab.format.ps1xml">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Ab.psd1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Ab.psm1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="StartupScripts\InitializeAssemblyResolver.ps1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Update="Ab.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Ab.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Ab.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StartupScripts\InitializeAssemblyResolver.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-	<ItemGroup>
-		<PreloadAssemblies Include="$(RepoSrc)lib\NetFxPreloadAssemblies\*.dll" />
-		<NetCoreAssemblies Include="$(RepoSrc)lib\NetCorePreloadAssemblies\*.dll" />
-	</ItemGroup>
+  <ItemGroup>
+    <PreloadAssemblies Include="$(RepoSrc)lib\NetFxPreloadAssemblies\*.dll" />
+    <NetCoreAssemblies Include="$(RepoSrc)lib\NetCorePreloadAssemblies\*.dll" />
+  </ItemGroup>
 
-	<Target Name="CopyFiles" AfterTargets="Build">
-		<Copy SourceFiles="@(PreloadAssemblies)" DestinationFolder="$(TargetDir)\NetFxPreloadAssemblies" />
-		<Copy SourceFiles="@(NetCoreAssemblies)" DestinationFolder="$(TargetDir)\NetCorePreloadAssemblies" />
-	</Target>
+  <Target Name="CopyFiles" AfterTargets="Build">
+    <Copy SourceFiles="@(PreloadAssemblies)" DestinationFolder="$(TargetDir)\NetFxPreloadAssemblies" />
+    <Copy SourceFiles="@(NetCoreAssemblies)" DestinationFolder="$(TargetDir)\NetCorePreloadAssemblies" />
+  </Target>
 
 </Project>
