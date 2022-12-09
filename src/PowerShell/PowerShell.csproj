@@ -3,8 +3,7 @@
 	<Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
 
 	<PropertyGroup>
-		<AssemblyName>AutoBrew.PowerShell</AssemblyName>
-		<RootNamespace>AutoBrew.PowerShell</RootNamespace>
+		<AssemblyName>$(AbAssemblyPrefix)</AssemblyName>
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 
@@ -23,18 +22,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Ab.format.ps1xml">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Ab.psd1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Ab.psm1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="StartupScripts\InitializeAssemblyResolver.ps1">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="Ab.format.ps1xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Ab.psd1">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Ab.psm1">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="StartupScripts\InitializeAssemblyResolver.ps1">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>

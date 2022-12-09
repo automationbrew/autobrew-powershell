@@ -14,7 +14,7 @@
         /// <summary>
         /// Name for the directory that contains the assemblies.
         /// </summary>
-        private const string assemblyDirectoryName = "NetCorePreloadAssemblies";
+        private const string AssemblyDirectoryName = "NetCorePreloadAssemblies";
 
         /// <summary>
         /// The cache for any resolved assemblies used to simplify resolution.
@@ -52,9 +52,9 @@
                 }
             }
 
-            string dependencyAsmPath = Path.Join(
+            string dependencyAsmPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                assemblyDirectoryName,
+                AssemblyDirectoryName,
                 $"{assemblyName.Name}.dll");
 
             if (File.Exists(dependencyAsmPath))

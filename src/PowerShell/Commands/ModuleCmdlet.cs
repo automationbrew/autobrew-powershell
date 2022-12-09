@@ -10,6 +10,7 @@
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.ApplicationInsights.Extensibility;
+    using Microsoft.Identity.Client;
     using Microsoft.Rest;
     using Models;
     using Models.Configuration;
@@ -122,6 +123,11 @@
         protected QosEvent QosEvent => qosEvent;
 
         /// <summary>
+        /// Gets a flag that indicates whether the connection should be validated before processing the command.
+        /// </summary>
+        public virtual bool ValidateConnection => false;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ModuleCmdlet" /> class.
         /// </summary>
         public ModuleCmdlet()
@@ -169,6 +175,11 @@
         {
             string commandAlias = GetType().Name;
 
+            if (ValidateConnection && ModuleSession.Instance.Context == null)
+            {
+                throw new ModuleException("Run Connect-AbAccount perform attempting this operation.", ModuleExceptionCategory.Authentication);
+            }
+
             if (MyInvocation != null && MyInvocation.MyCommand != null)
             {
                 commandAlias = MyInvocation.MyCommand.Name;
@@ -211,20 +222,14 @@
             method.AssertNotNull(nameof(method));
             target.AssertNotEmpty(nameof(target));
 
-            if (qosEvent is not null)
-            {
-                qosEvent.PauseQoSTimer();
-            }
+            qosEvent?.PauseQoSTimer();
 
             if (ShouldProcess(target, action) == false)
             {
                 return;
             }
 
-            if (qosEvent is not null)
-            {
-                qosEvent.ResumeQoSTimer();
-            }
+            qosEvent?.ResumeQoSTimer();
 
             method();
         }
@@ -407,6 +412,7 @@
             try
             {
                 telemetryClient.TrackPageView(pageViewTelemetry);
+                telemetryClient.Flush();
             }
             catch
             {

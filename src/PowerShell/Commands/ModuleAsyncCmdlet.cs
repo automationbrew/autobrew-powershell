@@ -1,5 +1,7 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
+    using System;
+    using System.Management.Automation;
     using Runtime;
 
     /// <summary>
@@ -27,20 +29,14 @@
             asyncMethod.AssertNotNull(nameof(asyncMethod));
             target.AssertNotEmpty(nameof(target));
 
-            if (QosEvent is not null)
-            {
-                QosEvent.PauseQoSTimer();
-            }
+            QosEvent?.PauseQoSTimer();
 
             if (ShouldProcess(target, action) == false)
             {
                 return;
             }
 
-            if (QosEvent is not null)
-            {
-                QosEvent.ResumeQoSTimer();
-            }
+            QosEvent?.ResumeQoSTimer();
 
             await asyncMethod().ConfigureAwait(false);
         }
@@ -51,7 +47,15 @@
         protected override void PerformCmdlet()
         {
             using AsyncCommandRuntime asyncCommandRuntime = new(this, CancellationToken);
-            asyncCommandRuntime.Wait(PerformCmdletAsync());
+
+            try
+            {
+                asyncCommandRuntime.Wait(PerformCmdletAsync());
+            }
+            catch (AggregateException ex)
+            {
+                HandleException(ex);
+            }
         }
 
         /// <summary>
@@ -59,5 +63,31 @@
         /// </summary>
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected abstract Task PerformCmdletAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exception"></param>
+        private void HandleException(Exception exception)
+        {
+            exception.AssertNotNull(nameof(exception));
+
+            if (exception is AggregateException aggregateException)
+            {
+                foreach (Exception innerException in aggregateException.InnerExceptions.Where(ex => ex != null))
+                {
+                    HandleException(innerException);
+                }
+            }
+            else
+            {
+                WriteError(new ErrorRecord(exception, string.Empty, ErrorCategory.NotSpecified, null));
+
+                if (exception.InnerException != null)
+                {
+                    HandleException(exception.InnerException);
+                }
+            }
+        }
     }
 }

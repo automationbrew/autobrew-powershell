@@ -15,9 +15,11 @@
 
 	<!-- Build -->
 	<PropertyGroup>
+		<AbAssemblyPrefix>AutoBrew.PowerShell</AbAssemblyPrefix>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<OutputPath>$(RepoArtifacts)$(Configuration)\</OutputPath>
 		<PublishDir>$(OutputPath)</PublishDir>
+		<RootNamespace>AutoBrew.PowerShell</RootNamespace>
 	</PropertyGroup>
 </Project>

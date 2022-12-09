@@ -19,6 +19,11 @@
         public string[] Scopes { get; set; }
 
         /// <summary>
+        /// Gets a flag that indicates whether the connection should be validated before processing the command.
+        /// </summary>
+        public override bool ValidateConnection => true;
+
+        /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
