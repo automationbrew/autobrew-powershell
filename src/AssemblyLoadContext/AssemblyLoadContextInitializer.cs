@@ -23,8 +23,6 @@
         {
             Dictionary<string, Version> sharedAssemblies = new()
             {
-                //{ "Azure.Core", new Version("1.25.0.0") },
-                //{ "Azure.Identity", new Version("1.8.0.0") },
                 { "Microsoft.Identity.Client", new Version("4.48.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.25.0.0") },
                 { "Microsoft.IdentityModel.Abstractions", new Version("6.22.0.0") }
