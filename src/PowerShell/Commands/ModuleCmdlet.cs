@@ -10,7 +10,6 @@
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.ApplicationInsights.Extensibility;
-    using Microsoft.Identity.Client;
     using Microsoft.Rest;
     using Models;
     using Models.Configuration;
@@ -39,15 +38,7 @@
         /// <summary>
         /// The client that provides the ability to capture telemetry if enabled.
         /// </summary>
-        private static readonly TelemetryClient telemetryClient = new(telemetryConfiguration);
-
-        /// <summary>
-        /// The configuration for the telemetry client.
-        /// </summary>
-        private static readonly TelemetryConfiguration telemetryConfiguration = new()
-        {
-            ConnectionString = TELEMETRY_CONNECTION_STRING
-        };
+        private static readonly TelemetryClient telemetryClient;
 
         /// <summary>
         /// The provider of configurations for the module.
@@ -123,6 +114,11 @@
         protected QosEvent QosEvent => qosEvent;
 
         /// <summary>
+        /// Gets the identifier for the session.
+        /// </summary>
+        private static string SessionId { get; } = Guid.NewGuid().ToString();
+
+        /// <summary>
         /// Gets a flag that indicates whether the connection should be validated before processing the command.
         /// </summary>
         public virtual bool ValidateConnection => false;
@@ -138,6 +134,18 @@
             {
                 throw new ModuleException("Unable to locate the configuration provider.", ModuleExceptionCategory.Configuration);
             }
+        }
+
+        /// <summary>
+        /// Initializes the static components of the <see cref="ModuleCmdlet" /> class.
+        /// </summary>
+        static ModuleCmdlet()
+        {
+            TelemetryConfiguration configuration = TelemetryConfiguration.CreateDefault();
+
+            configuration.ConnectionString = TELEMETRY_CONNECTION_STRING;
+
+            telemetryClient = new TelemetryClient(configuration);
         }
 
         /// <summary>
@@ -174,6 +182,7 @@
         protected override void BeginProcessing()
         {
             string commandAlias = GetType().Name;
+            string userId = ModuleSession.Instance.Context == null ? "defaultUserId" : GenerateSha256HashString(ModuleSession.Instance.Context.Account.Username);
 
             if (ValidateConnection && ModuleSession.Instance.Context == null)
             {
@@ -190,7 +199,9 @@
                 CommandName = commandAlias,
                 IsSuccess = true,
                 ModuleVersion = GetType().Assembly.GetName().Version.ToString(),
-                ParameterSetName = ParameterSetName
+                ParameterSetName = ParameterSetName,
+                SessionId = SessionId,
+                UserId = userId
             };
 
             if (MyInvocation != null && MyInvocation.BoundParameters != null && MyInvocation.BoundParameters.Keys != null)
@@ -245,6 +256,8 @@
             }
 
             LogQosEvent();
+
+            telemetryClient.Flush();
         }
 
         /// <summary>
@@ -368,6 +381,8 @@
             }
 
             exceptionTelemetry.Metrics.Add("Duration", qosEvent.Duration.TotalMilliseconds);
+        
+            PopulateClientContext(qosEvent, exceptionTelemetry.Context);
             PopulatePropertiesFromQos(exceptionTelemetry.Properties);
 
             try
@@ -406,13 +421,12 @@
                 Timestamp = qosEvent.StartTime
             };
 
-            pageViewTelemetry.Context.Device.OperatingSystem = Environment.OSVersion.ToString();
+            PopulateClientContext(qosEvent, pageViewTelemetry.Context);
             PopulatePropertiesFromQos(pageViewTelemetry.Properties);
 
             try
             {
                 telemetryClient.TrackPageView(pageViewTelemetry);
-                telemetryClient.Flush();
             }
             catch
             {
@@ -422,6 +436,21 @@
             if (qosEvent.Exception != null)
             {
                 LogExceptionEvent();
+            }
+        }
+
+        /// <summary>
+        /// Populates the client context for the telemetry request.
+        /// </summary>
+        /// <param name="qosEvent">The quality of service event that provides the values for the client context.</param>
+        /// <param name="telemetryContext">The context for sending telemetry to the Application Insights service.</param>
+        private void PopulateClientContext(QosEvent qosEvent, TelemetryContext telemetryContext)
+        {
+            if (qosEvent != null && telemetryContext != null)
+            {
+                telemetryContext.Device.OperatingSystem = Environment.OSVersion.ToString();
+                telemetryContext.Session.Id = qosEvent.SessionId;
+                telemetryContext.User.AccountId = qosEvent.UserId;
             }
         }
 
