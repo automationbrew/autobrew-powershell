@@ -23,10 +23,10 @@
         /// <exception cref="ArgumentNullException">
         /// The method parameter is null.
         /// </exception>
-        protected virtual async Task ConfirmActionAsync(string action, string target, Func<Task> asyncMethod)
+        protected virtual async Task ConfirmActionAsync(string action, string target, Func<Task> method)
         {
             action.AssertNotEmpty(nameof(action));
-            asyncMethod.AssertNotNull(nameof(asyncMethod));
+            method.AssertNotNull(nameof(method));
             target.AssertNotEmpty(nameof(target));
 
             QosEvent?.PauseQoSTimer();
@@ -38,7 +38,7 @@
 
             QosEvent?.ResumeQoSTimer();
 
-            await asyncMethod().ConfigureAwait(false);
+            await method().ConfigureAwait(false);
         }
 
         /// <summary>
