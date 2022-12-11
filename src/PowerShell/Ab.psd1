@@ -145,9 +145,14 @@ PrivateData = @{
 * Resolved obsolete initialization of the telemetry client [#19](https://github.com/automationbrew/autobrew-powershell/issues/19)
 * Updated the `Azure.Identity` dependency to version `1.8.0`
 * Updated the `Microsoft.ApplicationInsights` dependency to version `2.21.0`
+* Updated the `Microsoft.Graph.Beta` dependency to version `4.67.0-preview`
+* Updated the `Microsoft.Identity.Client` dependency to version `4.48.0`
+* Updated the `Microsoft.Identity.Client.Extensions.Msal` dependency to version `1.25.0`
 * Updated the `Selenium.WebDriver` dependency to version `4.7.0`
 * Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `107.0.1418.42`
-* Updated the `System.Text.Json` dependency to version `7.0.0`'
+* Updated the `System.Diagnostics.DiagnosticSource` dependency to version `5.0.0`
+* Updated the `System.Runtime.CompilerServices.Unsafe` dependency to version `6.0.0`
+* Updated the `System.Text.Encodings.Web` and `System.Text.Json` dependencies to version `7.0.0`'
 
         # Prerelease string of this module
         # Prerelease = ''

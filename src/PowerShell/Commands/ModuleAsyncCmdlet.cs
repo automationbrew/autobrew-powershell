@@ -54,7 +54,7 @@
             }
             catch (AggregateException ex)
             {
-                HandleException(ex);
+                UnpackException(ex);
             }
         }
 
@@ -65,10 +65,10 @@
         protected abstract Task PerformCmdletAsync();
 
         /// <summary>
-        /// 
+        /// Unpacks an exception to ensure the error details are visible to the user.
         /// </summary>
-        /// <param name="exception"></param>
-        private void HandleException(Exception exception)
+        /// <param name="exception">An instance of the <see cref="Exception" /> class that represents the error that was encountered.</param>
+        private void UnpackException(Exception exception)
         {
             exception.AssertNotNull(nameof(exception));
 
@@ -76,7 +76,7 @@
             {
                 foreach (Exception innerException in aggregateException.InnerExceptions.Where(ex => ex != null))
                 {
-                    HandleException(innerException);
+                    UnpackException(innerException);
                 }
             }
             else
@@ -85,7 +85,7 @@
 
                 if (exception.InnerException != null)
                 {
-                    HandleException(exception.InnerException);
+                    UnpackException(exception.InnerException);
                 }
             }
         }
