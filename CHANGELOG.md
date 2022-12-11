@@ -29,9 +29,9 @@
 * Resolved configuration issue when using the module with an Azure Function app [#9](https://github.com/automationbrew/autobrew-powershell/issues/9)
 * Resolved null reference exception when using the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command [#13](https://github.com/automationbrew/autobrew-powershell/issues/13)
 * Resolved obsolete initialization of the telemetry client [#19](https://github.com/automationbrew/autobrew-powershell/issues/19)
-* Updated the `Azure.Identity` dependency to version `1.7.0`
+* Updated the `Azure.Identity` dependency to version `1.8.0`
 * Updated the `Microsoft.ApplicationInsights` dependency to version `2.21.0`
-* Updated the `Selenium.WebDriver` dependency to version `4.6.0`
+* Updated the `Selenium.WebDriver` dependency to version `4.7.0`
 * Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `107.0.1418.42`
 * Updated the `System.Text.Json` dependency to version `7.0.0`
 
