@@ -1,5 +1,7 @@
 # AutomationBrew PowerShell
 
+[![Ab](https://img.shields.io/powershellgallery/v/Ab.svg?style=flat-square&label=Ab)](https://www.powershellgallery.com/packages/Ab/) [![GitHub issues](https://img.shields.io/github/issues/automationbrew/autobrew-powershell.svg)](https://github.com/automationbrew/autobrew-powershell/issues/) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/automationbrew/autobrew-powershell.svg)](https://gitHub.com/automationbrew/autobrew-powershell/pull/)
+
 AutomationBrew PowerShell is a module that provides cmdlets that are helpful for automating different aspects of testing.
 
 ## Requirements

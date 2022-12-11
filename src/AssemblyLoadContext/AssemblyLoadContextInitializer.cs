@@ -23,17 +23,9 @@
         {
             Dictionary<string, Version> sharedAssemblies = new()
             {
-                { "Azure.Core", new Version("1.2500.22.33004") },
-                { "Azure.Identity", new Version("1.800.22.55901") },
-                { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
-                { "Microsoft.Bcl.AsyncInterfaces", new Version("7.0.22.51805") },
-                { "Microsoft.Extensions.Primitives", new Version("7.0.22.51805") },
-                { "Microsoft.Identity.Client", new Version("4.46.0.0") },
+                { "Microsoft.Identity.Client", new Version("4.48.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.25.0.0") },
-                { "Microsoft.IdentityModel.Abstractions", new Version("6.25.1.31130") },
-                { "Microsoft.Rest.ClientRuntime", new Version("2.3.23.0") },
-                { "System.Text.Encodings.Web", new Version("7.0.22.51805") },
-                { "System.Text.Json", new Version("7.0.22.51805") },
+                { "Microsoft.IdentityModel.Abstractions", new Version("6.22.0.0") }
             };
 
             SharedAssemblyMap = new ConcurrentDictionary<string, Version>(sharedAssemblies, StringComparer.OrdinalIgnoreCase);

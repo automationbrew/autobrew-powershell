@@ -1,5 +1,7 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
+    using System;
+    using System.Management.Automation;
     using Runtime;
 
     /// <summary>
@@ -21,28 +23,22 @@
         /// <exception cref="ArgumentNullException">
         /// The method parameter is null.
         /// </exception>
-        protected virtual async Task ConfirmActionAsync(string action, string target, Func<Task> asyncMethod)
+        protected virtual async Task ConfirmActionAsync(string action, string target, Func<Task> method)
         {
             action.AssertNotEmpty(nameof(action));
-            asyncMethod.AssertNotNull(nameof(asyncMethod));
+            method.AssertNotNull(nameof(method));
             target.AssertNotEmpty(nameof(target));
 
-            if (QosEvent is not null)
-            {
-                QosEvent.PauseQoSTimer();
-            }
+            QosEvent?.PauseQoSTimer();
 
             if (ShouldProcess(target, action) == false)
             {
                 return;
             }
 
-            if (QosEvent is not null)
-            {
-                QosEvent.ResumeQoSTimer();
-            }
+            QosEvent?.ResumeQoSTimer();
 
-            await asyncMethod().ConfigureAwait(false);
+            await method().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -51,7 +47,15 @@
         protected override void PerformCmdlet()
         {
             using AsyncCommandRuntime asyncCommandRuntime = new(this, CancellationToken);
-            asyncCommandRuntime.Wait(PerformCmdletAsync());
+
+            try
+            {
+                asyncCommandRuntime.Wait(PerformCmdletAsync());
+            }
+            catch (AggregateException ex)
+            {
+                UnpackException(ex);
+            }
         }
 
         /// <summary>
@@ -59,5 +63,31 @@
         /// </summary>
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected abstract Task PerformCmdletAsync();
+
+        /// <summary>
+        /// Unpacks an exception to ensure the error details are visible to the user.
+        /// </summary>
+        /// <param name="exception">An instance of the <see cref="Exception" /> class that represents the error that was encountered.</param>
+        private void UnpackException(Exception exception)
+        {
+            exception.AssertNotNull(nameof(exception));
+
+            if (exception is AggregateException aggregateException)
+            {
+                foreach (Exception innerException in aggregateException.InnerExceptions.Where(ex => ex != null))
+                {
+                    UnpackException(innerException);
+                }
+            }
+            else
+            {
+                WriteError(new ErrorRecord(exception, string.Empty, ErrorCategory.NotSpecified, null));
+
+                if (exception.InnerException != null)
+                {
+                    UnpackException(exception.InnerException);
+                }
+            }
+        }
     }
 }

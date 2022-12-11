@@ -3,14 +3,14 @@
 	<Import Project="$(MSBuildThisFileDirectory)..\..\repo.props" />
 
 	<PropertyGroup>
-		<AssemblyName>AutoBrew.PowerShell.Authentication</AssemblyName>
-		<RootNamespace>AutoBrew.PowerShell</RootNamespace>
+		<AssemblyName>$(AbAssemblyPrefix).Authentication</AssemblyName>
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Azure.Identity" Version="1.8.0" />
-		<PackageReference Include="Microsoft.Graph.Beta" Version="4.45.0-preview" />
+		<PackageReference Include="Microsoft.Graph.Beta" Version="4.67.0-preview" />
+		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.25.0" />
 		<PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
 		<PackageReference Include="System.Text.Json" Version="7.0.0" />
 	</ItemGroup>
