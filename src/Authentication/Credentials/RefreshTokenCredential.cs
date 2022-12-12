@@ -124,7 +124,7 @@
         /// <summary>
         /// Callback that writes the specified message to the log.
         /// </summary>
-        /// <param name="logLevel">The level for the log enty.</param>
+        /// <param name="logLevel">The level for the log entry.</param>
         /// <param name="message">The message for the log entry.</param>
         /// <param name="isPiiLoggingEnabled">A flag indicating whether personal identifiable information logging is enabled.</param>
         private void LoggingCallback(LogLevel logLevel, string message, bool isPiiLoggingEnabled)

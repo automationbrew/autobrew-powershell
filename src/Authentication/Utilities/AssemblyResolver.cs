@@ -42,7 +42,7 @@
         private static string PreloadAssemblyDirectory;
 
         /// <summary>
-        /// Intitializes the assembly resolver to ensure redirects are applied when loading assemblies.
+        /// Initializes the assembly resolver to ensure redirects are applied when loading assemblies.
         /// </summary>
         public static void Initialize()
         {
@@ -84,7 +84,7 @@
         }
 
         /// <summary>
-        /// Determines if the major version for the sepcified assembly matches the specified version.
+        /// Determines if the major version for the specified assembly matches the specified version.
         /// </summary>
         /// <param name="assemblyName">An instance of the <see cref="AssemblyName" /> class that represents the assembly to be loaded.</param>
         /// <param name="version">An instance of the <see cref="Version" /> class that represents the version of the assembly in the NetFxPreloadAssemblies directory.</param>

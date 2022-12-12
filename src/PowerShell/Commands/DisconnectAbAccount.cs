@@ -22,7 +22,7 @@
         {
             if (ModuleSession.Instance.TryGetComponent(ComponentType.TokenCache, out TokenCacheProvider tokenCache) == false)
             {
-                throw new ModuleException("Reload the module becuase there was an issue with the token cache.", ModuleExceptionCategory.Authentication);
+                throw new ModuleException("Reload the module because there was an issue with the token cache.", ModuleExceptionCategory.Authentication);
             }
 
             ModuleAccount account = ModuleSession.Instance?.Context?.Account;

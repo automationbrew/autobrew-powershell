@@ -14,7 +14,7 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response.</typeparam>
         /// <param name="requestUri">A string that represents the URI for the request.</param>
-        /// <param name="parameters">The collection of parameters that will be used to contruct the query string parameters.</param>
+        /// <param name="parameters">The collection of parameters that will be used to construct the query string parameters.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The response from the request.</returns>
         Task<TResponse> GetAsync<TResponse>(Uri requestUri, IDictionary<string, string> parameters = null, CancellationToken cancellationToken = default);

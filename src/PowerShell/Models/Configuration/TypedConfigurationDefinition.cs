@@ -1,7 +1,7 @@
 ﻿namespace AutoBrew.PowerShell.Models.Configuration
 {
     /// <summary>
-    /// Represnts a strongly typed definition for a configuration.
+    /// Represents a strongly typed definition for a configuration.
     /// </summary>
     /// <typeparam name="TValue">The type for the value of the configuration.</typeparam>
     public sealed class TypedConfigurationDefinition<TValue> : ConfigurationDefinition

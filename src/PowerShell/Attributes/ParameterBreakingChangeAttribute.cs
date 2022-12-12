@@ -23,10 +23,10 @@
         /// <summary>
         /// Gets or sets the type for the old parameter.
         /// </summary>
-        public Type OldParamaterType { get; set; }
+        public Type OldParameterType { get; set; }
 
         /// <summary>
-        /// Gets or sets the paramter that is changing.
+        /// Gets or sets the parameter that is changing.
         /// </summary>
         public string ParameterChanging { get; }
 
@@ -60,9 +60,9 @@
         /// </summary>
         /// <param name="parameterChanging">The parameter on the command that is changing.</param>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
-        /// <param name="changeInEfectByDate">The date when the change will be required.</param>
-        public ParameterBreakingChangeAttribute(string parameterChanging, string deprecateByVersion, string changeInEfectByDate) :
-             base(string.Empty, deprecateByVersion, changeInEfectByDate)
+        /// <param name="ChangeInEffectByDate">The date when the change will be required.</param>
+        public ParameterBreakingChangeAttribute(string parameterChanging, string deprecateByVersion, string ChangeInEffectByDate) :
+             base(string.Empty, deprecateByVersion, ChangeInEffectByDate)
         {
             ParameterChanging = parameterChanging;
         }
@@ -98,9 +98,9 @@
                 }
             }
 
-            if (OldParamaterType != null && string.IsNullOrEmpty(NewParameterTypeName) == false)
+            if (OldParameterType != null && string.IsNullOrEmpty(NewParameterTypeName) == false)
             {
-                message.Append(string.Format(Resources.BreakingChangeAttributeParameterTypeChange, OldParamaterType.FullName, NewParameterTypeName));
+                message.Append(string.Format(Resources.BreakingChangeAttributeParameterTypeChange, OldParameterType.FullName, NewParameterTypeName));
             }
 
             return message.ToString();

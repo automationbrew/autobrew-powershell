@@ -33,9 +33,9 @@
         /// Initializes a new instance of the <see cref="CommandDeprecationAttribute" /> class.
         /// </summary>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
-        /// <param name="changeInEfectByDate">The date when the change will be required.</param>
-        public CommandDeprecationAttribute(string deprecateByVersion, string changeInEfectByDate) :
-             base(string.Empty, deprecateByVersion, changeInEfectByDate)
+        /// <param name="ChangeInEffectByDate">The date when the change will be required.</param>
+        public CommandDeprecationAttribute(string deprecateByVersion, string ChangeInEffectByDate) :
+             base(string.Empty, deprecateByVersion, ChangeInEffectByDate)
         {
         }
 

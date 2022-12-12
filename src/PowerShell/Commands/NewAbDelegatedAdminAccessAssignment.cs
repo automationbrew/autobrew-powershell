@@ -6,7 +6,7 @@
     using Models;
 
     /// <summary>
-    /// Cmdlet that creates a delegated admin relationship acccess assignment using the specified information.
+    /// Cmdlet that creates a delegated admin relationship access assignment using the specified information.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "AbDelegatedAdminAccessAssignment")]
     [OutputType(typeof(DelegatedAdminAccessAssignment))]

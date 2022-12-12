@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// Registers a token cache to synchronize with the approriate storage.
+        /// Registers a token cache to synchronize with the appropriate storage.
         /// </summary>
         /// <param name="tokenCache">The token cache to be registered.</param>
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
@@ -99,7 +99,7 @@
         /// <summary>
         /// Verifies the underlying persistence mechanism for the token cache.
         /// </summary>
-        /// <returns><c>true</c> if the underlying persistence mechanism was succesfully verified; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if the underlying persistence mechanism was successfully verified; otherwise, <c>false</c>.</returns>
         public override async Task<bool> VerifyPersistenceAsync()
         {
             MsalCacheHelper helper;

@@ -61,7 +61,7 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} acccount in environment &apos;{1}&apos;.
+        ///   Looks up a localized string similar to {0} account in environment &apos;{1}&apos;.
         /// </summary>
         public static string AcquireTokenTarget {
             get {

@@ -32,7 +32,7 @@
         public static SharedAssemblyLoadContext Instance => instance.Value;
 
         /// <summary>
-        /// Intiailizes a new instance of the <see cref="SharedAssemblyLoadContext" /> class.
+        /// Initializes a new instance of the <see cref="SharedAssemblyLoadContext" /> class.
         /// </summary>
         public SharedAssemblyLoadContext()
         { }

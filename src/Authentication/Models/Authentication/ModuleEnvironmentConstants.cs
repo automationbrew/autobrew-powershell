@@ -36,7 +36,7 @@
         public const string DefaultScope = ".default";
 
         /// <summary>
-        /// The endpoint of Microosft Graph for the Azure cloud environment.
+        /// The endpoint of Microsoft Graph for the Azure cloud environment.
         /// </summary>
         public const string MicrosoftGraphEndpoint = "https://graph.microsoft.com";
 

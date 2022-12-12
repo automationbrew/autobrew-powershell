@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets the date the change will be required.
         /// </summary>
-        public DateTime? ChangeInEfectByDate { get; } = null;
+        public DateTime? ChangeInEffectByDate { get; } = null;
 
         /// <summary>
         /// Gets the version when this change will be deprecated.
@@ -70,15 +70,15 @@
         /// </summary>
         /// <param name="message">The message that describes the breaking change.</param>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
-        /// <param name="changeInEfectByDate">The date when the change will be required.</param>
-        public BreakingChangeAttribute(string message, string deprecateByVersion, string changeInEfectByDate)
+        /// <param name="changeInEffectByDate">The date when the change will be required.</param>
+        public BreakingChangeAttribute(string message, string deprecateByVersion, string changeInEffectByDate)
         {
             deprecateByVersion.AssertNotEmpty(nameof(deprecateByVersion));
-            changeInEfectByDate.AssertNotEmpty(nameof(changeInEfectByDate));
+            changeInEffectByDate.AssertNotEmpty(nameof(changeInEffectByDate));
 
             this.message = message;
             DeprecateByVersion = deprecateByVersion;
-            ChangeInEfectByDate = DateTime.Parse(changeInEfectByDate, CultureInfo.CurrentCulture);
+            ChangeInEffectByDate = DateTime.Parse(changeInEffectByDate, CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -157,13 +157,13 @@
                         ChangeDescription));
             }
 
-            if (ChangeInEfectByDate.HasValue)
+            if (ChangeInEffectByDate.HasValue)
             {
                 output(
                     string.Format(
                         CultureInfo.CurrentCulture,
                         Resources.BreakingChangesAttributesInEffectByDateMessage,
-                        ChangeInEfectByDate.Value));
+                        ChangeInEffectByDate.Value));
             }
 
             if (!string.IsNullOrEmpty(DeprecateByVersion))

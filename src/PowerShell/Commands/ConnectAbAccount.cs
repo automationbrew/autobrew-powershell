@@ -63,7 +63,7 @@
         public SecureString RefreshToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the scopes to be used for authenitcation.
+        /// Gets or sets the scopes to be used for authentication.
         /// </summary>
         [Parameter(HelpMessage = "The scopes to be used for authentication.", Mandatory = false)]
         [ValidateNotNull]

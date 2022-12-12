@@ -374,7 +374,7 @@ public class GetSomeObjectA : ModuleCmdlet
     /// Gets or sets the name for the object.
     /// </summary>
     [Parameter(HelpMessage = "The name for the object.", Mandatory = false)]
-    [ParameterBreakingChange(nameof(Name), NewParameterTypeName = "MyName", OldParamaterType = typeof(string))]
+    [ParameterBreakingChange(nameof(Name), NewParameterTypeName = "MyName", OldParameterType = typeof(string))]
     [ValidateNotNullOrEmpty]
     public string Name { get; set; }
 

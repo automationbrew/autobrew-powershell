@@ -54,9 +54,9 @@
         /// </summary>
         /// <param name="deprecatedOutputType">The type for the output type that will be deprecated.</param>
         /// <param name="deprecateByVersion">The version where the change will be required.</param>
-        /// <param name="changeInEfectByDate">The date when the change will be required.</param>
-        public OutputBreakingChangeAttribute(Type deprecatedOutputType, string deprecateByVersion, string changeInEfectByDate) :
-            base(string.Empty, deprecateByVersion, changeInEfectByDate)
+        /// <param name="ChangeInEffectByDate">The date when the change will be required.</param>
+        public OutputBreakingChangeAttribute(Type deprecatedOutputType, string deprecateByVersion, string ChangeInEffectByDate) :
+            base(string.Empty, deprecateByVersion, ChangeInEffectByDate)
         {
             DeprecatedOutputType = deprecatedOutputType;
         }
