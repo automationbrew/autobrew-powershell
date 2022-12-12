@@ -25,7 +25,13 @@
                 throw new ModuleException("Reload the module becuase there was an issue with the token cache.", ModuleExceptionCategory.Authentication);
             }
 
-            ModuleAccount account = ModuleSession.Instance.Context.Account;
+            ModuleAccount account = ModuleSession.Instance?.Context?.Account;
+
+            if (account == null)
+            {
+                ModuleSession.Instance.Context = null;
+                return;
+            }
 
             await ConfirmActionAsync(
                 string.Format(CultureInfo.InvariantCulture, Resources.LogoutTarget, account.Username),
@@ -37,6 +43,7 @@
 
                     WriteObject(account);
                 }).ConfigureAwait(false);
+
         }
     }
 }
