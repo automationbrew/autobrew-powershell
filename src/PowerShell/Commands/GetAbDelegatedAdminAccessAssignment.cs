@@ -25,6 +25,9 @@
         [Parameter(HelpMessage = "The identifier for the delegated admin relationship.", Mandatory = true)]
         public string RelationshipId { get; set; }
 
+        /// <inheritdoc/>
+        public override bool ValidateConnection => true;
+
         /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>

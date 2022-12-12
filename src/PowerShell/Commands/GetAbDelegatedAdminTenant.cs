@@ -19,6 +19,9 @@
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string Tenant { get; set; }
 
+        /// <inheritdoc/>
+        public override bool ValidateConnection => true;
+
         /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>

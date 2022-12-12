@@ -32,6 +32,9 @@
         [Parameter(HelpMessage = "The unified roles to be included in the access assignment.", Mandatory = true)]
         public string[] UnifiedRoles { get; set; }
 
+        /// <inheritdoc/>
+        public override bool ValidateConnection => true;
+
         /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>

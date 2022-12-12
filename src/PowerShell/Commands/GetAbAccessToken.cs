@@ -18,9 +18,7 @@
         [Parameter(HelpMessage = "The scopes to be used for authentication.", Mandatory = true)]
         public string[] Scopes { get; set; }
 
-        /// <summary>
-        /// Gets a flag that indicates whether the connection should be validated before processing the command.
-        /// </summary>
+        /// <inheritdoc/>
         public override bool ValidateConnection => true;
 
         /// <summary>

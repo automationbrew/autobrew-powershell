@@ -38,6 +38,9 @@
         [Parameter(HelpMessage = "The unified roles for the delegated admin relationship.", Mandatory = true)]
         public string[] UnifiedRoles { get; set; }
 
+        /// <inheritdoc/>
+        public override bool ValidateConnection => true;
+
         /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>

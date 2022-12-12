@@ -18,6 +18,9 @@
         [ValidateNotNullOrEmpty]
         public string RelationshipId { get; set; }
 
+        /// <inheritdoc/>
+        public override bool ValidateConnection => true;
+
         /// <summary>
         /// Performs the actions associated with the command.
         /// </summary>
