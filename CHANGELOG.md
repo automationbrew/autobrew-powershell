@@ -24,6 +24,7 @@
 
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md)
+* Introduced logic to handle a null reference exception when invoking the `Disconnect-AbAccount` command before a valid connection has been established
 * Introduced logic to validate `Run-AbAccount` has been invoked successfully with commands that require a valid connection
 * Prevent builtin environments from being updated using the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command [#12](https://github.com/automationbrew/autobrew-powershell/issues/12)
 * Resolved could not load the `System.Runtime.CompilerServices.Unsafe` assembly when using the `New-AbAccessToken` command and PowerShell 5.1 [#17](https://github.com/automationbrew/autobrew-powershell/issues/17)
