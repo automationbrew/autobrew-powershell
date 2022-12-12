@@ -1,33 +1,68 @@
-name: .NET
+name: ".NET"
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
+    # The branches below must be a subset of the branches above
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  analyze:
+    name: Analyze
     runs-on: windows-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
       with:
-        dotnet-version: 6.0.x
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+        languages: ${{ matrix.language }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
+        
+        # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+        # queries: security-extended,security-and-quality
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3.0.3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Setup MS Build
+      uses: microsoft/setup-msbuild@v1.1.3
+
     - name: Restore dependencies
       run: dotnet restore autobrew-powershell.sln
-    - name: Build
+
+    - name: Build the module
       run: msbuild build.proj -t:Build -p:Configuration=Debug
+
     - name: Install platyPS
       shell: pwsh
       run: |
         Install-Module platyPS -Force -Confirm:$false -Scope CurrentUser
+
     - name: Generate help
       run: msbuild build.proj -t:GenerateHelp -p:Configuration=Debug
+
     - name: Validate module manifest
       run: msbuild build.proj -t:ValidateModule -p:Configuration=Debug
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
