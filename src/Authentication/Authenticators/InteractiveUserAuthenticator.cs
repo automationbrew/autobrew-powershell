@@ -72,7 +72,7 @@
         /// </summary>
         /// <returns>The TCP port to be used as part of the reply URL.</returns>
         /// <exception cref="ModuleException">
-        /// Unabled to find a TCP port between 8400 and 8999 that is available for use.
+        /// Unable to find a TCP port between 8400 and 8999 that is available for use.
         /// </exception>
         private int GetReplyUrlPort()
         {
@@ -96,7 +96,7 @@
                 }
             }
 
-            throw new ModuleException("Unabled to find a TCP port between 8400 and 8999 that is available for use.", ModuleExceptionCategory.Network);
+            throw new ModuleException("Unable to find a TCP port between 8400 and 8999 that is available for use.", ModuleExceptionCategory.Network);
         }
     }
 }

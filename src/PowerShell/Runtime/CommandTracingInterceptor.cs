@@ -48,8 +48,8 @@
         /// Writes invocation information to the trace when entering a method.
         /// </summary>
         /// <param name="invocationId">The identifier for the invocation of the method.</param>
-        /// <param name="instance">The instnace that contains the method.</param>
-        /// <param name="method">The name of the methond that was invoked.</param>
+        /// <param name="instance">The instance that contains the method.</param>
+        /// <param name="method">The name of the method that was invoked.</param>
         /// <param name="parameters">The collection that represents the parameters that were used when invoking the method.</param>
         public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters)
         {

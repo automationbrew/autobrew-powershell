@@ -146,11 +146,11 @@
         }
 
         /// <summary>
-        /// Registers an environment with the sepcified name.
+        /// Registers an environment with the specified name.
         /// </summary>
         /// <param name="name">The name for the environment to register.</param>
         /// <param name="environment">The instance of the <see cref="ModuleEnvironment" /> class to register.</param>
-        /// <param name="overwrite">The flag that indicates wheather to overwrite an existing environment with the same name.</param>
+        /// <param name="overwrite">The flag that indicates whether to overwrite an existing environment with the same name.</param>
         /// <exception cref="ArgumentException">
         /// The name parameter is empty or null.
         /// </exception>

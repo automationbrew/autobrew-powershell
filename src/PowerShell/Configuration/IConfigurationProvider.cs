@@ -20,7 +20,7 @@
         /// <summary>
         /// Gets the list of configurations that have been defined.
         /// </summary>
-        /// <returns>The list of configuations that have been defined.</returns>
+        /// <returns>The list of configurations that have been defined.</returns>
         IList<ConfigurationData> ListConfiguration();
 
         /// <summary>
@@ -31,7 +31,7 @@
         /// <summary>
         /// Registers the configuration definition for use throughout the module.
         /// </summary>
-        /// <param name="definition">The defintion of the configuration to be registered.</param>
+        /// <param name="definition">The definition of the configuration to be registered.</param>
         void RegisterDefinition(ConfigurationDefinition definition);
 
         /// <summary>

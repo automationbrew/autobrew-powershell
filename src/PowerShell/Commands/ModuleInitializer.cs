@@ -32,7 +32,7 @@
 
             MsalHttpClientFactory.Initialize();
 
-            InitalizeConfiguration();
+            InitializeConfiguration();
             InitializeTokenCacheAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
@@ -60,7 +60,7 @@
         /// <summary>
         /// Initializes the configuration provider for use by the module.
         /// </summary>
-        public void InitalizeConfiguration()
+        public void InitializeConfiguration()
         {
             IConfigurationProvider provider = ConfigurationProvider.Initialize();
 

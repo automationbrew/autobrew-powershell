@@ -14,7 +14,7 @@
         /// <summary>
         /// The name for the directory that will be used to persist the configuration.
         /// </summary>
-        private const string directoryname = ".AutomationBrew";
+        private const string directoryName = ".AutomationBrew";
 
         /// <summary>
         /// The name for the file that will be used to persist the configuration.
@@ -113,7 +113,7 @@
         /// <summary>
         /// Gets the list of configurations that have been defined.
         /// </summary>
-        /// <returns>The list of configuations that have been defined.</returns>
+        /// <returns>The list of configurations that have been defined.</returns>
         public IList<ConfigurationData> ListConfiguration()
         {
             List<ConfigurationData> results = new();
@@ -161,7 +161,7 @@
         /// <summary>
         /// Registers the configuration definition for use throughout the module.
         /// </summary>
-        /// <param name="definition">The defintion of the configuration to be registered.</param>
+        /// <param name="definition">The definition of the configuration to be registered.</param>
         /// <exception cref="ModuleException">There is a definition with the key {key} already registered.</exception>
         public void RegisterDefinition(ConfigurationDefinition definition)
         {
@@ -247,8 +247,8 @@
         {
             List<string> paths = new()
             {
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), directoryname, filename),
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), directoryname, filename)
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), directoryName, filename),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), directoryName, filename)
             };
 
             foreach (string path in paths)

@@ -31,7 +31,7 @@
         private const string EVENT_NAME = "cmdletInvocation";
 
         /// <summary>
-        /// The connectiong string for the telemetry client.
+        /// The connection string for the telemetry client.
         /// </summary>
         private const string TELEMETRY_CONNECTION_STRING = "InstrumentationKey=e48b6543-12b1-45ba-8416-4b8e917ab0cf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/";
 

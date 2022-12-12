@@ -1,7 +1,7 @@
 ﻿namespace AutoBrew.PowerShell.Models.Configuration
 {
     /// <summary>
-    /// Represents the known key vaules for configurations.
+    /// Represents the known key values for configurations.
     /// </summary>
     internal static class ConfigurationKey
     {
