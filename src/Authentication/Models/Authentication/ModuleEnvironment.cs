@@ -28,6 +28,11 @@
         public string MicrosoftGraphEndpoint { get; set; }
 
         /// <summary>
+        /// Gets or sets the Microsoft Partner Center endpoint for the environment.
+        /// </summary>
+        public string MicrosoftPartnerCenterEndpoint { get; set; }
+
+        /// <summary>
         /// Gets or sets the name for the environment.
         /// </summary>
         public string Name { get; set; }

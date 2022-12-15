@@ -48,6 +48,12 @@
         public string MicrosoftGraphEndpoint { get; set; }
 
         /// <summary>
+        /// Gets or sets the endpoint of Microsoft Graph for the environment.
+        /// </summary>
+        [Parameter(HelpMessage = "The endpoint of Microsoft Partner Center for the environment.", Mandatory = false, ValueFromPipeline = true)]
+        public string MicrosoftPartnerCenterEndpoint { get; set; }
+
+        /// <summary>
         /// Gets or sets the name for the environment.
         /// </summary>
         [Parameter(HelpMessage = "The name for the environment.", Mandatory = true, ValueFromPipelineByPropertyName = true)]
@@ -90,6 +96,7 @@
                     ActiveDirectoryAuthority = ActiveDirectoryAuthority,
                     ApplicationId = ApplicationId,
                     MicrosoftGraphEndpoint = MicrosoftGraphEndpoint,
+                    MicrosoftPartnerCenterEndpoint = MicrosoftPartnerCenterEndpoint,
                     Name = Name,
                     Tenant = Tenant,
                     Type = ModuleEnvironmentType.UserDefined

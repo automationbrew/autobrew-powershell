@@ -20,6 +20,10 @@
 
 # Change Log
 
+## Upcoming Release
+
+* Resolved `could not load file or assembly Microsoft.Extensions.Primitives` exception that occurred when the `Az.Resources` module was imported first [#31](https://github.com/automationbrew/autobrew-powershell/issues/31)
+
 ## 1.0.2 - December 2022
 
 * Added optional parameters `DevTestLabName`, `KeyVaultName`, `ResourceGroupName`, and `SubscriptionId` to [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md)
