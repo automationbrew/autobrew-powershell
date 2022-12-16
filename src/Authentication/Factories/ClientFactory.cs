@@ -1,10 +1,10 @@
 ﻿namespace AutoBrew.PowerShell.Factories
 {
     using System.Net;
+    using System.Threading;
     using AutoBrew.PowerShell.Models;
     using Microsoft.Graph;
-    using Microsoft.Store.PartnerCenter;
-    using Microsoft.Store.PartnerCenter.Extensions;
+    using Microsoft.Rest;
     using Models.Authentication;
     using Network;
 
@@ -13,6 +13,11 @@
     /// </summary>
     public class ClientFactory : IClientFactory
     {
+        /// <summary>
+        /// The client used to perform HTTP operations.
+        /// </summary>
+        private static readonly HttpClient httpClient = new();
+
         /// <summary>
         /// Creates a new instance of the <see cref="GraphServiceClient" /> class used to communicate with Microsoft Graph.
         /// </summary>
@@ -42,40 +47,25 @@
             };
         }
 
-
         /// <summary>
-        /// Creates a new instance of the <see cref="PartnerOperations" /> class used to communicate with Partner Center.
+        /// Creates a new instance of the <see cref="RestServiceClient" /> class used to communicate with a REST endpoint.
         /// </summary>
-        /// <param name="account">An instance of the <see cref="ModuleAccount" /> class that provides information used to authenticate.</param>
+        /// <param name="requestData">The data used to request an access token.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An instance of the <see cref="PartnerOperations" /> class used to communicate with partner Center.</returns>
-        public async Task<IPartner> CreatePartnerOperationsAsync(ModuleAccount account, CancellationToken cancellationToken = default)
+        /// <returns>An instance of the <see cref="RestServiceClient" /> class used to communicate with a REST endpoint.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// The requestData parameter is null.
+        /// </exception>
+        public async Task<IRestServiceClient> CreateRestServiceClientAsync(TokenRequestData requestData, CancellationToken cancellationToken = default)
         {
-            ModuleAuthenticationResult authResult = await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
-                new TokenRequestData(
-                    account,
-                    ModuleSession.Instance.Context.Environment,
-                    new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
+            requestData.AssertNotNull(nameof(requestData));
+
+            ModuleAuthenticationResult authResult  = await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
+                requestData,
                 null,
                 cancellationToken).ConfigureAwait(false);
 
-            IPartnerCredentials credentials = await PartnerCredentials.Instance.GenerateByUserCredentialsAsync(
-                ModuleSession.Instance.Context.Environment.ApplicationId,
-                new AuthenticationToken(authResult.AccessToken, authResult.ExpiresOn),
-                async (AuthenticationToken token) =>
-                {
-                    ModuleAuthenticationResult renewedAuthResult = await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
-                        new TokenRequestData(
-                        account,
-                        ModuleSession.Instance.Context.Environment,
-                        new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
-                        null,
-                        cancellationToken).ConfigureAwait(false);
-
-                    return new AuthenticationToken(renewedAuthResult.AccessToken, renewedAuthResult.ExpiresOn);
-                }).ConfigureAwait(false);
-
-            return PartnerService.Instance.CreatePartnerOperations(credentials);
+            return new RestServiceClient(new TokenCredentials(authResult.AccessToken, authResult.TokenType), httpClient, false);
         }
     }
 }

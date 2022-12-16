@@ -1,7 +1,7 @@
 ﻿namespace AutoBrew.PowerShell.Factories
 {
+    using AutoBrew.PowerShell.Network;
     using Microsoft.Graph;
-    using Microsoft.Store.PartnerCenter;
     using Models.Authentication;
 
     /// <summary>
@@ -17,11 +17,11 @@
         GraphServiceClient CreateGraphServiceClient(ModuleAccount account);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="PartnerOperations" /> class used to communicate with Partner Center.
+        /// Creates a new instance of the <see cref="RestServiceClient" /> class used to communicate with a REST endpoint.
         /// </summary>
-        /// <param name="account">An instance of the <see cref="ModuleAccount" /> class that provides information used to authenticate.</param>
+        /// <param name="requestData">The data used to request an access token.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An instance of the <see cref="PartnerOperations" /> class used to communicate with partner Center.</returns>
-        Task<IPartner> CreatePartnerOperationsAsync(ModuleAccount account, CancellationToken cancellationToken = default);
+        /// <returns>An instance of the <see cref="RestServiceClient" /> class used to communicate with a REST endpoint.</returns>
+        Task<IRestServiceClient> CreateRestServiceClientAsync(TokenRequestData requestData, CancellationToken cancellationToken = default);
     }
 }

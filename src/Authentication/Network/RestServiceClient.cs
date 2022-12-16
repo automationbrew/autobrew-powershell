@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net.Http.Headers;
+    using System.Net.Http.Json;
     using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
@@ -79,7 +80,7 @@
                     { "parameters", parameters },
                 };
 
-                ServiceClientTracing.Enter(invocationId, this, "Get", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, HttpMethod.Get.ToString(), tracingParameters);
             }
 
             return await ParseResponseAsync<TResponse>(invocationId, request, cancellationToken).ConfigureAwait(false);
@@ -103,8 +104,9 @@
             cancellationToken.ThrowIfCancellationRequested();
             await serviceCredentials.ProcessHttpRequestAsync(request, cancellationToken).ConfigureAwait(false);
 
-            request.Content = new StringContent(JsonSerializer.Serialize(content));
+            request.Content = JsonContent.Create(content);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue(JSON_MEDIA_TYPE);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JSON_MEDIA_TYPE));
 
             if (ServiceClientTracing.IsEnabled)
             {
@@ -116,7 +118,7 @@
                     { "content", content }
                 };
 
-                ServiceClientTracing.Enter(invocationId, this, "Post", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, HttpMethod.Post.ToString(), tracingParameters);
             }
 
             return await ParseResponseAsync<TResponse>(invocationId, request, cancellationToken).ConfigureAwait(false);
