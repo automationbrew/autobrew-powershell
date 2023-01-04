@@ -41,6 +41,11 @@
         public const string MicrosoftGraphEndpoint = "https://graph.microsoft.com";
 
         /// <summary>
+        /// The endpoint of Microsoft Partner Center for the Azure cloud environment.
+        /// </summary>
+        public const string MicrosoftPartnerCenterEndpoint = "https://api.partnercenter.microsoft.com";
+
+        /// <summary>
         /// The tenant used when requesting an access token.
         /// </summary>
         public const string Tenant = "organizations";

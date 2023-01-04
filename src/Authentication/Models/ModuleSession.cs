@@ -121,6 +121,7 @@
                         ActiveDirectoryAuthority = ModuleEnvironmentConstants.ActiveDirectoryAuthority,
                         ApplicationId = ModuleEnvironmentConstants.ApplicationId,
                         MicrosoftGraphEndpoint = ModuleEnvironmentConstants.MicrosoftGraphEndpoint,
+                        MicrosoftPartnerCenterEndpoint = ModuleEnvironmentConstants.MicrosoftPartnerCenterEndpoint,
                         Name = ModuleEnvironmentConstants.AzureCloud,
                         Tenant = ModuleEnvironmentConstants.Tenant,
                         Type = ModuleEnvironmentType.BuiltIn

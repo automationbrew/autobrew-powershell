@@ -15,8 +15,9 @@ Sets the properties for a given environment.
 
 ```powershell
 Set-AbEnvironment -ActiveDirectoryAuthority <String> [-ApplicationId <String>] [-DevTestLabName <String>]
- [-KeyVaultName <String>] [-MicrosoftGraphEndpoint <String>] -Name <String> [-ResourceGroupName <String>]
- [-SubscriptionId <String>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-KeyVaultName <String>] [-MicrosoftGraphEndpoint <String>] [-MicrosoftPartnerCenterEndpoint <String>]
+ -Name <String> [-ResourceGroupName <String>] [-SubscriptionId <String>] [-Tenant <String>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -112,6 +113,22 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -MicrosoftPartnerCenterEndpoint
+
+The endpoint of Microsoft Partner Center for the environment.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 

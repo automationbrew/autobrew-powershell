@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents the ability to interact with a rest based service.
     /// </summary>
-    internal interface IRestServiceClient
+    public interface IRestServiceClient
     {
         /// <summary>
         /// Performs a HTTP GET operation using the specified parameters.
