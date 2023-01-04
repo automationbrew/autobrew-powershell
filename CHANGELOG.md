@@ -22,6 +22,10 @@
 
 ## Upcoming Release
 
+* Added the [New-AbApplicationConsent](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/New-AbApplicationConsent.md) command to create a new consent for an Azure Active Directory application in the specified Azure Active Directory tenant
+* Added the [New-AbApplicationGrant](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/New-AbApplicationGrant.md) command to create a new application grant object that is used as part of the request to consent for an Azure Active Directory to access resources in an Azure Active Directory tenant
+* Added the optional parameter `MicrosoftPartnerCenterEndpoint` to the [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md) command
+* Added the optional parameter `MicrosoftPartnerCenterEndpoint` to the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command
 * Resolved `could not load file or assembly Microsoft.Extensions.Primitives` exception that occurred when the `Az.Resources` module was imported first [#31](https://github.com/automationbrew/autobrew-powershell/issues/31)
 
 ## 1.0.2 - December 2022

@@ -28,12 +28,6 @@
         public string ApplicationId { get; set; }
 
         /// <summary>
-        /// Gets or sets the display name of the Azure Active Directory application.
-        /// </summary>
-        [Parameter(HelpMessage = "The display name of the Azure Active Directory application.", Mandatory = true)]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or sets the identifier for the customer tenant.
         /// </summary>
         [Parameter(HelpMessage = "The identifier for the customer tenant.", Mandatory = true)]

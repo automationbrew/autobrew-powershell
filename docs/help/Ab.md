@@ -58,6 +58,14 @@ Automates a series of interactions with a web browser based on the defined templ
 
 Acquires an access token from Azure Active Directory.
 
+### [New-AbApplicationConsent](New-AbApplicationConsent.md)
+
+Creates a new consent for an Azure Active Directory application in the specified Azure Active Directory tenant.
+
+### [New-AbApplicationGrant](New-AbApplicationGrant.md)
+
+Creates a new application grant object that is used as part of the request to consent for an Azure Active Directory to access resources in an Azure Active Directory tenant.
+
 ### [New-AbBulkRefreshToken](New-AbBulkRefreshToken.md)
 
 Acquires a bulk refresh token from Azure Active Directory that will be used to perform the cloud domain join or workspace join operation.

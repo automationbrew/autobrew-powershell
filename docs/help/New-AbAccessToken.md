@@ -59,8 +59,8 @@ Requests a new access token from Azure Directory using the authorization code fl
 ### Example 2
 
 ```powershell
-$refreshToken = Get-AzKeyVaultSecret -SecretName 'secretName' -VaultName 'vaultName'
-New-AbAccessToken -ApplicationId 'xxxx-xxxx-xxxx-xxxx' -RefreshToken $refreshToken.SecretValue -Scopes 'https://graph.microsoft.com/.default' -Tenant 'yyyy-yyyy-yyyy-yyyy'
+PS C:\> $refreshToken = Get-AzKeyVaultSecret -SecretName 'secretName' -VaultName 'vaultName'
+PS C:\> New-AbAccessToken -ApplicationId 'xxxx-xxxx-xxxx-xxxx' -RefreshToken $refreshToken.SecretValue -Scopes 'https://graph.microsoft.com/.default' -Tenant 'yyyy-yyyy-yyyy-yyyy'
 ```
 
 Obtains a refresh token from Azure KeyVault, and requests a new access from Azure Directory using that refresh token.

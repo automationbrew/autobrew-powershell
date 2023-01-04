@@ -46,8 +46,6 @@
         /// <param name="message">The message that describes the breaking change.</param>
         public BreakingChangeAttribute(string message)
         {
-            message.AssertNotEmpty(nameof(message));
-
             this.message = message;
         }
 
