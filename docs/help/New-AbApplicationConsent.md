@@ -38,7 +38,7 @@ PS C:\>
 PS C:\> New-AbApplicationConsent -ApplicationGrants $grants -ApplicationId $applicationId -TenantId 'yyyy-yyyy-yyyy-yyyy'
 ```
 
-{{ Add example description here }}
+Creates a new consent for an Azure Active Directory application with grants for Microsoft Graph and Azure Service Management.
 
 ## PARAMETERS
 
