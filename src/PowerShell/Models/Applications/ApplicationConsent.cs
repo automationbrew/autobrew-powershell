@@ -14,5 +14,10 @@
         /// Gets or sets the identifier of the Azure Active Directory application.
         /// </summary>
         public string ApplicationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display name for the application consent.
+        /// </summary>
+        public string DisplayName { get; set; }
     }
 }

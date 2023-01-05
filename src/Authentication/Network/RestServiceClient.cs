@@ -19,6 +19,11 @@
         private const string JSON_MEDIA_TYPE = "application/json";
 
         /// <summary>
+        /// Options to control the behavior during parsing.
+        /// </summary>
+        private readonly static JsonSerializerOptions serializerOptions = new() { PropertyNameCaseInsensitive = true };
+
+        /// <summary>
         /// The credentials used to access a secure resource.
         /// </summary>
         private readonly ServiceClientCredentials serviceCredentials;
@@ -155,7 +160,7 @@
             if (response.IsSuccessStatusCode)
             {
                 return typeof(TResponse) == typeof(HttpResponseMessage)
-                    ? (TResponse)Convert.ChangeType(response, typeof(TResponse)) : JsonSerializer.Deserialize<TResponse>(responseContent);
+                    ? (TResponse)Convert.ChangeType(response, typeof(TResponse)) : JsonSerializer.Deserialize<TResponse>(responseContent, serializerOptions);
             }
 
             RestServiceException exception = new(response.ReasonPhrase)

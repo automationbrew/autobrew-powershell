@@ -12,6 +12,7 @@
     /// Cmdlet used to create a new application grant.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "AbApplicationConsent")]
+    [OutputType(typeof(ApplicationConsent))]
     public class NewAbApplicationConsent : ModuleAsyncCmdlet
     {
         /// <summary>
@@ -26,6 +27,12 @@
         [Parameter(HelpMessage = "The identifier of the Azure Active Directory application.", Mandatory = true)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display name for the application consent.
+        /// </summary>
+        [Parameter(HelpMessage = "The display name for the application consent.", Mandatory = true)]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier for the customer tenant.
@@ -43,7 +50,8 @@
             ApplicationConsent consent = new()
             {
                 ApplicationGrants = new List<ApplicationGrant>(ApplicationGrants),
-                ApplicationId = ApplicationId
+                ApplicationId = ApplicationId,
+                DisplayName = DisplayName
             };
 
             IRestServiceClient client = await ModuleSession.Instance.ClientFactory.CreateRestServiceClientAsync(
