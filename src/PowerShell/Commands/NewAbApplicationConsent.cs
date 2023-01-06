@@ -11,7 +11,7 @@
     /// <summary>
     /// Cmdlet used to create a new application grant.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbApplicationConsent")]
+    [Cmdlet(VerbsCommon.New, "AbApplicationConsent", SupportsShouldProcess = true)]
     [OutputType(typeof(ApplicationConsent))]
     public class NewAbApplicationConsent : ModuleAsyncCmdlet
     {

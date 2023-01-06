@@ -90,6 +90,10 @@ Generate a secure random password.
 
 Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
 
+### [Register-AbDevice](Register-AbDevice.md)
+
+Registers the device with a MDM service, using the Mobile Device Enrollment Protocol.
+
 ### [Remove-AbEnvironment](Remove-AbEnvironment.md)
 
 Removes the metadata for connecting to given cloud.

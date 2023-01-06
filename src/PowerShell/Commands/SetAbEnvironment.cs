@@ -50,13 +50,13 @@
         /// <summary>
         /// Gets or sets the endpoint of Microsoft Graph for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The endpoint of Microsoft Partner Center for the environment.", Mandatory = false, ValueFromPipeline = true)]
+        [Parameter(HelpMessage = "The endpoint of Microsoft Partner Center for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
         public string MicrosoftPartnerCenterEndpoint { get; set; }
 
         /// <summary>
         /// Gets or sets the name for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The name for the environment.", Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(HelpMessage = "The name for the environment.", Mandatory = true)]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
@@ -77,7 +77,7 @@
         /// <summary>
         /// Gets or sets the tenant for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The tenant for the environment.", Mandatory = false)]
+        [Parameter(HelpMessage = "The tenant for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         public string Tenant { get; set; }
 

@@ -6,7 +6,7 @@
     /// <summary>
     /// Cmdlet that generates a new in-memory application grant.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbApplicationGrant")]
+    [Cmdlet(VerbsCommon.New, "AbApplicationGrant", SupportsShouldProcess = true)]
     [OutputType(typeof(ApplicationGrant))]
     public class NewAbApplicationGrant : ModuleCmdlet
     {
