@@ -61,20 +61,29 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to acquire token.
+        /// </summary>
+        public static string AcquireToken {
+            get {
+                return ResourceManager.GetString("AcquireToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} account in environment &apos;{1}&apos;.
         /// </summary>
-        public static string AcquireTokenTarget {
+        public static string AcquireTokenAction {
             get {
-                return ResourceManager.GetString("AcquireTokenTarget", resourceCulture);
+                return ResourceManager.GetString("AcquireTokenAction", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to add environment.
         /// </summary>
-        public static string AddEnvironmentTarget {
+        public static string AddEnvironmentAction {
             get {
-                return ResourceManager.GetString("AddEnvironmentTarget", resourceCulture);
+                return ResourceManager.GetString("AddEnvironmentAction", resourceCulture);
             }
         }
         
@@ -325,9 +334,9 @@ namespace AutoBrew.PowerShell.Properties {
         /// <summary>
         ///   Looks up a localized string similar to remove account.
         /// </summary>
-        public static string DisconnectAccountTarget {
+        public static string DisconnectAccountAction {
             get {
-                return ResourceManager.GetString("DisconnectAccountTarget", resourceCulture);
+                return ResourceManager.GetString("DisconnectAccountAction", resourceCulture);
             }
         }
         
@@ -341,38 +350,56 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout account &apos;{0}&apos;.
+        ///   Looks up a localized string similar to generate new user risk event.
         /// </summary>
-        public static string LogoutTarget {
+        public static string NewRiskyUserAction {
             get {
-                return ResourceManager.GetString("LogoutTarget", resourceCulture);
+                return ResourceManager.GetString("NewRiskyUserAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to register the device with the management service.
+        /// </summary>
+        public static string RegisterDeviceAction {
+            get {
+                return ResourceManager.GetString("RegisterDeviceAction", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to remove environment.
         /// </summary>
-        public static string RemoveEnvironmentTarget {
+        public static string RemoveEnvironmentAction {
             get {
-                return ResourceManager.GetString("RemoveEnvironmentTarget", resourceCulture);
+                return ResourceManager.GetString("RemoveEnvironmentAction", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to update the following configurations &apos;{0}&apos;..
+        ///   Looks up a localized string similar to unregister the from the management service.
         /// </summary>
-        public static string UpdateConfigurationTarget {
+        public static string UnregisterDeviceAction {
             get {
-                return ResourceManager.GetString("UpdateConfigurationTarget", resourceCulture);
+                return ResourceManager.GetString("UnregisterDeviceAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to update the following configurations &apos;{0}&apos;.
+        /// </summary>
+        public static string UpdateConfigurationAction {
+            get {
+                return ResourceManager.GetString("UpdateConfigurationAction", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to update environment.
         /// </summary>
-        public static string UpdateEnvironmentTarget {
+        public static string UpdateEnvironmentAction {
             get {
-                return ResourceManager.GetString("UpdateEnvironmentTarget", resourceCulture);
+                return ResourceManager.GetString("UpdateEnvironmentAction", resourceCulture);
             }
         }
     }

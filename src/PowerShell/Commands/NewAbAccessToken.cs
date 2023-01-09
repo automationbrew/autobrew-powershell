@@ -40,11 +40,23 @@
         private const string RefreshTokenParameterSetName = "RefreshTokenParameterSet";
 
         /// <summary>
+        /// The name for the user password parameter set.
+        /// </summary>
+        private const string UserPasswordParameterSetName = "UserPasswordParameterSet";
+
+        /// <summary>
         /// Gets or sets the identifier for the application to be used for authentication.
         /// </summary>
         [Parameter(HelpMessage = "The identifier for the application to be used for authentication.", Mandatory = false)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the credentials to be used for authentication.
+        /// </summary>
+        [Parameter(HelpMessage = "The credentials to be used for authentication.", Mandatory = true, ParameterSetName = UserPasswordParameterSetName)]
+        [ValidateNotNull]
+        public PSCredential Credentials { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the environment to be used for authentication.
@@ -95,7 +107,8 @@
             ModuleAccount account = new()
             {
                 AccountType = ModuleAccountType.User,
-                Tenant = string.IsNullOrEmpty(Tenant) ? CommonTenant : Tenant
+                Tenant = string.IsNullOrEmpty(Tenant) ? CommonTenant : Tenant,
+                Username = Credentials?.UserName
             };
 
             ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
@@ -122,6 +135,7 @@
                 new TokenRequestData(account, environment, Scopes)
                 {
                     IncludeRefreshToken = true,
+                    Password = Credentials?.Password,
                     RefreshToken = RefreshToken
                 },
                 (string value) => WriteWarning(value),

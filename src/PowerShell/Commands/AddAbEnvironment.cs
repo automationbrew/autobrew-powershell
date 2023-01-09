@@ -11,6 +11,7 @@
     /// Cmdlet that provides the ability to add a new environment.
     /// </summary>
     [Cmdlet(VerbsCommon.Add, "AbEnvironment", SupportsShouldProcess = true)]
+    [OutputType(typeof(ModuleEnvironment))]
     public class AddAbEnvironment : ModuleCmdlet
     {
         /// <summary>
@@ -87,20 +88,25 @@
         /// </summary>
         protected override void PerformCmdlet()
         {
-            ModuleEnvironment environment = new()
+            ConfirmAction(Resources.AddEnvironmentAction, Name, () =>
             {
-                ActiveDirectoryAuthority = ActiveDirectoryAuthority,
-                ApplicationId = ApplicationId,
-                MicrosoftGraphEndpoint = MicrosoftGraphEndpoint,
-                MicrosoftPartnerCenterEndpoint = MicrosoftPartnerCenterEndpoint,
-                Name = Name,
-                Tenant = Tenant,
-                Type = ModuleEnvironmentType.UserDefined
-            };
+                ModuleEnvironment environment = new()
+                {
+                    ActiveDirectoryAuthority = ActiveDirectoryAuthority,
+                    ApplicationId = ApplicationId,
+                    MicrosoftGraphEndpoint = MicrosoftGraphEndpoint,
+                    MicrosoftPartnerCenterEndpoint = MicrosoftPartnerCenterEndpoint,
+                    Name = Name,
+                    Tenant = Tenant,
+                    Type = ModuleEnvironmentType.UserDefined
+                };
 
-            SetExtendedProperties(environment);
+                SetExtendedProperties(environment);
 
-            ConfirmAction(Resources.AddEnvironmentTarget, Name, () => ModuleSession.Instance.RegisterEnvironment(Name, environment));
+                ModuleSession.Instance.RegisterEnvironment(Name, environment);
+
+                WriteObject(environment);
+            });
         }
 
         /// <summary>

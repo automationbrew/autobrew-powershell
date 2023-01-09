@@ -1,64 +1,46 @@
 ---
 external help file: AutoBrew.PowerShell.dll-Help.xml
 Module Name: Ab
-online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Register-AbDevice.md
+online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Unregister-AbDevice.md
 schema: 2.0.0
 ---
 
-# Register-AbDevice
+# Unregister-AbDevice
 
 ## SYNOPSIS
 
-Registers the device with a MDM service, using the Mobile Device Enrollment Protocol.
+Provides the ability to unregister the device with a management service.
 
 ## SYNTAX
 
 ```powershell
-Register-AbDevice -AccessToken <String> -UserPrincipalName <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Unregister-AbDevice -EnrollmentId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Registers the device with a MDM service, using the Mobile Device Enrollment Protocol.
+Provides the ability to unregister the device with a management service.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> $token = New-AbAccessToken -ApplicationId '29d9ed98-a469-4536-ade2-f981bc1d605e' -Scopes 'urn:ms-drs:enterpriseregistration.windows.net/.default' -UseDeviceAuthentication
-PS C:\>
-PS C:\> Register-AbDevice -AccessToken $token.AccessToken -UserPrincipalName 'mbowen@contoso.onmicrosoft.com'
+PS C:\> Unregister-AbDevice -EnrollmentId 'd244cff2-9dae-406d-90df-ad21dbff7118'
 ```
 
-Registers the device with a MDM service, using the Mobile Device Enrollment Protocol.
+Performs the operation required to unregister the device from a management service associated with the specified enrollment identifier.
 
 ## PARAMETERS
 
-### -AccessToken
+### -EnrollmentId
 
-The access token for the user registering the device.
+The identifier of the enrollment that should be unregistered.
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
 Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserPrincipalName
-
-The user principal name (UPN) for the user registering the device.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: UPN
 
 Required: True
 Position: Named
@@ -85,7 +67,8 @@ Accept wildcard characters: False
 
 ### -WhatIf
 
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

@@ -3,6 +3,7 @@
     using System.Management.Automation;
     using System.Security;
     using System.Text.RegularExpressions;
+    using Properties;
     using Factories;
     using Microsoft.Graph;
     using Microsoft.Identity.Client;
@@ -13,6 +14,7 @@
     /// Cmdlet that generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
     /// </summary>
     [Cmdlet(VerbsCommon.New, "AbRiskyUser", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
+    [OutputType(typeof(void))]
     public class NewAbRiskyUser : ModuleAsyncCmdlet
     {
         /// <summary>
@@ -71,7 +73,9 @@
         /// </summary>
         protected override async Task PerformCmdletAsync()
         {
-            if (ShouldProcess($"This operation will temporarily disable security defaults and causes a user risk event for {UserPrincipalName}."))
+            string username = string.IsNullOrEmpty(UserPrincipalName) ? Credential.UserName : UserPrincipalName;
+
+            await ConfirmActionAsync(Resources.NewRiskyUserAction, username, async () => 
             {
                 ModuleAccount account = ModuleSession.Instance.Context.Account.Clone();
                 account.Tenant = Tenant;
@@ -95,14 +99,11 @@
                     .Build();
 
                 SecureString password = Password ?? Credential.Password;
-                string username = string.IsNullOrEmpty(UserPrincipalName) ? Credential.UserName : UserPrincipalName;
 
-                AuthenticationResult authResult = await app.AcquireTokenByUsernamePassword(
+                _ = await app.AcquireTokenByUsernamePassword(
                     new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftGraphEndpoint}/.default" },
                     username,
                     password.AsString()).ExecuteAsync(CancellationToken).ConfigureAwait(false);
-
-                WriteObject(authResult.Account);
 
                 // Enable security defaults only in the event it was enabled before performing this operation.
 
@@ -110,7 +111,7 @@
                 {
                     await UpdateSecurityDefaultsAsync(client, true).ConfigureAwait(false);
                 }
-            }
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -126,6 +127,5 @@
                 IsEnabled = isEnabled
             }, CancellationToken);
         }
-
     }
 }

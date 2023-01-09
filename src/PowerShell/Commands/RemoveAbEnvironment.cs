@@ -22,7 +22,7 @@
         /// </summary>
         protected override void PerformCmdlet()
         {
-            ConfirmAction(Resources.RemoveEnvironmentTarget, Name, () => ModuleSession.Instance.UnregisterEnvironment(Name));
+            ConfirmAction(Resources.RemoveEnvironmentAction, Name, () => ModuleSession.Instance.UnregisterEnvironment(Name));
         }
     }
 }

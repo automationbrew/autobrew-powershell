@@ -1,6 +1,5 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
-    using System.Globalization;
     using System.Management.Automation;
     using Cache;
     using Models;
@@ -34,8 +33,8 @@
             }
 
             await ConfirmActionAsync(
-                string.Format(CultureInfo.InvariantCulture, Resources.LogoutTarget, account.Username),
-                Resources.DisconnectAccountTarget,
+                Resources.DisconnectAccountAction,
+                account.Username,
                 async () =>
                 {
                     await tokenCache.RemoveAccountAsync(ModuleSession.Instance.Context.Account);

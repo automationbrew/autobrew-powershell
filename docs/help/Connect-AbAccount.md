@@ -20,13 +20,6 @@ Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <St
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### RefreshTokenParameterSet
-
-```powershell
-Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
- [-Scopes <String[]>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
 ### AuthorizationCodeParameterSet
 
 ```powershell
@@ -39,6 +32,13 @@ Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <St
 ```powershell
 Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] [-Scopes <String[]>] [-Tenant <String>]
  [-UseDeviceAuthentication] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### RefreshTokenParameterSet
+
+```powershell
+Connect-AbAccount [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
+ [-Scopes <String[]>] [-Tenant <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

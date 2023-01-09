@@ -110,6 +110,10 @@ Updates the request for the specified delegated admin relationship.
 
 Sets the properties for a given environment.
 
+### [Unregister-AbDevice](Unregister-AbDevice.md)
+
+Provides the ability to unregister the device with a management service.
+
 ### [Update-AbConfiguration](Update-AbConfiguration.md)
 
 Updates the configurations for the AutomationBrew PowerShell module.

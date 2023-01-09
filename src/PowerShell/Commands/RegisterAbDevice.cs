@@ -3,12 +3,14 @@
     using System.Management.Automation;
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
+    using Properties;
     using Interop;
 
     /// <summary>
     /// Cmdlet that registers a device with a MDM service, using the Mobile Device Enrollment Protocol.
     /// </summary>
     [Cmdlet(VerbsLifecycle.Register, "AbDevice", SupportsShouldProcess = true)]
+    [OutputType(typeof(void))]
     public class RegisterAbDevice : ModuleCmdlet
     {
         /// <summary>
@@ -28,23 +30,26 @@
         /// <inheritdoc />
         protected override void PerformCmdlet()
         {
-            int error;
-
-            if (MdmRegistration.DiscoverManagementService(UserPrincipalName, out IntPtr pInfo) == 0)
+            ConfirmAction(Resources.RegisterDeviceAction, Environment.MachineName, () =>
             {
-                MdmRegistration.ManagementServiceInfo info = (MdmRegistration.ManagementServiceInfo)Marshal.PtrToStructure(pInfo, typeof(MdmRegistration.ManagementServiceInfo));
+                int error;
 
-                error = MdmRegistration.RegisterDeviceWithManagement(UserPrincipalName, info.mdmServiceUri, AccessToken);
-            }
-            else
-            {
-                throw new ModuleException($"Failed to discover the management service for {UserPrincipalName}");
-            }
+                if (MdmRegistration.DiscoverManagementService(UserPrincipalName, out IntPtr pInfo) == 0)
+                {
+                    MdmRegistration.ManagementServiceInfo info = (MdmRegistration.ManagementServiceInfo)Marshal.PtrToStructure(pInfo, typeof(MdmRegistration.ManagementServiceInfo));
 
-            if (error != 0)
-            {
-                throw new ModuleException($"Device registration with the management service failed with error {error}");
-            }
+                    error = MdmRegistration.RegisterDeviceWithManagement(UserPrincipalName, info.mdmServiceUri, AccessToken);
+                }
+                else
+                {
+                    throw new ModuleException($"Failed to discover the management service for {UserPrincipalName}");
+                }
+
+                if (error != 0)
+                {
+                    throw new ModuleException($"Device registration with the management service failed with error {error}");
+                }
+            });
         }
     }
 }
