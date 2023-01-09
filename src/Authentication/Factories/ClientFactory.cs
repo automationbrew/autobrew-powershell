@@ -60,7 +60,7 @@
         {
             requestData.AssertNotNull(nameof(requestData));
 
-            ModuleAuthenticationResult authResult  = await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
+            ModuleAuthenticationResult authResult = await ModuleSession.Instance.AuthenticationFactory.AcquireTokenAsync(
                 requestData,
                 null,
                 cancellationToken).ConfigureAwait(false);

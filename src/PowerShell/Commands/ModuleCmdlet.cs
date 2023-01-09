@@ -381,7 +381,7 @@
             }
 
             exceptionTelemetry.Metrics.Add("Duration", qosEvent.Duration.TotalMilliseconds);
-        
+
             PopulateClientContext(qosEvent, exceptionTelemetry.Context);
             PopulatePropertiesFromQos(exceptionTelemetry.Properties);
 

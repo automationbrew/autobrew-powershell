@@ -122,7 +122,7 @@
                 }
 
                 ModuleSession.Instance.RegisterEnvironment(Name, environment, true);
-                
+
                 WriteObject(environment);
             });
         }

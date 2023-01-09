@@ -3,12 +3,12 @@
     using System.Management.Automation;
     using System.Security;
     using System.Text.RegularExpressions;
-    using Properties;
     using Factories;
     using Microsoft.Graph;
     using Microsoft.Identity.Client;
     using Models;
     using Models.Authentication;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
@@ -75,7 +75,7 @@
         {
             string username = string.IsNullOrEmpty(UserPrincipalName) ? Credential.UserName : UserPrincipalName;
 
-            await ConfirmActionAsync(Resources.NewRiskyUserAction, username, async () => 
+            await ConfirmActionAsync(Resources.NewRiskyUserAction, username, async () =>
             {
                 ModuleAccount account = ModuleSession.Instance.Context.Account.Clone();
                 account.Tenant = Tenant;

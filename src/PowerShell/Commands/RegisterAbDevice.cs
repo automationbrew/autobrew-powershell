@@ -3,8 +3,8 @@
     using System.Management.Automation;
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
-    using Properties;
     using Interop;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that registers a device with a MDM service, using the Mobile Device Enrollment Protocol.

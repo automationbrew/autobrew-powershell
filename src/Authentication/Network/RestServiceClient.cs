@@ -21,7 +21,7 @@
         /// <summary>
         /// Options to control the behavior during parsing.
         /// </summary>
-        private readonly static JsonSerializerOptions serializerOptions = new() { PropertyNameCaseInsensitive = true };
+        private static readonly JsonSerializerOptions serializerOptions = new() { PropertyNameCaseInsensitive = true };
 
         /// <summary>
         /// The credentials used to access a secure resource.

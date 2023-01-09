@@ -1,8 +1,8 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
     using System.Management.Automation;
-    using Properties;
     using Interop;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that provides the ability to unregister the device with a management service.
