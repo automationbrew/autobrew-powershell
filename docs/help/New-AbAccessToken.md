@@ -20,6 +20,20 @@ New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <Str
  [<CommonParameters>]
 ```
 
+### UserPasswordParameterSet
+
+```powershell
+New-AbAccessToken [-ApplicationId <String>] -Credentials <PSCredential> [-Environment <String>]
+ -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
+```
+
+### RefreshTokenParameterSet
+
+```powershell
+New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
+ -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
+```
+
 ### AuthorizationCodeParameterSet
 
 ```powershell
@@ -32,20 +46,6 @@ New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <Str
 ```powershell
 New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <String[]> [-Tenant <String>]
  [-UseDeviceAuthentication] [<CommonParameters>]
-```
-
-### RefreshTokenParameterSet
-
-```powershell
-New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -RefreshToken <SecureString>
- -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
-```
-
-### UserPasswordParameterSet
-
-```powershell
-New-AbAccessToken [-ApplicationId <String>] -Credentials <PSCredential> [-Environment <String>]
- -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
