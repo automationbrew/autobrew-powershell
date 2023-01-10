@@ -7,7 +7,7 @@
     using Properties;
 
     /// <summary>
-    /// Cmdlet that registers a device with a MDM service, using the Mobile Device Enrollment Protocol.
+    /// Cmdlet that registers a device with a management service.
     /// </summary>
     [Cmdlet(VerbsLifecycle.Register, "AbDevice", SupportsShouldProcess = true)]
     [OutputType(typeof(void))]
@@ -18,6 +18,12 @@
         /// </summary>
         [Parameter(HelpMessage = "The access token for the user registering the device.", Mandatory = true)]
         public string AccessToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address for the management service.
+        /// </summary>
+        [Parameter(HelpMessage = "The address for the management service.", Mandatory = false)]
+        public string ManagementUri { get; set; }
 
         /// <summary>
         /// Gets or sets the user principal name (UPN) for the user registering the device.
@@ -32,22 +38,28 @@
         {
             ConfirmAction(Resources.RegisterDeviceAction, Environment.MachineName, () =>
             {
-                int error;
+                MdmRegistration.ManagementServiceInfo? info = default;
+                int hr = 0;
 
-                if (MdmRegistration.DiscoverManagementService(UserPrincipalName, out IntPtr pInfo) == 0)
+                if (string.IsNullOrEmpty(ManagementUri))
                 {
-                    MdmRegistration.ManagementServiceInfo info = (MdmRegistration.ManagementServiceInfo)Marshal.PtrToStructure(pInfo, typeof(MdmRegistration.ManagementServiceInfo));
-
-                    error = MdmRegistration.RegisterDeviceWithManagement(UserPrincipalName, info.mdmServiceUri, AccessToken);
-                }
-                else
-                {
-                    throw new ModuleException($"Failed to discover the management service for {UserPrincipalName}");
+                    hr = MdmRegistration.DiscoverManagementService(UserPrincipalName, out IntPtr pInfo);
+                    info = (MdmRegistration.ManagementServiceInfo)Marshal.PtrToStructure(pInfo, typeof(MdmRegistration.ManagementServiceInfo));
                 }
 
-                if (error != 0)
+                if (hr != 0)
                 {
-                    throw new ModuleException($"Device registration with the management service failed with error {error}");
+                    throw new ModuleException($"{hr}", ModuleExceptionCategory.Interop);
+                }
+
+                hr = MdmRegistration.RegisterDeviceWithManagement(
+                    UserPrincipalName, 
+                    info == null ? ManagementUri : info.Value.mdmServiceUri, 
+                    AccessToken);
+
+                if (hr != 0)
+                {
+                    throw new ModuleException($"{hr}", ModuleExceptionCategory.Interop);
                 }
             });
         }

@@ -26,7 +26,7 @@ Registers the device with a MDM service, using the Mobile Device Enrollment Prot
 ### Example 1
 
 ```powershell
-PS C:\> $token = New-AbAccessToken -ApplicationId '29d9ed98-a469-4536-ade2-f981bc1d605e' -Scopes 'urn:ms-drs:enterpriseregistration.windows.net/.default' -UseDeviceAuthentication
+PS C:\> $token = New-AbAccessToken -ApplicationId 'de50c81f-5f80-4771-b66b-cebd28ccdfc1' -Scopes 'https://enrollment.manage.microsoft.com/.default' -UseDeviceAuthentication
 PS C:\>
 PS C:\> Register-AbDevice -AccessToken $token.AccessToken -UserPrincipalName 'mbowen@contoso.onmicrosoft.com'
 ```

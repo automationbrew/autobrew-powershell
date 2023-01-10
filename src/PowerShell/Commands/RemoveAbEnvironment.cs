@@ -2,12 +2,14 @@
 {
     using System.Management.Automation;
     using Models;
+    using Models.Authentication;
     using Properties;
 
     /// <summary>
     /// Cmdlet that provides the ability to remove a specific environment.
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "AbEnvironment", SupportsShouldProcess = true)]
+    [OutputType(typeof(ModuleEnvironment))]
     public class RemoveAbEnvironment : ModuleCmdlet
     {
         /// <summary>
@@ -22,6 +24,7 @@
         /// </summary>
         protected override void PerformCmdlet()
         {
+            // TODO - Missing out
             ConfirmAction(Resources.RemoveEnvironmentAction, Name, () => ModuleSession.Instance.UnregisterEnvironment(Name));
         }
     }
