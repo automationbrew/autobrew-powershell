@@ -1,7 +1,6 @@
 ﻿namespace AutoBrew.PowerShell.Commands
 {
     using System.Management.Automation;
-    using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
     using Interop;
     using Properties;
@@ -22,7 +21,7 @@
         /// <summary>
         /// Gets or sets the address for the management service.
         /// </summary>
-        [Parameter(HelpMessage = "The address for the management service.", Mandatory = false)]
+        [Parameter(HelpMessage = "The address for the management service.", Mandatory = true)]
         public string ManagementUri { get; set; }
 
         /// <summary>
@@ -38,28 +37,11 @@
         {
             ConfirmAction(Resources.RegisterDeviceAction, Environment.MachineName, () =>
             {
-                MdmRegistration.ManagementServiceInfo? info = default;
-                int hr = 0;
-
-                if (string.IsNullOrEmpty(ManagementUri))
-                {
-                    hr = MdmRegistration.DiscoverManagementService(UserPrincipalName, out IntPtr pInfo);
-                    info = (MdmRegistration.ManagementServiceInfo)Marshal.PtrToStructure(pInfo, typeof(MdmRegistration.ManagementServiceInfo));
-                }
+                int hr = MdmRegistration.RegisterDeviceWithManagement(UserPrincipalName, ManagementUri, AccessToken);
 
                 if (hr != 0)
                 {
-                    throw new ModuleException($"{hr}", ModuleExceptionCategory.Interop);
-                }
-
-                hr = MdmRegistration.RegisterDeviceWithManagement(
-                    UserPrincipalName, 
-                    info == null ? ManagementUri : info.Value.mdmServiceUri, 
-                    AccessToken);
-
-                if (hr != 0)
-                {
-                    throw new ModuleException($"{hr}", ModuleExceptionCategory.Interop);
+                    throw new ModuleException(string.Format("0x{0:X}", hr), ModuleExceptionCategory.Interop);
                 }
             });
         }
