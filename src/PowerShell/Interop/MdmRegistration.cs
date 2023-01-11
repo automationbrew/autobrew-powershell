@@ -4,7 +4,7 @@
     using System.Text;
 
     /// <summary>
-    /// 
+    /// Provides access to the mobile device management functions exposed through the mdmregistration.dll assembly.
     /// </summary>
     internal static class MdmRegistration
     {

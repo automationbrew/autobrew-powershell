@@ -9,7 +9,7 @@
     using Properties;
 
     /// <summary>
-    /// Cmdlet that provides the ability to register a deivce for management.
+    /// Cmdlet that provides the ability to register a device for management.
     /// </summary>
     [Cmdlet(VerbsLifecycle.Register, "AbDevice", DefaultParameterSetName = AccessTokenParameterSetName, SupportsShouldProcess = true)]
     [OutputType(typeof(void))]
@@ -46,7 +46,7 @@
         /// Gets or sets the name of the environment to be used for authentication.
         /// </summary>
         [EnvironmentCompleter]
-        [Parameter(HelpMessage = "The name of the environment to be used for authentication.", Mandatory = true, ParameterSetName = CredentialsParameterSetName)]
+        [Parameter(HelpMessage = "The name of the environment to be used for authentication.", Mandatory = false, ParameterSetName = CredentialsParameterSetName)]
         public string Environment { get; set; }
 
         /// <summary>
@@ -91,6 +91,10 @@
             }).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Gets an access token to be used by the management service to validate the user.
+        /// </summary>
+        /// <returns>An access token to be used by the management service to validate the user.</returns>
         private async Task<string> GetAccessTokenAsync()
         {
             ModuleAccount account = new()
