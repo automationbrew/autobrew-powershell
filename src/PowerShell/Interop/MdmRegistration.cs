@@ -3,6 +3,9 @@
     using System.Runtime.InteropServices;
     using System.Text;
 
+    /// <summary>
+    /// 
+    /// </summary>
     internal static class MdmRegistration
     {
         /// <summary>
