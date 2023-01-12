@@ -242,7 +242,7 @@
         /// Gets the path for the configuration file.
         /// </summary>
         /// <returns>The path for the configuration file.</returns>
-        /// <exception cref="ModuleException">TODO</exception>
+        /// <exception cref="ModuleException">"Unable to store the configuration file.</exception>
         private static string GetConfigurationFilePath()
         {
             List<string> paths = new()

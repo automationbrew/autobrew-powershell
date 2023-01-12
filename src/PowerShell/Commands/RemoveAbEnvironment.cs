@@ -24,8 +24,13 @@
         /// </summary>
         protected override void PerformCmdlet()
         {
-            // TODO - Missing out
-            ConfirmAction(Resources.RemoveEnvironmentAction, Name, () => ModuleSession.Instance.UnregisterEnvironment(Name));
+            ConfirmAction(Resources.RemoveEnvironmentAction, Name, () =>
+            {
+                if (ModuleSession.Instance.TryRemoveEnvironment(Name, out ModuleEnvironment environment))
+                {
+                    WriteObject(environment);
+                }
+            });
         }
     }
 }
