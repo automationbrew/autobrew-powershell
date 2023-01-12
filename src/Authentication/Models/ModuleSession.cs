@@ -108,6 +108,32 @@
         }
 
         /// <summary>
+        /// Removes the environment with the specified name.
+        /// </summary>
+        /// <param name="name">The name for the environment in the registry.</param>
+        /// <param name="environment">When this function returns, the instance of the <see cref="ModuleEnvironment" /> class associated with the specified name if found; otherwise, the default value.</param>
+        /// <returns><c>true</c> if the environment was successfully removed; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ModuleException">
+        /// The environment {name} cannot be unregistered because it is a builtin environment.
+        /// </exception>
+        public bool TryRemoveEnvironment(string name, out ModuleEnvironment environment)
+        {
+            bool result = false;
+
+            if (environmentRegistry[name].Type == ModuleEnvironmentType.BuiltIn)
+            {
+                throw new ModuleException($"The environment {name} cannot be unregistered because it is a builtin environment.");
+            }
+
+            if (TryGetEnvironment(name, out environment))
+            {
+                result = environmentRegistry.Remove(name);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Initializes the session for use by the module.
         /// </summary>
         public void Initialize()
@@ -187,30 +213,6 @@
             {
                 componentRegistry.Remove(key);
             }
-        }
-
-        /// <summary>
-        /// Unregisters the environment with the specified name.
-        /// </summary>
-        /// <param name="name">The name of the environment to be unregistered.</param>
-        /// <exception cref="ArgumentException">
-        /// The name parameter is empty or null.
-        /// </exception>
-        public void UnregisterEnvironment(string name)
-        {
-            name.AssertNotEmpty(nameof(name));
-
-            if (environmentRegistry.ContainsKey(name) == false)
-            {
-                return;
-            }
-
-            if (environmentRegistry[name].Type == ModuleEnvironmentType.BuiltIn)
-            {
-                throw new ModuleException($"The environment {name} cannot be unregistered because it is a builtin environment.");
-            }
-
-            environmentRegistry.Remove(name);
         }
     }
 }

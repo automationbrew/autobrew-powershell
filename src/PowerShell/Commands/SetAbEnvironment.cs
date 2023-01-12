@@ -11,6 +11,7 @@
     /// Cmdlet that provides the ability to update an environment.
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "AbEnvironment", SupportsShouldProcess = true)]
+    [OutputType(typeof(ModuleEnvironment))]
     public class SetAbEnvironment : ModuleCmdlet
     {
         /// <summary>
@@ -22,7 +23,7 @@
         /// <summary>
         /// Gets or sets the identifier of the application for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The identifier of the application for the environment.", Mandatory = false)]
+        [Parameter(HelpMessage = "The identifier of the application for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
         [ValidatePattern(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", Options = RegexOptions.Compiled | RegexOptions.IgnoreCase)]
         public string ApplicationId { get; set; }
 
@@ -50,13 +51,13 @@
         /// <summary>
         /// Gets or sets the endpoint of Microsoft Graph for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The endpoint of Microsoft Partner Center for the environment.", Mandatory = false, ValueFromPipeline = true)]
+        [Parameter(HelpMessage = "The endpoint of Microsoft Partner Center for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
         public string MicrosoftPartnerCenterEndpoint { get; set; }
 
         /// <summary>
         /// Gets or sets the name for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The name for the environment.", Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(HelpMessage = "The name for the environment.", Mandatory = true)]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
@@ -77,7 +78,7 @@
         /// <summary>
         /// Gets or sets the tenant for the environment.
         /// </summary>
-        [Parameter(HelpMessage = "The tenant for the environment.", Mandatory = false)]
+        [Parameter(HelpMessage = "The tenant for the environment.", Mandatory = false, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         public string Tenant { get; set; }
 
@@ -86,39 +87,44 @@
         /// </summary>
         protected override void PerformCmdlet()
         {
-            ModuleSession.Instance.TryGetEnvironment(Name, out ModuleEnvironment environment);
-            string[] excludeProperties = { "ExtendedProperties", nameof(Name), "Type" };
+            ConfirmAction(Resources.UpdateEnvironmentAction, Name, () =>
+            {
+                ModuleSession.Instance.TryGetEnvironment(Name, out ModuleEnvironment environment);
+                string[] excludeProperties = { "ExtendedProperties", nameof(Name), "Type" };
 
-            if (environment == null)
-            {
-                environment = new()
+                if (environment == null)
                 {
-                    ActiveDirectoryAuthority = ActiveDirectoryAuthority,
-                    ApplicationId = ApplicationId,
-                    MicrosoftGraphEndpoint = MicrosoftGraphEndpoint,
-                    MicrosoftPartnerCenterEndpoint = MicrosoftPartnerCenterEndpoint,
-                    Name = Name,
-                    Tenant = Tenant,
-                    Type = ModuleEnvironmentType.UserDefined
-                };
+                    environment = new()
+                    {
+                        ActiveDirectoryAuthority = ActiveDirectoryAuthority,
+                        ApplicationId = ApplicationId,
+                        MicrosoftGraphEndpoint = MicrosoftGraphEndpoint,
+                        MicrosoftPartnerCenterEndpoint = MicrosoftPartnerCenterEndpoint,
+                        Name = Name,
+                        Tenant = Tenant,
+                        Type = ModuleEnvironmentType.UserDefined
+                    };
 
-                SetExtendedProperties(environment);
-            }
-            else if (environment.Type == ModuleEnvironmentType.BuiltIn)
-            {
-                throw new ModuleException($"Only user defined environments can be updated. {Name} is a built-in environment, so it cannot be modified.");
-            }
-            else
-            {
-                foreach (PropertyInfo property in typeof(ModuleEnvironment).GetProperties().Where(p => excludeProperties.Contains(p.Name) == false))
+                    SetExtendedProperties(environment);
+                }
+                else if (environment.Type == ModuleEnvironmentType.BuiltIn)
                 {
-                    SetValue(environment, property.Name, GetType().GetProperty(property.Name).GetValue(this)?.ToString());
+                    throw new ModuleException($"Only user defined environments can be updated. {Name} is a built-in environment, so it cannot be modified.");
+                }
+                else
+                {
+                    foreach (PropertyInfo property in typeof(ModuleEnvironment).GetProperties().Where(p => excludeProperties.Contains(p.Name) == false))
+                    {
+                        SetValue(environment, property.Name, GetType().GetProperty(property.Name).GetValue(this)?.ToString());
+                    }
+
+                    SetExtendedProperties(environment);
                 }
 
-                SetExtendedProperties(environment);
-            }
+                ModuleSession.Instance.RegisterEnvironment(Name, environment, true);
 
-            ConfirmAction(Resources.UpdateEnvironmentTarget, Name, () => ModuleSession.Instance.RegisterEnvironment(Name, environment, true));
+                WriteObject(environment);
+            });
         }
 
         /// <summary>

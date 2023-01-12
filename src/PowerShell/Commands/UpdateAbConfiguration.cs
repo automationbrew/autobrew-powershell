@@ -11,6 +11,7 @@
     /// Cmdlet that provides the ability to list configurations.
     /// </summary>
     [Cmdlet(VerbsData.Update, "AbConfiguration", SupportsShouldProcess = true)]
+    [OutputType(typeof(PSConfiguration))]
     public class UpdateAbConfiguration : ModuleCmdlet, IDynamicParameters
     {
         /// <summary>
@@ -80,7 +81,7 @@
             var userDefinedParameters = parameters.Values.Where(p => p.IsSet);
 
             ConfirmAction(
-                string.Format(Resources.UpdateConfigurationTarget, string.Join(", ", userDefinedParameters.Select(p => p.Name))),
+                string.Format(Resources.UpdateConfigurationAction, string.Join(", ", userDefinedParameters.Select(p => p.Name))),
                 Scope.ToString(),
                 () =>
                 {

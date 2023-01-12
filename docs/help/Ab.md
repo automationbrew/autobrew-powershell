@@ -88,7 +88,11 @@ Generate a secure random password.
 
 ### [New-AbRiskyUser](New-AbRiskyUser.md)
 
-Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
+Creates a new user risk event in Azure Active Directory using a Tor proxy when performing an authentication request.
+
+### [Register-AbDevice](Register-AbDevice.md)
+
+Registers the device for management.
 
 ### [Remove-AbEnvironment](Remove-AbEnvironment.md)
 
@@ -105,6 +109,10 @@ Updates the request for the specified delegated admin relationship.
 ### [Set-AbEnvironment](Set-AbEnvironment.md)
 
 Sets the properties for a given environment.
+
+### [Unregister-AbDevice](Unregister-AbDevice.md)
+
+Provides the ability to unregister the device with a management service.
 
 ### [Update-AbConfiguration](Update-AbConfiguration.md)
 

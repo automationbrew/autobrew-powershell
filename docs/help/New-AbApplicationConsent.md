@@ -14,8 +14,8 @@ Creates a new consent for an Azure Active Directory application in the specified
 ## SYNTAX
 
 ```powershell
-New-AbApplicationConsent -ApplicationGrants <ApplicationGrant[]> -ApplicationId <String> -TenantId <String>
- [<CommonParameters>]
+New-AbApplicationConsent -ApplicationGrants <ApplicationGrant[]> -ApplicationId <String> -DisplayName <String>
+ -TenantId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,7 +35,7 @@ PS C:\> $grants = @()
 PS C:\> $grants += New-AbApplicationGrant -EnterpriseApplicationId '00000003-0000-0000-c000-000000000000' -Scope 'DeviceManagementConfiguration.Read.All,DeviceManagementManagedDevices.Read.All'
 PS C:\> $grants += New-AbApplicationGrant -EnterpriseApplicationId '797f4846-ba00-4fd7-ba43-dac1f8f63013' -Scope 'user_impersonation'
 PS C:\>
-PS C:\> New-AbApplicationConsent -ApplicationGrants $grants -ApplicationId $applicationId -TenantId 'yyyy-yyyy-yyyy-yyyy'
+PS C:\> New-AbApplicationConsent -ApplicationGrants $grants -ApplicationId $applicationId -DisplayName 'Partner Application' -TenantId 'yyyy-yyyy-yyyy-yyyy'
 ```
 
 Creates a new consent for an Azure Active Directory application with grants for Microsoft Graph and Azure Service Management.
@@ -74,6 +74,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DisplayName
+
+The display name for the application consent.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -TenantId
 
 The identifier for the customer tenant.
@@ -90,6 +106,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -100,7 +148,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### AutoBrew.PowerShell.Models.Applications.ApplicationConsent
 
 ## NOTES
 

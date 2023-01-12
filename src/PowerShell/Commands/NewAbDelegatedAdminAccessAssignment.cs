@@ -4,11 +4,12 @@
     using System.Text.RegularExpressions;
     using Microsoft.Graph;
     using Models;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that creates a delegated admin relationship access assignment using the specified information.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbDelegatedAdminAccessAssignment")]
+    [Cmdlet(VerbsCommon.New, "AbDelegatedAdminAccessAssignment", SupportsShouldProcess = true)]
     [OutputType(typeof(DelegatedAdminAccessAssignment))]
     public class NewAbDelegatedAdminAccessAssignment : ModuleAsyncCmdlet
     {
@@ -41,29 +42,32 @@
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected override async Task PerformCmdletAsync()
         {
-            GraphServiceClient client = ModuleSession.Instance.ClientFactory.CreateGraphServiceClient(ModuleSession.Instance.Context.Account);
-
-            DelegatedAdminAccessAssignment accessAssignment = new()
+            await ConfirmActionAsync(Resources.NewDelegatedAdminAccessAssignmentAction, RelationshipId, async () =>
             {
-                AccessContainer = new DelegatedAdminAccessContainer
-                {
-                    AccessContainerId = AccessContainerId,
-                    AccessContainerType = DelegatedAdminAccessContainerType.SecurityGroup
-                },
-                AccessDetails = new DelegatedAdminAccessDetails
-                {
-                    UnifiedRoles = UnifiedRoles.Select(r => new UnifiedRole { RoleDefinitionId = r })
-                }
-            };
+                GraphServiceClient client = ModuleSession.Instance.ClientFactory.CreateGraphServiceClient(ModuleSession.Instance.Context.Account);
 
-            accessAssignment = await client
-                .TenantRelationships
-                .DelegatedAdminRelationships[RelationshipId]
-                .AccessAssignments
-                .Request()
-                .AddAsync(accessAssignment, CancellationToken).ConfigureAwait(false);
+                DelegatedAdminAccessAssignment accessAssignment = new()
+                {
+                    AccessContainer = new DelegatedAdminAccessContainer
+                    {
+                        AccessContainerId = AccessContainerId,
+                        AccessContainerType = DelegatedAdminAccessContainerType.SecurityGroup
+                    },
+                    AccessDetails = new DelegatedAdminAccessDetails
+                    {
+                        UnifiedRoles = UnifiedRoles.Select(r => new UnifiedRole { RoleDefinitionId = r })
+                    }
+                };
 
-            WriteObject(accessAssignment);
+                accessAssignment = await client
+                    .TenantRelationships
+                    .DelegatedAdminRelationships[RelationshipId]
+                    .AccessAssignments
+                    .Request()
+                    .AddAsync(accessAssignment, CancellationToken).ConfigureAwait(false);
+
+                WriteObject(accessAssignment);
+            }).ConfigureAwait(false);
         }
     }
 }

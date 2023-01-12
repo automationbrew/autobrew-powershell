@@ -23,12 +23,16 @@
         {
             Dictionary<string, Version> sharedAssemblies = new()
             {
+                { "Microsoft.ApplicationInsights", new Version("2.21.0.429") },
                 { "Microsoft.Extensions.Primitives", new Version("7.0.0.0") },
                 { "Microsoft.Graph.Beta", new Version("4.68.0.0") },
                 { "Microsoft.Graph.Core", new Version("2.0.14.0") },
                 { "Microsoft.Identity.Client", new Version("4.48.0.0") },
                 { "Microsoft.Identity.Client.Extensions.Msal", new Version("2.25.0.0") },
-                { "Microsoft.IdentityModel.Abstractions", new Version("6.22.0.0") }
+                { "Microsoft.IdentityModel.Abstractions", new Version("6.22.0.0") },
+                { "System.Diagnostics.DiagnosticSource", new Version("5.0.0.0") },
+                { "System.Text.Encodings.Web", new Version("7.0.0.0") },
+                { "System.Text.Json", new Version("7.0.0.0") }
             };
 
             SharedAssemblyMap = new ConcurrentDictionary<string, Version>(sharedAssemblies, StringComparer.OrdinalIgnoreCase);

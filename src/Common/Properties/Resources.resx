@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AcquireTokenTarget" xml:space="preserve">
+  <data name="AcquireToken" xml:space="preserve">
+    <value>acquire token</value>
+  </data>
+  <data name="AcquireTokenAction" xml:space="preserve">
     <value>{0} account in environment '{1}'</value>
   </data>
-  <data name="AddEnvironmentTarget" xml:space="preserve">
+  <data name="AddEnvironmentAction" xml:space="preserve">
     <value>add environment</value>
   </data>
   <data name="AssertNumberPositiveInvalidError" xml:space="preserve">
@@ -217,22 +220,46 @@ Cmdlet invocation changes :
   <data name="DataCollectionConfigurationDefinition" xml:space="preserve">
     <value>Controls if data collection, to help improve Automation Brew cmdlets, is enabled. When enabled, telemetry is shared with the developers to identify patterns of usage to identify common issues and help improve the experience with the module. Automation Brew does not collect any personal or private information. This configuration is enabled by default, and you must opt-out if you which to disable this functionality.</value>
   </data>
-  <data name="DisconnectAccountTarget" xml:space="preserve">
+  <data name="DisconnectAccountAction" xml:space="preserve">
     <value>remove account</value>
   </data>
   <data name="DisplayBreakingChangesConfigurationDefinition" xml:space="preserve">
     <value>Controls if warning messages for breaking changes are displayed or suppressed. When enabled, a breaking change warning is displayed when executing cmdlets with breaking changes in a future release.</value>
   </data>
-  <data name="LogoutTarget" xml:space="preserve">
-    <value>Logout account '{0}'</value>
+  <data name="NewApplicationConsentAction" xml:space="preserve">
+    <value>new application consent</value>
   </data>
-  <data name="RemoveEnvironmentTarget" xml:space="preserve">
+  <data name="NewApplicationGrantAction" xml:space="preserve">
+    <value>new application grant</value>
+  </data>
+  <data name="NewBulkRefreshTokenAction" xml:space="preserve">
+    <value>new bulk refresh token</value>
+  </data>
+  <data name="NewDelegatedAdminAccessAssignmentAction" xml:space="preserve">
+    <value>new delegate admin access assignment</value>
+  </data>
+  <data name="NewDelegatedAdminRelationshipAction" xml:space="preserve">
+    <value>new delegate admin relationship</value>
+  </data>
+  <data name="NewDelegatedAdminRelationshipRequestAction" xml:space="preserve">
+    <value>new delegate admin relationship request</value>
+  </data>
+  <data name="NewRiskyUserAction" xml:space="preserve">
+    <value>generate new user risk event</value>
+  </data>
+  <data name="RegisterDeviceAction" xml:space="preserve">
+    <value>register the device with the management service</value>
+  </data>
+  <data name="RemoveEnvironmentAction" xml:space="preserve">
     <value>remove environment</value>
   </data>
-  <data name="UpdateConfigurationTarget" xml:space="preserve">
-    <value>update the following configurations '{0}'.</value>
+  <data name="UnregisterDeviceAction" xml:space="preserve">
+    <value>unregister the from the management service</value>
   </data>
-  <data name="UpdateEnvironmentTarget" xml:space="preserve">
+  <data name="UpdateConfigurationAction" xml:space="preserve">
+    <value>update the following configurations '{0}'</value>
+  </data>
+  <data name="UpdateEnvironmentAction" xml:space="preserve">
     <value>update environment</value>
   </data>
 </root>

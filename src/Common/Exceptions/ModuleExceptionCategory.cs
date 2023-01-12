@@ -21,6 +21,11 @@
         Configuration,
 
         /// <summary>
+        /// Represents the exception was cause by an interop related issue.
+        /// </summary>
+        Interop,
+
+        /// <summary>
         /// Represents the exception was caused by a network related issue.
         /// </summary>
         Network,

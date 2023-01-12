@@ -4,11 +4,12 @@
     using System.Threading.Tasks;
     using Models;
     using Models.Authentication;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that requests a new bulk refresh token from Azure Active Directory.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbBulkRefreshToken")]
+    [Cmdlet(VerbsCommon.New, "AbBulkRefreshToken", SupportsShouldProcess = true)]
     [OutputType(typeof(BulkRefreshToken))]
     public class NewAbBulkRefreshToken : ModuleAsyncCmdlet
     {
@@ -25,10 +26,13 @@
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected override async Task PerformCmdletAsync()
         {
-            ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
+            await ConfirmActionAsync(Resources.NewBulkRefreshTokenAction, Environment, async () =>
+            {
+                ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
 
-            WriteObject(await ModuleSession.Instance.AuthenticationFactory.AcquireBulkRefreshTokenAsync(
-                environment, (string value) => WriteWarning(value), CancellationToken));
+                WriteObject(await ModuleSession.Instance.AuthenticationFactory.AcquireBulkRefreshTokenAsync(
+                    environment, WriteWarning, CancellationToken));
+            }).ConfigureAwait(false);
         }
     }
 }

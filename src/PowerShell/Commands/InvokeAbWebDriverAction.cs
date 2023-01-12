@@ -16,6 +16,7 @@
     /// Invokes a series of web driver actions defined by a template.
     /// </summary>
     [Cmdlet(VerbsLifecycle.Invoke, "AbWebDriverAction", DefaultParameterSetName = TemplateParameterSetName)]
+    [OutputType(typeof(void))]
     public sealed class InvokeAbWebDriverAction : ModuleAsyncCmdlet
     {
         /// <summary>

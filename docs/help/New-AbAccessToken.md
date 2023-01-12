@@ -20,6 +20,13 @@ New-AbAccessToken [-ApplicationId <String>] [-Environment <String>] -Scopes <Str
  [<CommonParameters>]
 ```
 
+### UserPasswordParameterSet
+
+```powershell
+New-AbAccessToken [-ApplicationId <String>] -Credentials <PSCredential> [-Environment <String>]
+ -Scopes <String[]> [-Tenant <String>] [<CommonParameters>]
+```
+
 ### RefreshTokenParameterSet
 
 ```powershell
@@ -77,6 +84,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Credentials
+
+The credentials to be used for authentication.
+
+```yaml
+Type: System.Management.Automation.PSCredential
+Parameter Sets: UserPasswordParameterSet
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
+Creates a new user risk event in Azure Active Directory using a Tor proxy when performing an authentication request.
 
 ## SYNTAX
 
@@ -29,7 +29,7 @@ New-AbRiskyUser -ApplicationId <String> -Password <SecureString> -Tenant <String
 
 ## DESCRIPTION
 
-Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
+Creates a new user risk event in Azure Active Directory using a Tor proxy when performing an authentication request.
 
 ## EXAMPLES
 
@@ -45,7 +45,7 @@ PS C:\> $credential = New-Object System.Management.Automation.PSCredential ($use
 PS C:\> New-AbRiskyUser -ApplicationId 'yyyy-yyyy-yyyy-yyyy' -Credential $credential -Tenant 'zzzz-zzzz-zzzz-zzzz'
 ```
 
-Utilizes the Azure Active Directory PowerShell module to reset the password for a specific user. Then Generates a risky user event in Azure Active Directory by performing an authentication request that is proxied using the Tor Project.
+Utilizes the Azure Active Directory PowerShell module to reset the password for a specific user. Then creates a new user risk event in Azure Active Directory using a Tor proxy when performing an authentication request.
 
 ## PARAMETERS
 
@@ -171,7 +171,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Void
 
 ## NOTES
 

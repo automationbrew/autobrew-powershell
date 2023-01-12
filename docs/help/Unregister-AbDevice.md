@@ -1,41 +1,41 @@
 ---
 external help file: AutoBrew.PowerShell.dll-Help.xml
 Module Name: Ab
-online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Remove-AbEnvironment.md
+online version: https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Unregister-AbDevice.md
 schema: 2.0.0
 ---
 
-# Remove-AbEnvironment
+# Unregister-AbDevice
 
 ## SYNOPSIS
 
-Removes the metadata for connecting to given cloud.
+Provides the ability to unregister the device with a management service.
 
 ## SYNTAX
 
 ```powershell
-Remove-AbEnvironment -Name <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Unregister-AbDevice -EnrollmentId <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Removes the metadata for connecting to given cloud.
+Provides the ability to unregister the device with a management service.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Remove-AbEnvironment -Name MyEnvironment
+PS C:\> Unregister-AbDevice -EnrollmentId 'd244cff2-9dae-406d-90df-ad21dbff7118'
 ```
 
-Removes the metadata for connecting to the cloud represented by the environment named MyEnvironment.
+Performs the operation required to unregister the device from a management service associated with the specified enrollment identifier.
 
 ## PARAMETERS
 
-### -Name
+### -EnrollmentId
 
-The name for the environment.
+The identifier of the enrollment that should be unregistered.
 
 ```yaml
 Type: System.String
@@ -45,7 +45,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -88,11 +88,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
+### None
 
 ## OUTPUTS
 
-### AutoBrew.PowerShell.Models.Authentication.ModuleEnvironment
+### System.Void
 
 ## NOTES
 

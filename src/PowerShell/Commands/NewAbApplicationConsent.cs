@@ -7,11 +7,13 @@
     using Models.Applications;
     using Models.Authentication;
     using Network;
+    using Properties;
 
     /// <summary>
     /// Cmdlet used to create a new application grant.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbApplicationConsent")]
+    [Cmdlet(VerbsCommon.New, "AbApplicationConsent", SupportsShouldProcess = true)]
+    [OutputType(typeof(ApplicationConsent))]
     public class NewAbApplicationConsent : ModuleAsyncCmdlet
     {
         /// <summary>
@@ -28,6 +30,12 @@
         public string ApplicationId { get; set; }
 
         /// <summary>
+        /// Gets or sets the display name for the application consent.
+        /// </summary>
+        [Parameter(HelpMessage = "The display name for the application consent.", Mandatory = true)]
+        public string DisplayName { get; set; }
+
+        /// <summary>
         /// Gets or sets the identifier for the customer tenant.
         /// </summary>
         [Parameter(HelpMessage = "The identifier for the customer tenant.", Mandatory = true)]
@@ -40,25 +48,29 @@
         /// <inheritdoc />
         protected override async Task PerformCmdletAsync()
         {
-            ApplicationConsent consent = new()
+            await ConfirmActionAsync(Resources.NewApplicationConsentAction, DisplayName, async () =>
             {
-                ApplicationGrants = new List<ApplicationGrant>(ApplicationGrants),
-                ApplicationId = ApplicationId
-            };
+                ApplicationConsent consent = new()
+                {
+                    ApplicationGrants = new List<ApplicationGrant>(ApplicationGrants),
+                    ApplicationId = ApplicationId,
+                    DisplayName = DisplayName
+                };
 
-            IRestServiceClient client = await ModuleSession.Instance.ClientFactory.CreateRestServiceClientAsync(
-                new TokenRequestData(
-                    ModuleSession.Instance.Context.Account,
-                    ModuleSession.Instance.Context.Environment,
-                    new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
-                CancellationToken).ConfigureAwait(false);
+                IRestServiceClient client = await ModuleSession.Instance.ClientFactory.CreateRestServiceClientAsync(
+                    new TokenRequestData(
+                        ModuleSession.Instance.Context.Account,
+                        ModuleSession.Instance.Context.Environment,
+                        new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
+                    CancellationToken).ConfigureAwait(false);
 
-            consent = await client.PostAsync<ApplicationConsent, ApplicationConsent>(
-                new Uri(new Uri(ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint), $"/v1/customers/{TenantId}/applicationconsents"),
-                consent,
-                CancellationToken).ConfigureAwait(false);
+                consent = await client.PostAsync<ApplicationConsent, ApplicationConsent>(
+                    new Uri(new Uri(ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint), $"/v1/customers/{TenantId}/applicationconsents"),
+                    consent,
+                    CancellationToken).ConfigureAwait(false);
 
-            WriteObject(consent);
+                WriteObject(consent);
+            }).ConfigureAwait(false);
         }
     }
 }

@@ -2,11 +2,12 @@
 {
     using System.Management.Automation;
     using Models.Applications;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that generates a new in-memory application grant.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbApplicationGrant")]
+    [Cmdlet(VerbsCommon.New, "AbApplicationGrant", SupportsShouldProcess = true)]
     [OutputType(typeof(ApplicationGrant))]
     public class NewAbApplicationGrant : ModuleCmdlet
     {
@@ -25,7 +26,10 @@
         /// <inheritdoc />
         protected override void PerformCmdlet()
         {
-            WriteObject(new ApplicationGrant { EnterpriseApplicationId = EnterpriseApplicationId, Scope = Scope });
+            ConfirmAction(Resources.NewApplicationGrantAction, EnterpriseApplicationId, () =>
+            {
+                WriteObject(new ApplicationGrant { EnterpriseApplicationId = EnterpriseApplicationId, Scope = Scope });
+            });
         }
     }
 }
