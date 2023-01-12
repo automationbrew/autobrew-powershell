@@ -13,7 +13,7 @@ Creates a new application grant object that is used as part of the request to co
 
 ## SYNTAX
 
-```
+```powershell
 New-AbApplicationGrant -EnterpriseApplicationId <String> -Scope <String> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
