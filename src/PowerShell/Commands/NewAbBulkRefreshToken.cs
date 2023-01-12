@@ -31,7 +31,7 @@
                 ModuleSession.Instance.TryGetEnvironment(Environment, out ModuleEnvironment environment);
 
                 WriteObject(await ModuleSession.Instance.AuthenticationFactory.AcquireBulkRefreshTokenAsync(
-                    environment, (string value) => WriteWarning(value), CancellationToken));
+                    environment, WriteWarning, CancellationToken));
             }).ConfigureAwait(false);
         }
     }

@@ -138,7 +138,7 @@
                     Password = Credentials?.Password,
                     RefreshToken = RefreshToken
                 },
-                (string value) => WriteWarning(value),
+                WriteWarning,
                 CancellationToken).ConfigureAwait(false));
         }
     }

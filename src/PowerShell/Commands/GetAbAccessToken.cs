@@ -32,7 +32,7 @@
                 {
                     IncludeRefreshToken = true
                 },
-                (string value) => WriteWarning(value),
+                WriteWarning,
                 CancellationToken).ConfigureAwait(false));
         }
     }

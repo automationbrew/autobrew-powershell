@@ -114,7 +114,7 @@
                     IncludeRefreshToken = false,
                     Password = Credentials.Password
                 },
-                (string value) => WriteWarning(value),
+                WriteWarning,
                 CancellationToken).ConfigureAwait(false);
 
             return authResult.AccessToken;
