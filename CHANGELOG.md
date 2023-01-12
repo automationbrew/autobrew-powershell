@@ -28,6 +28,7 @@
 * Added the [Unregister-AbDevice](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Unregister-AbDevice.md) command to unregister the specified enrollment from management
 * Added the optional parameter `MicrosoftPartnerCenterEndpoint` to the [Add-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Add-AbEnvironment.md) command
 * Added the optional parameter `MicrosoftPartnerCenterEndpoint` to the [Set-AbEnvironment](https://github.com/automationbrew/autobrew-powershell/blob/main/docs/help/Set-AbEnvironment.md) command
+* Updated the `Selenium.WebDriver.MSEdgeDriver` dependency to version `108.0.1462.76`
 * Resolved `could not load file or assembly Microsoft.Extensions.Primitives` exception that occurred when the `Az.Resources` module was imported first [#31](https://github.com/automationbrew/autobrew-powershell/issues/31)
 
 ## 1.0.2 - December 2022

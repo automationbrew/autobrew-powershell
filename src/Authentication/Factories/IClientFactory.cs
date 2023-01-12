@@ -1,8 +1,8 @@
 ﻿namespace AutoBrew.PowerShell.Factories
 {
-    using AutoBrew.PowerShell.Network;
     using Microsoft.Graph;
     using Models.Authentication;
+    using Network;
 
     /// <summary>
     /// Represents the factory used to create clients used to communicate with online services.

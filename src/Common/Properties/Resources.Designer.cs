@@ -350,6 +350,60 @@ namespace AutoBrew.PowerShell.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to new application consent.
+        /// </summary>
+        public static string NewApplicationConsentAction {
+            get {
+                return ResourceManager.GetString("NewApplicationConsentAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new application grant.
+        /// </summary>
+        public static string NewApplicationGrantAction {
+            get {
+                return ResourceManager.GetString("NewApplicationGrantAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new bulk refresh token.
+        /// </summary>
+        public static string NewBulkRefreshTokenAction {
+            get {
+                return ResourceManager.GetString("NewBulkRefreshTokenAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new delegate admin access assignment.
+        /// </summary>
+        public static string NewDelegatedAdminAccessAssignmentAction {
+            get {
+                return ResourceManager.GetString("NewDelegatedAdminAccessAssignmentAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new delegate admin relationship.
+        /// </summary>
+        public static string NewDelegatedAdminRelationshipAction {
+            get {
+                return ResourceManager.GetString("NewDelegatedAdminRelationshipAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new delegate admin relationship request.
+        /// </summary>
+        public static string NewDelegatedAdminRelationshipRequestAction {
+            get {
+                return ResourceManager.GetString("NewDelegatedAdminRelationshipRequestAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to generate new user risk event.
         /// </summary>
         public static string NewRiskyUserAction {

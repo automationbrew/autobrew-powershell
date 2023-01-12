@@ -2,6 +2,7 @@
 {
     using System.Management.Automation;
     using Models.Applications;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that generates a new in-memory application grant.
@@ -25,7 +26,10 @@
         /// <inheritdoc />
         protected override void PerformCmdlet()
         {
-            WriteObject(new ApplicationGrant { EnterpriseApplicationId = EnterpriseApplicationId, Scope = Scope });
+            ConfirmAction(Resources.NewApplicationGrantAction, EnterpriseApplicationId, () =>
+            {
+                WriteObject(new ApplicationGrant { EnterpriseApplicationId = EnterpriseApplicationId, Scope = Scope });
+            });
         }
     }
 }

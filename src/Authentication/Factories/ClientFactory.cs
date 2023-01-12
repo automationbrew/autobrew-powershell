@@ -2,9 +2,9 @@
 {
     using System.Net;
     using System.Threading;
-    using AutoBrew.PowerShell.Models;
     using Microsoft.Graph;
     using Microsoft.Rest;
+    using Models;
     using Models.Authentication;
     using Network;
 

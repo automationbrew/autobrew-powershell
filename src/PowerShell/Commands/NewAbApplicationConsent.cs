@@ -7,6 +7,7 @@
     using Models.Applications;
     using Models.Authentication;
     using Network;
+    using Properties;
 
     /// <summary>
     /// Cmdlet used to create a new application grant.
@@ -47,26 +48,29 @@
         /// <inheritdoc />
         protected override async Task PerformCmdletAsync()
         {
-            ApplicationConsent consent = new()
+            await ConfirmActionAsync(Resources.NewApplicationConsentAction, DisplayName, async () =>
             {
-                ApplicationGrants = new List<ApplicationGrant>(ApplicationGrants),
-                ApplicationId = ApplicationId,
-                DisplayName = DisplayName
-            };
+                ApplicationConsent consent = new()
+                {
+                    ApplicationGrants = new List<ApplicationGrant>(ApplicationGrants),
+                    ApplicationId = ApplicationId,
+                    DisplayName = DisplayName
+                };
 
-            IRestServiceClient client = await ModuleSession.Instance.ClientFactory.CreateRestServiceClientAsync(
-                new TokenRequestData(
-                    ModuleSession.Instance.Context.Account,
-                    ModuleSession.Instance.Context.Environment,
-                    new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
-                CancellationToken).ConfigureAwait(false);
+                IRestServiceClient client = await ModuleSession.Instance.ClientFactory.CreateRestServiceClientAsync(
+                    new TokenRequestData(
+                        ModuleSession.Instance.Context.Account,
+                        ModuleSession.Instance.Context.Environment,
+                        new[] { $"{ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint}/user_impersonation" }),
+                    CancellationToken).ConfigureAwait(false);
 
-            consent = await client.PostAsync<ApplicationConsent, ApplicationConsent>(
-                new Uri(new Uri(ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint), $"/v1/customers/{TenantId}/applicationconsents"),
-                consent,
-                CancellationToken).ConfigureAwait(false);
+                consent = await client.PostAsync<ApplicationConsent, ApplicationConsent>(
+                    new Uri(new Uri(ModuleSession.Instance.Context.Environment.MicrosoftPartnerCenterEndpoint), $"/v1/customers/{TenantId}/applicationconsents"),
+                    consent,
+                    CancellationToken).ConfigureAwait(false);
 
-            WriteObject(consent);
+                WriteObject(consent);
+            }).ConfigureAwait(false);
         }
     }
 }

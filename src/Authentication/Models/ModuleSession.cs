@@ -118,13 +118,13 @@
         /// </exception>
         public bool TryRemoveEnvironment(string name, out ModuleEnvironment environment)
         {
-            bool result = false; 
+            bool result = false;
 
             if (environmentRegistry[name].Type == ModuleEnvironmentType.BuiltIn)
             {
                 throw new ModuleException($"The environment {name} cannot be unregistered because it is a builtin environment.");
             }
-            
+
             if (TryGetEnvironment(name, out environment))
             {
                 result = environmentRegistry.Remove(name);

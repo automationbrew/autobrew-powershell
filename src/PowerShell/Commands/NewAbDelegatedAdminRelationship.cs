@@ -4,11 +4,12 @@
     using System.Text.RegularExpressions;
     using Microsoft.Graph;
     using Models;
+    using Properties;
 
     /// <summary>
     /// Cmdlet that creates delegated admin relationships based on the specified input.
     /// </summary>
-    [Cmdlet(VerbsCommon.New, "AbDelegatedAdminRelationship")]
+    [Cmdlet(VerbsCommon.New, "AbDelegatedAdminRelationship", SupportsShouldProcess = true)]
     [OutputType(typeof(DelegatedAdminRelationship))]
     public class NewAbDelegatedAdminRelationship : ModuleAsyncCmdlet
     {
@@ -47,23 +48,27 @@
         /// <returns>An instance of the <see cref="Task" /> class that represents the asynchronous operation.</returns>
         protected override async Task PerformCmdletAsync()
         {
-            GraphServiceClient client = ModuleSession.Instance.ClientFactory.CreateGraphServiceClient(ModuleSession.Instance.Context.Account);
-
-            DelegatedAdminRelationship relationship = await client.TenantRelationships.DelegatedAdminRelationships.Request().AddAsync(new DelegatedAdminRelationship
+            await ConfirmActionAsync(Resources.NewDelegatedAdminRelationshipAction, DisplayName, async () =>
             {
-                AccessDetails = new DelegatedAdminAccessDetails
-                {
-                    UnifiedRoles = UnifiedRoles.Select(r => new UnifiedRole { RoleDefinitionId = r }).ToList()
-                },
-                Customer = new DelegatedAdminRelationshipCustomerParticipant
-                {
-                    TenantId = Tenant
-                },
-                DisplayName = DisplayName,
-                Duration = new Duration(Duration)
-            }, CancellationToken).ConfigureAwait(false);
+                GraphServiceClient client = ModuleSession.Instance.ClientFactory.CreateGraphServiceClient(ModuleSession.Instance.Context.Account);
 
-            WriteObject(relationship);
+                DelegatedAdminRelationship relationship = await client.TenantRelationships.DelegatedAdminRelationships.Request().AddAsync(new DelegatedAdminRelationship
+                {
+                    AccessDetails = new DelegatedAdminAccessDetails
+                    {
+                        UnifiedRoles = UnifiedRoles.Select(r => new UnifiedRole { RoleDefinitionId = r }).ToList()
+                    },
+                    Customer = new DelegatedAdminRelationshipCustomerParticipant
+                    {
+                        TenantId = Tenant
+                    },
+                    DisplayName = DisplayName,
+                    Duration = new Duration(Duration)
+                }, CancellationToken).ConfigureAwait(false);
+
+                WriteObject(relationship);
+            }).ConfigureAwait(false);
+
         }
     }
 }

@@ -226,6 +226,24 @@ Cmdlet invocation changes :
   <data name="DisplayBreakingChangesConfigurationDefinition" xml:space="preserve">
     <value>Controls if warning messages for breaking changes are displayed or suppressed. When enabled, a breaking change warning is displayed when executing cmdlets with breaking changes in a future release.</value>
   </data>
+  <data name="NewApplicationConsentAction" xml:space="preserve">
+    <value>new application consent</value>
+  </data>
+  <data name="NewApplicationGrantAction" xml:space="preserve">
+    <value>new application grant</value>
+  </data>
+  <data name="NewBulkRefreshTokenAction" xml:space="preserve">
+    <value>new bulk refresh token</value>
+  </data>
+  <data name="NewDelegatedAdminAccessAssignmentAction" xml:space="preserve">
+    <value>new delegate admin access assignment</value>
+  </data>
+  <data name="NewDelegatedAdminRelationshipAction" xml:space="preserve">
+    <value>new delegate admin relationship</value>
+  </data>
+  <data name="NewDelegatedAdminRelationshipRequestAction" xml:space="preserve">
+    <value>new delegate admin relationship request</value>
+  </data>
   <data name="NewRiskyUserAction" xml:space="preserve">
     <value>generate new user risk event</value>
   </data>
